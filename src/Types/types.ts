@@ -1,4 +1,4 @@
-type product = {
+export type Product = {
   id: number;
   title: string;
   description: string;
@@ -8,7 +8,6 @@ type product = {
   rating: number;
   stock: number;
   tags: string[];
-
   brand: string;
   sku: string;
   weight: number;
@@ -23,18 +22,21 @@ type product = {
   images: string[];
   thumbnail: string;
 };
-type Meta = {
+
+export type Meta = {
   createdAt: string;
   updatedAt: string;
   barcode: string;
   qrCode: string;
 };
-type Dimension = {
+
+export type Dimension = {
   width: number;
   height: number;
   depth: number;
 };
-type Review = {
+
+export type Review = {
   rating: number;
   comment: string;
   date: string;
@@ -42,4 +44,9 @@ type Review = {
   reviewerEmail: string;
 };
 
-export type products = product[];
+export type ProductsResponse = {
+  products: Product[];
+  total: number;
+  skip: number;
+  limit: number;
+};
