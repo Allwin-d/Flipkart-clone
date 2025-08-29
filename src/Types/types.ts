@@ -11,30 +11,30 @@ type product = {
 
   brand: string;
   sku: string;
-  weight:number,
-  dimensions: dimension;
+  weight: number;
+  dimensions: Dimension;
   warrantyInformation: string;
   shippingInformation: string;
   availabilityStatus: string;
-  reviews: review[];
+  reviews: Review[];
   returnPolicy: string;
   minimumOrderQuantity: number;
-  meta: met;
+  meta: Meta;
   images: string[];
   thumbnail: string;
 };
-type met = {
+type Meta = {
   createdAt: string;
   updatedAt: string;
   barcode: string;
   qrCode: string;
 };
-type dimension = {
+type Dimension = {
   width: number;
   height: number;
   depth: number;
 };
-type review = {
+type Review = {
   rating: number;
   comment: string;
   date: string;
