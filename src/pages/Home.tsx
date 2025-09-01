@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import type { Product, ProductsResponse } from "../Types/types";
 import axios from "axios";
 import { useMemo } from "react";
+import Footer from "../components/Footer";
 
 const Home = () => {
   const fetchProducts = async (): Promise<Product[]> => {
@@ -67,9 +68,12 @@ const Home = () => {
             <h2 className="text-lg font-semibold">Best of Beauty Products</h2>
 
             <div className="flex gap-6 w-full">
-              {beauty.map((item) => {
+              {beauty.map((item, index) => {
                 return (
-                  <div className="flex flex-col text-center w-full items-center justify-center">
+                  <div
+                    className="flex flex-col text-center w-full items-center justify-center  p-2 hover:shadow-gray-500 hover:shadow-md transition duration-200"
+                    key={index}
+                  >
                     <img
                       className="w-40 h-30 hover:cursor-pointer"
                       src={item.images}
@@ -86,12 +90,15 @@ const Home = () => {
           <section className="mb-6">
             <h2 className="text-lg font-semibold">Best of Fragrance</h2>
             <div className="flex gap-6 w-full">
-              {fragrances.map((item) => {
+              {fragrances.map((item, index) => {
                 return (
-                  <div className="flex flex-col text-center w-full items-center justify-center">
+                  <div
+                    className="flex flex-col text-center w-full items-center justify-center"
+                    key={index}
+                  >
                     <img
                       className="w-40 h-30 hover:cursor-pointer"
-                      src={item.images}
+                      src={item.images[0]}
                       alt={item.brand}
                     ></img>
                     <p className="font-semibold">{item.brand}</p>
@@ -105,12 +112,15 @@ const Home = () => {
           <section className="mb-6">
             <h2 className="text-lg font-semibold">Best of Furnitures</h2>
             <div className="flex gap-6 w-full">
-              {furniture.map((item) => {
+              {furniture.map((item, index) => {
                 return (
-                  <div className="flex flex-col text-center w-full items-center justify-center">
+                  <div
+                    className="flex flex-col text-center w-full items-center justify-center"
+                    key={index}
+                  >
                     <img
                       className="w-40 h-30 hover:cursor-pointer"
-                      src={item.images}
+                      src={item.images[0]}
                       alt={item.brand}
                     ></img>
                     <p className="font-semibold">{item.brand}</p>
@@ -124,22 +134,30 @@ const Home = () => {
           <section className="mb-6">
             <h2 className="text-lg font-semibold">Best of Groceries</h2>
             <div className="flex gap-6 w-full">
-              {groceries.map((item) => {
-                return (
-                  <div className="flex flex-col text-center w-full items-center justify-center">
-                    <img
-                      className="w-40 h-30 hover:cursor-pointer"
-                      src={item.images}
-                      alt={item.brand}
-                    ></img>
-                    <p className="font-semibold">{item.brand} </p>
-                  </div>
-                );
-              })}
+              {groceries
+                .map((item, index) => {
+                  return (
+                    <div
+                      className="flex flex-col text-center w-full items-center justify-center"
+                      key={index}
+                    >
+                      <img
+                        className="w-40 h-30 hover:cursor-pointer"
+                        src={item.images[0]}
+                        alt={item.brand}
+                      ></img>
+                      <p className="font-semibold">
+                        {item.description.slice(0, 15)}{" "}
+                      </p>
+                    </div>
+                  );
+                })
+                .slice(0, 5)}
             </div>
           </section>
         </>
       )}
+      <Footer />
     </div>
   );
 };

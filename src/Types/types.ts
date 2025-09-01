@@ -19,7 +19,7 @@ export type Product = {
   returnPolicy: string;
   minimumOrderQuantity: number;
   meta: Meta;
-  images: string[] | string | undefined;
+  images: string[];
   thumbnail: string;
 };
 
