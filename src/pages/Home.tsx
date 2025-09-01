@@ -64,50 +64,79 @@ const Home = () => {
         <>
           {/* Beauty */}
           <section className="mb-6">
-            <h2 className="text-lg font-semibold">Beauty</h2>
-            <ul>
-              {beauty.map((item) => (
-                <li key={item.id}>
-                  {item.title} - ${item.price}
-                </li>
-              ))}
-            </ul>
+            <h2 className="text-lg font-semibold">Best of Beauty Products</h2>
+
+            <div className="flex gap-6 w-full">
+              {beauty.map((item) => {
+                return (
+                  <div className="flex flex-col text-center w-full items-center justify-center">
+                    <img
+                      className="w-40 h-30 hover:cursor-pointer"
+                      src={item.images}
+                      alt={item.brand}
+                    ></img>
+                    <p className="font-semibold">{item.brand}</p>
+                  </div>
+                );
+              })}
+            </div>
           </section>
 
           {/* Fragrances */}
           <section className="mb-6">
-            <h2 className="text-lg font-semibold">Fragrances</h2>
-            <ul>
-              {fragrances.map((item) => (
-                <li key={item.id}>
-                  {item.title} - ${item.price}
-                </li>
-              ))}
-            </ul>
+            <h2 className="text-lg font-semibold">Best of Fragrance</h2>
+            <div className="flex gap-6 w-full">
+              {fragrances.map((item) => {
+                return (
+                  <div className="flex flex-col text-center w-full items-center justify-center">
+                    <img
+                      className="w-40 h-30 hover:cursor-pointer"
+                      src={item.images}
+                      alt={item.brand}
+                    ></img>
+                    <p className="font-semibold">{item.brand}</p>
+                  </div>
+                );
+              })}
+            </div>
           </section>
 
           {/* Furniture */}
           <section className="mb-6">
-            <h2 className="text-lg font-semibold">Furniture</h2>
-            <ul>
-              {furniture.map((item) => (
-                <li key={item.id}>
-                  {item.title} - ${item.price}
-                </li>
-              ))}
-            </ul>
+            <h2 className="text-lg font-semibold">Best of Furnitures</h2>
+            <div className="flex gap-6 w-full">
+              {furniture.map((item) => {
+                return (
+                  <div className="flex flex-col text-center w-full items-center justify-center">
+                    <img
+                      className="w-40 h-30 hover:cursor-pointer"
+                      src={item.images}
+                      alt={item.brand}
+                    ></img>
+                    <p className="font-semibold">{item.brand}</p>
+                  </div>
+                );
+              })}
+            </div>
           </section>
 
           {/* Groceries */}
           <section className="mb-6">
-            <h2 className="text-lg font-semibold">Groceries</h2>
-            <ul>
-              {groceries.map((item) => (
-                <li key={item.id}>
-                  {item.title} - ${item.price}
-                </li>
-              ))}
-            </ul>
+            <h2 className="text-lg font-semibold">Best of Groceries</h2>
+            <div className="flex gap-6 w-full">
+              {groceries.map((item) => {
+                return (
+                  <div className="flex flex-col text-center w-full items-center justify-center">
+                    <img
+                      className="w-40 h-30 hover:cursor-pointer"
+                      src={item.images}
+                      alt={item.brand}
+                    ></img>
+                    <p className="font-semibold">{item.brand} </p>
+                  </div>
+                );
+              })}
+            </div>
           </section>
         </>
       )}
