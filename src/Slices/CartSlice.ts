@@ -26,9 +26,18 @@ const CartSlice = createSlice({
       });
     },
 
-    clearCart: (state) => {
+    clearCart: () => {
       return [];
     },
+    
+    IncreaseQuantity :(state,action)=>{
+       
+    },
+    DecreaseQuantity:(state,action)=>{
+
+    }
+
+
   },
 });
 
