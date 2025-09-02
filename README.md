@@ -7,4 +7,7 @@
     3.1 ) in products details page , first we get the product item from the url using (useLocation) , and then using destructuring to get specific details from the product
 
     the Uselocation have 3 properties : state,key,pathname;
+
+  4)Created Redux to handle the (Add to Cart , Remove from Cart and clear Cart) 
+  
      

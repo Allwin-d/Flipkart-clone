@@ -21,6 +21,7 @@ export type Product = {
   meta: Meta;
   images: string[];
   thumbnail: string;
+  Quantity ?:number|undefined;
 };
 
 export type Meta = {
@@ -50,3 +51,9 @@ export type ProductsResponse = {
   skip: number;
   limit: number;
 };
+
+export type CartItem = Product & {
+  Quantity : number;
+}
+
+

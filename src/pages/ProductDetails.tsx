@@ -1,5 +1,9 @@
 import { useLocation } from "react-router-dom";
 import Rating from "../components/Rating";
+import { useDispatch } from "react-redux";
+import type { Product } from "../Types/types";
+import type { Review } from "../Types/types";
+import { addtoCart } from "../Slices/CartSlice";
 
 const ProductDetails = () => {
   const location = useLocation();
@@ -30,6 +34,13 @@ const ProductDetails = () => {
     warrantyInformation,
   } = item;
 
+  const dispatch = useDispatch();
+
+  function handleAdd(val: Product) {
+    console.log("Add to Cart is clicked", val);
+    dispatch(addtoCart(item));
+  }
+
   return (
     <div key={id} className="mt-2 mb-2">
       <div className="w-full  ">
@@ -51,7 +62,10 @@ const ProductDetails = () => {
               {description}
             </p>
             <div className="flex flex-row gap-8  mt-10">
-              <button className="w-40 bg-red-600 text-white rounded-lg py-2 hover:bg-red-800">
+              <button
+                className="w-40 bg-red-600 text-white rounded-lg py-2 hover:bg-red-800"
+                onClick={() => handleAdd(item)}
+              >
                 Add to Cart
               </button>
               <button className="w-40 bg-orange-500 text-white rounded-lg py-2 hover:bg-orange-800 ">
@@ -76,14 +90,14 @@ const ProductDetails = () => {
             <p className="text-2xl font-semibold p-4 bg-blue-600 w-60 rounded-lg text-white  hover:cursor-pointer hover:bg-blue-900">
               Price: ${price}
             </p>
-            <p className="bg-green-500 w-48 rounded-lg p-2 text-white text-center font-semibold hover:cursor-pointer hover:bg-green-900">
+            <p className="bg-green-600 w-48 rounded-lg p-2 text-white text-center font-semibold hover:cursor-pointer hover:bg-green-900">
               {" "}
               Discount: {discountPercentage}%
             </p>
 
             <h2 className="text-xl font-semibold mt-4">Customer Reviews</h2>
             {reviews.length > 0 ? (
-              reviews.map((review, index) => (
+              reviews.map((review: Review, index: number) => (
                 <div key={index} className="border p-3 rounded-md my-2">
                   <p>
                     <strong>{review.reviewerName}</strong>{" "}

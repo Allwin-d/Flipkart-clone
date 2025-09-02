@@ -65,7 +65,7 @@ const Home = () => {
             <div className="flex gap-6 w-full ">
               {beauty.map((item, index) => (
                 <div
-                  className="flex flex-col text-center w-full items-center justify-center p-2 hover:shadow-blue-300 hover:shadow-md hover:rounded-md transition duration-200"
+                  className="flex flex-col text-center w-full items-center justify-center p-2 hover:shadow-blue-300 hover:shadow-md hover:rounded-md transition duration-200 hover:cursor-pointer"
                   key={index}
                   onClick={() => handleClick(index, item)}
                 >
@@ -74,7 +74,7 @@ const Home = () => {
                     src={item.images[0]}
                     alt={item.brand}
                   />
-                  <p className="font-semibold">{item.brand}</p>
+                  <p className="font-semibold">{item.title}</p>
                 </div>
               ))}
             </div>
@@ -86,7 +86,7 @@ const Home = () => {
             <div className="flex gap-6 w-full">
               {fragrances.map((item, index) => (
                 <div
-                  className="flex flex-col text-center w-full items-center justify-center p-2 hover:shadow-blue-300 hover:shadow-md hover:rounded-md transition duration-200"
+                  className="flex flex-col text-center w-full items-center justify-center p-2 hover:shadow-blue-300 hover:shadow-md hover:rounded-md transition duration-200 hover:cursor-pointer"
                   key={index}
                   onClick={() => handleClick(index, item)}
                 >
@@ -95,7 +95,7 @@ const Home = () => {
                     src={item.images[0]}
                     alt={item.brand}
                   />
-                  <p className="font-semibold">{item.brand}</p>
+                  <p className="font-semibold">{item.title}</p>
                 </div>
               ))}
             </div>
@@ -107,7 +107,7 @@ const Home = () => {
             <div className="flex gap-6 w-full">
               {furniture.map((item, index) => (
                 <div
-                  className="flex flex-col text-center w-full items-center justify-center p-2 hover:shadow-blue-300 hover:shadow-md hover:rounded-md transition duration-200"
+                  className="flex flex-col text-center w-full items-center justify-center p-2 hover:shadow-blue-300 hover:shadow-md hover:rounded-md transition duration-200 hover:cursor-pointer"
                   key={index}
                   onClick={() => handleClick(index, item)}
                 >
@@ -116,7 +116,7 @@ const Home = () => {
                     src={item.images[0]}
                     alt={item.brand}
                   />
-                  <p className="font-semibold">{item.brand}</p>
+                  <p className="font-semibold">{item.title}</p>
                 </div>
               ))}
             </div>
@@ -128,18 +128,16 @@ const Home = () => {
             <div className="flex gap-6 w-full">
               {groceries.slice(0, 5).map((item, index) => (
                 <div
-                  className="flex flex-col text-center w-full items-center justify-center p-2 hover:shadow-blue-300 hover:shadow-md hover:rounded-md transition duration-200"
+                  className="flex flex-col text-center w-full items-center justify-center p-2 hover:shadow-blue-300 hover:shadow-md hover:rounded-md transition duration-200 hover:cursor-pointer"
                   key={index}
                   onClick={() => handleClick(index, item)}
                 >
                   <img
-                    className="w-40 h-30 hover:cursor-pointer"
+                    className="w-40 h-30 hover:cursor-pointer "
                     src={item.images[0]}
                     alt={item.brand}
                   />
-                  <p className="font-semibold">
-                    {item.description.slice(0, 15)}{" "}
-                  </p>
+                  <p className="font-semibold">{item.title}</p>
                 </div>
               ))}
             </div>
