@@ -10,4 +10,8 @@
 
   4)Created Redux to handle the (Add to Cart , Remove from Cart and clear Cart) 
   
+  5)Created Cart Page , To get All the Products from the Cart that are being added to the cart , 
+  (used UseSelector to get the current state of the cart )
+  (used Dispatch to perform the operations based on the selected case reducers)
+  
      

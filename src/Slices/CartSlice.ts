@@ -21,8 +21,8 @@ const CartSlice = createSlice({
     },
 
     removeFromCart: (state, action) => {
-      state.filter((item) => {
-        item.id !== action.payload.id;
+      return state.filter((item) => {
+        return item.id !== action.payload.id;
       });
     },
 
@@ -40,13 +40,17 @@ const CartSlice = createSlice({
       }
     },
     DecreaseQuantity: (state, action) => {
-      console.log(action.payload);
-      const existingItem = state.find((item) => {
-        return item.id === action.payload.id;
-      });
+      const existingItem = state.find((item) => item.id === action.payload.id);
+
       if (existingItem) {
-        existingItem.Quantity -= 1;
+        if (existingItem.Quantity > 1) {
+          existingItem.Quantity -= 1;
+        } else {
+          // remove item completely
+          return state.filter((item) => item.id !== action.payload.id);
+        }
       }
+      return state; // always return state when using conditional returns
     },
   },
 });

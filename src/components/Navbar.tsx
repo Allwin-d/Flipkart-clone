@@ -35,7 +35,10 @@ const Navbar = () => {
           <MdOutlineAccountCircle className="text-2xl" />
           <span>Account</span>
         </button>
-        <button className="flex items-center gap-1 cursor-pointer hover:text-blue-600 transition-colors duration-200 bg-transparent border-none p-0">
+        <button
+          className="flex items-center gap-1 cursor-pointer hover:text-blue-600 transition-colors duration-200 bg-transparent border-none p-0"
+          onClick={() => navigate("/Cart")}
+        >
           <BsCart3 className="text-2xl" />
           <span>Cart</span>
         </button>
