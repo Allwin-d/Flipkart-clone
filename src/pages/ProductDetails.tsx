@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Rating from "../components/Rating";
 import { useDispatch } from "react-redux";
 import type { Product } from "../Types/types";
@@ -35,10 +35,12 @@ const ProductDetails = () => {
   } = item;
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   function handleAdd(val: Product) {
     console.log("Add to Cart is clicked", val);
-    dispatch(addtoCart(item));
+    dispatch(addtoCart(val));
+    navigate("/Cart");
   }
 
   return (
@@ -63,12 +65,12 @@ const ProductDetails = () => {
             </p>
             <div className="flex flex-row gap-8  mt-10">
               <button
-                className="w-40 bg-red-600 text-white rounded-lg py-2 hover:bg-red-800"
+                className="w-40 bg-red-600 text-white rounded-lg py-2 hover:bg-red-800 transition duration-200"
                 onClick={() => handleAdd(item)}
               >
                 Add to Cart
               </button>
-              <button className="w-40 bg-orange-500 text-white rounded-lg py-2 hover:bg-orange-800 ">
+              <button className="w-40 bg-orange-500 text-white rounded-lg py-2 hover:bg-orange-800 transition duration-200">
                 Buy Now
               </button>
             </div>
@@ -87,10 +89,10 @@ const ProductDetails = () => {
             </p>
             <p className="font-semibold text-xl">{shippingInformation}</p>
             <p className="font-semibold text-xl">{warrantyInformation}</p>
-            <p className="text-2xl font-semibold p-4 bg-blue-600 w-60 rounded-lg text-white  hover:cursor-pointer hover:bg-blue-900">
+            <p className="text-2xl font-semibold p-1 bg-blue-600 w-60 rounded-lg text-white  hover:cursor-pointer hover:bg-blue-900 text-center">
               Price: ${price}
             </p>
-            <p className="bg-green-600 w-48 rounded-lg p-2 text-white text-center font-semibold hover:cursor-pointer hover:bg-green-900">
+            <p className="bg-green-600 w-60 rounded-full p-2 text-white text-center font-semibold hover:cursor-pointer hover:bg-green-900">
               {" "}
               Discount: {discountPercentage}%
             </p>
@@ -98,7 +100,10 @@ const ProductDetails = () => {
             <h2 className="text-xl font-semibold mt-4">Customer Reviews</h2>
             {reviews.length > 0 ? (
               reviews.map((review: Review, index: number) => (
-                <div key={index} className="border p-3 rounded-md my-2">
+                <div
+                  key={index}
+                  className="border p-3 rounded-md my-2 space-y-3"
+                >
                   <p>
                     <strong>{review.reviewerName}</strong>{" "}
                     <Rating rating={review.rating} />

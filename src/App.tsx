@@ -7,6 +7,7 @@ import SignIn from "./pages/SignIn";
 import Products from "./pages/Products";
 import { Provider } from "react-redux";
 import { store } from "./Store";
+import Cart from "./pages/Cart";
 
 const App = () => {
   const queryclient = new QueryClient();
@@ -21,6 +22,7 @@ const App = () => {
             <Route path="/ProductDetail" element={<ProductDetails />}></Route>
             <Route path="/SignIn" element={<SignIn />}></Route>
             <Route path="/Product" element={<Products />}></Route>
+            <Route path="/Cart" element={<Cart />}></Route>
           </Routes>
         </QueryClientProvider>
       </Provider>
