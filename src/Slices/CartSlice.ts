@@ -40,6 +40,7 @@ const CartSlice = createSlice({
       }
       return state;
     },
+
     DecreaseQuantity: (state, action:PayloadAction<CartItem>) => {
       const existingItem = state.find((item) => item.id === action.payload.id);
 

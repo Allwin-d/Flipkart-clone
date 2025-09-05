@@ -4,8 +4,11 @@ import type { CartItem } from "../Types/types";
 import { IncreaseQuantity } from "../Slices/CartSlice";
 import { DecreaseQuantity } from "../Slices/CartSlice";
 import { removeFromCart } from "../Slices/CartSlice";
+import { useEffect, useState } from "react";
 
 const Cart = () => {
+  const [totalPrice, SetTotalPrice] = useState<number>(0);
+
   const value = useSelector((state: RootState) => {
     return state.cart;
   });
@@ -26,6 +29,17 @@ const Cart = () => {
     dispatch(removeFromCart(val));
   }
 
+  function handleTotal() {
+    const TotalAmount = value.reduce((acc, item) => {
+      return acc + item.price;
+    }, 0);
+    return SetTotalPrice(TotalAmount);
+  }
+
+  useEffect(() => {
+    handleTotal();
+  }, [handleIncrement, handleDecrement]);
+
   return (
     <div className="w-full ">
       <div className="flex flex-col space-y-6 items-center justify-center mt-5 mb-5 ">
@@ -44,7 +58,7 @@ const Cart = () => {
                 <p className="font-semibold">{item.title}</p>
                 <p className="font-light text-xl">{item.category}</p>
                 <div className="flex space-x-3">
-                  <p className="font-">Price : {item.price}</p>
+                  <p className="font-">Price : ${item.price}</p>
                   <p className="font-">
                     Discount : {item.discountPercentage} %
                   </p>
@@ -66,6 +80,12 @@ const Cart = () => {
             </div>
           );
         })}
+        {/* This is for Total item section  */}
+        <div className="flex bg-green-500 px-5 py-2 rounded-lg cursor-pointer hover:bg-green-700 ">
+          <p className="text-xl text-bold text-white ">
+            Total Amount : {totalPrice}
+          </p>
+        </div>
       </div>
     </div>
   );
