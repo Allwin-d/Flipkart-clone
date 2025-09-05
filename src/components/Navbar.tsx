@@ -4,9 +4,18 @@ import { BsCart3 } from "react-icons/bs";
 import { IoHomeOutline } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const [query,setQuery] = useState("");
+
+  function handleChange(e:React.ChangeEvent<HTMLInputElement>){
+    console.log("Search Query",e.target.value);
+    setQuery(e.target.value);
+
+  }
+
 
   return (
     <nav className="flex w-full items-center justify-between px-6 py-3 shadow-md bg-white">
@@ -25,6 +34,8 @@ const Navbar = () => {
             type="text"
             placeholder="Search for Products, Brands and More"
             className="bg-gray-100 pl-10 pr-4 py-2 w-96 rounded-md outline-none focus:ring-2 focus:ring-blue-500 border-none"
+            onChange={handleChange}
+            value={query}
           />
         </div>
       </div>

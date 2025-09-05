@@ -21,7 +21,7 @@ const App = () => {
             <Route path="/" element={<Home />}></Route>
             <Route path="/ProductDetail" element={<ProductDetails />}></Route>
             <Route path="/SignIn" element={<SignIn />}></Route>
-            <Route path="/Product" element={<Products />}></Route>
+            <Route path="/Product/:query" element={<Products />}></Route>
             <Route path="/Cart" element={<Cart />}></Route>
           </Routes>
         </QueryClientProvider>

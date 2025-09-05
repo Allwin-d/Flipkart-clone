@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import Rating from "../components/Rating";
 import { useDispatch } from "react-redux";
-import type { Product } from "../Types/types";
+import type { CartItem } from "../Types/types";
 import type { Review } from "../Types/types";
 import { addtoCart } from "../Slices/CartSlice";
 
@@ -37,7 +37,7 @@ const ProductDetails = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  function handleAdd(val: Product) {
+  function handleAdd(val: CartItem) {
     console.log("Add to Cart is clicked", val);
     dispatch(addtoCart(val));
     navigate("/Cart");

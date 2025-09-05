@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { CartItem } from "../Types/types";
 
 const initialState: CartItem[] = [];
@@ -7,7 +7,7 @@ const CartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addtoCart: (state, action) => {
+    addtoCart: (state, action:PayloadAction<CartItem>) => {
       console.log("Action payload", action.payload);
       const existingItem = state.find((item) => {
         return item.id === action.payload.id;
@@ -20,7 +20,7 @@ const CartSlice = createSlice({
       }
     },
 
-    removeFromCart: (state, action) => {
+    removeFromCart: (state, action:PayloadAction<CartItem>) => {
       return state.filter((item) => {
         return item.id !== action.payload.id;
       });
@@ -30,7 +30,7 @@ const CartSlice = createSlice({
       return [];
     },
 
-    IncreaseQuantity: (state, action) => {
+    IncreaseQuantity: (state, action:PayloadAction<CartItem>) => {
       console.log(action.payload);
       const existingItem = state.find((item) => {
         return item.id === action.payload.id;
@@ -38,8 +38,9 @@ const CartSlice = createSlice({
       if (existingItem) {
         existingItem.Quantity += 1;
       }
+      return state;
     },
-    DecreaseQuantity: (state, action) => {
+    DecreaseQuantity: (state, action:PayloadAction<CartItem>) => {
       const existingItem = state.find((item) => item.id === action.payload.id);
 
       if (existingItem) {
@@ -50,7 +51,7 @@ const CartSlice = createSlice({
           return state.filter((item) => item.id !== action.payload.id);
         }
       }
-      return state; // always return state when using conditional returns
+      return state;
     },
   },
 });
