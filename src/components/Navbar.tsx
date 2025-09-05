@@ -8,14 +8,12 @@ import { useState } from "react";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const [query,setQuery] = useState("");
+  const [query, setQuery] = useState("");
 
-  function handleChange(e:React.ChangeEvent<HTMLInputElement>){
-    console.log("Search Query",e.target.value);
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    console.log("Search Query", e.target.value);
     setQuery(e.target.value);
-
   }
-
 
   return (
     <nav className="flex w-full items-center justify-between px-6 py-3 shadow-md bg-white">

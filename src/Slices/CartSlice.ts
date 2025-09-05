@@ -43,7 +43,6 @@ const CartSlice = createSlice({
 
     DecreaseQuantity: (state, action:PayloadAction<CartItem>) => {
       const existingItem = state.find((item) => item.id === action.payload.id);
-
       if (existingItem) {
         if (existingItem.Quantity > 1) {
           existingItem.Quantity -= 1;

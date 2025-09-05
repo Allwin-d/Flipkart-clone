@@ -36,9 +36,15 @@ const Cart = () => {
     return SetTotalPrice(TotalAmount);
   }
 
+  function handleDiscount() {}
+
   useEffect(() => {
     handleTotal();
   }, [handleIncrement, handleDecrement]);
+
+  useEffect(() => {
+    handleDiscount();
+  }, []);
 
   return (
     <div className="w-full ">
@@ -58,6 +64,12 @@ const Cart = () => {
                 <p className="font-semibold">{item.title}</p>
                 <p className="font-light text-xl">{item.category}</p>
                 <div className="flex space-x-3">
+                  <p className="text-gray-500">
+                    Original Price
+                    <small className="line-through text-gray-500">
+                      ${(item.price / (1 - item.discountPercentage)).toFixed(2)}
+                    </small>
+                  </p>
                   <p className="font-">Price : ${item.price}</p>
                   <p className="font-">
                     Discount : {item.discountPercentage} %
@@ -83,7 +95,7 @@ const Cart = () => {
         {/* This is for Total item section  */}
         <div className="flex bg-green-500 px-5 py-2 rounded-lg cursor-pointer hover:bg-green-700 ">
           <p className="text-xl text-bold text-white ">
-            Total Amount : {totalPrice}
+            Total Amount : {totalPrice.toFixed(2)}
           </p>
         </div>
       </div>
