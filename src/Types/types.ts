@@ -11,7 +11,7 @@ export type Product = {
   brand: string;
   sku: string;
   weight: number;
-  dimensions: Dimension;
+  dimensions: Dimensions;
   warrantyInformation: string;
   shippingInformation: string;
   availabilityStatus: string;
@@ -21,17 +21,9 @@ export type Product = {
   meta: Meta;
   images: string[];
   thumbnail: string;
-  Quantity ?:number|undefined;
 };
 
-export type Meta = {
-  createdAt: string;
-  updatedAt: string;
-  barcode: string;
-  qrCode: string;
-};
-
-export type Dimension = {
+export type Dimensions = {
   width: number;
   height: number;
   depth: number;
@@ -45,15 +37,11 @@ export type Review = {
   reviewerEmail: string;
 };
 
-export type ProductsResponse = {
-  products: Product[];
-  total: number;
-  skip: number;
-  limit: number;
+export type Meta = {
+  createdAt: string;
+  updatedAt: string;
+  barcode: string;
+  qrCode: string;
 };
 
-export type CartItem = Product & {
-  Quantity : number;
-}
-
-
+export type Products = Product[];
