@@ -1,7 +1,6 @@
-import { IoSearchOutline } from "react-icons/io5";
-import { FaRegCircleUser } from "react-icons/fa6";
+import { IoSearchOutline, IoHomeOutline } from "react-icons/io5";
+import { FaUserCircle } from "react-icons/fa";
 import { BsCart3 } from "react-icons/bs";
-import { IoHomeOutline } from "react-icons/io5";
 import FlipkartLogo from "../images/Flipkart-logo.png";
 import { useState } from "react";
 
@@ -16,7 +15,7 @@ const Header = () => {
   return (
     <div>
       <div className="flex flex-row items-center justify-center">
-        <img src={FlipkartLogo} alt="Logo"></img>
+        <img src={FlipkartLogo} alt="Logo" />
         <div>
           <IoSearchOutline />
           <input
@@ -24,10 +23,10 @@ const Header = () => {
             placeholder="Search for Products, Brands and More"
             onChange={handleChange}
             value={search}
-          ></input>
+          />
         </div>
         <div className="flex space-x-2">
-          <FaRegCircleUser />
+          <FaUserCircle />
           <span>Login</span>
         </div>
         <div className="flex space-x-2">
