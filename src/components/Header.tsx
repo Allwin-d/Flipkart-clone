@@ -13,29 +13,43 @@ const Header = () => {
   }
 
   return (
-    <div>
-      <div className="flex flex-row items-center justify-center">
-        <img src={FlipkartLogo} alt="Logo" />
-        <div>
-          <IoSearchOutline />
+    <div className="h-20 w-full p-4 bg-white">
+      <div className="flex items-center justify-between">
+        {/* Logo */}
+        <img
+          src={FlipkartLogo}
+          alt="Logo"
+          width={90}
+          height={90}
+          className="cursor-pointer"
+        />
+
+        {/* Search Bar */}
+        <div className="flex items-center border border-gray-300 rounded w-80 px-2 bg-white">
+          <IoSearchOutline className="text-gray-500 mr-2 hover:cursor-pointer bg-gray-100" />
           <input
             type="text"
             placeholder="Search for Products, Brands and More"
             onChange={handleChange}
             value={search}
+            className="w-full outline-none p-2 bg-gray-100"
           />
         </div>
-        <div className="flex space-x-2">
-          <FaUserCircle />
-          <span>Login</span>
-        </div>
-        <div className="flex space-x-2">
-          <BsCart3 />
-          <span>Cart</span>
-        </div>
-        <div className="flex space-x-2">
-          <IoHomeOutline />
-          <span>Become a Seller</span>
+
+        {/* Right Icons */}
+        <div className="flex space-x-36 items-center text-xl">
+          <div className="flex items-center space-x-1">
+            <FaUserCircle />
+            <span className="cursor-pointer">Login</span>
+          </div>
+          <div className="flex items-center space-x-1">
+            <BsCart3 />
+            <span className="cursor-pointer">Cart</span>
+          </div>
+          <div className="flex items-center space-x-1">
+            <IoHomeOutline />
+            <span className="cursor-pointer">Become a Seller</span>
+          </div>
         </div>
       </div>
     </div>

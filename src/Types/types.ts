@@ -44,4 +44,9 @@ export type Meta = {
   qrCode: string;
 };
 
-export type Products = Product[];
+export type ProductsResponse = {
+  products: Product[];
+  total: number;
+  skip: number;
+  limit: number;
+};
