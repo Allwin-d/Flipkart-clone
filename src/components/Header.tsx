@@ -1,54 +1,45 @@
-import { IoSearchOutline, IoHomeOutline } from "react-icons/io5";
-import { FaUserCircle } from "react-icons/fa";
-import { BsCart3 } from "react-icons/bs";
-import FlipkartLogo from "../images/Flipkart-logo.png";
-import { useState } from "react";
+import logo from "../assets/logo.svg";
+import { FaRegUserCircle } from "react-icons/fa";
+import { IoCartOutline } from "react-icons/io5";
+import { LuHouse } from "react-icons/lu";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-  const [search, setSearch] = useState<string>("");
+  const navigate = useNavigate();
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    console.log(e.target.value);
-    setSearch(e.target.value);
+  function handleClick() {
+    console.log("Clicked on Home icon ");
+    navigate("/");
   }
 
   return (
-    <div className="h-20 w-full p-4 bg-white">
-      <div className="flex items-center justify-between">
-        {/* Logo */}
-        <img
-          src={FlipkartLogo}
-          alt="Logo"
-          width={90}
-          height={90}
-          className="cursor-pointer"
-        />
-
-        {/* Search Bar */}
-        <div className="flex items-center border border-gray-300 rounded w-80 px-2 bg-white">
-          <IoSearchOutline className="text-gray-500 mr-2 hover:cursor-pointer bg-gray-100" />
+    <div>
+      <div className="flex flex-row w-full h-20 p-8 bg-yellow-300  space-x-3 ">
+        <div className="w-3/5 flex flex-row justify-between items-center ">
+          <img
+            src={logo}
+            alt="Flipkart-log"
+            className="cursor-pointer"
+            onClick={handleClick}
+          ></img>
           <input
             type="text"
-            placeholder="Search for Products, Brands and More"
-            onChange={handleChange}
-            value={search}
-            className="w-full outline-none p-2 bg-gray-100"
-          />
+            placeholder="Search for Products, Brands and More "
+            className="p-3 rounded-lg outline-none font-mono text-xl focus:border-2 border-blue-500  w-2/3"
+          ></input>
         </div>
-
-        {/* Right Icons */}
-        <div className="flex space-x-36 items-center text-xl">
-          <div className="flex items-center space-x-1">
-            <FaUserCircle />
-            <span className="cursor-pointer">Login</span>
+        <div className="w-2/5 flex flex-row justify-evenly items-center ">
+          <div className="flex flex-row space-x-2 text-xl cursor-pointer">
+            <FaRegUserCircle className="mt-1" />
+            <span className="font-mono ">User</span>
           </div>
-          <div className="flex items-center space-x-1">
-            <BsCart3 />
-            <span className="cursor-pointer">Cart</span>
+          <div className="flex flex-row space-x-2 text-xl cursor-pointer">
+            <IoCartOutline className="mt-1" />
+            <span className="font-mono">Cart</span>
           </div>
-          <div className="flex items-center space-x-1">
-            <IoHomeOutline />
-            <span className="cursor-pointer">Become a Seller</span>
+          <div className="flex flex-row space-x-2 text-xl cursor-pointer">
+            <LuHouse className="mt-1" />
+            <span className="font-mono">Become a Seller</span>
           </div>
         </div>
       </div>
