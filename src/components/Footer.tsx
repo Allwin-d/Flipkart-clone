@@ -24,7 +24,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-black text-white p-8">
-      <div className="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-6">
+      <div className="max-w-6xl mx-auto grid grid-cols-4 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {/* About Section */}
         <div>
           <p className="text-gray-400 font-semibold mb-2">ABOUT</p>
