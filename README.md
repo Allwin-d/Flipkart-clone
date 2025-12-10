@@ -1,17 +1,3 @@
-1) design the navbar 
-2) in the home page , use useQuery to fetch the data , 
-  -- then i filterd the fragrance , grocery , beauty and furniture for that i used useMemo bcz it runs only when the data gets changed , and it wont run on every time the page re-renders ...
-  
+Day one - 
+The Header component is built using React.js with Tailwind CSS for layout and styling. It includes imported image assets for the Flipkart logo and uses React Icons for the user, cart, home, and search icons. The component uses a flexbox-based structure to arrange the logo, search bar, and navigation items, with a styled search input and clean, responsive UI design
 
-  3)PRODUCT DETAILS PAGE : 
-    3.1 ) in products details page , first we get the product item from the url using (useLocation) , and then using destructuring to get specific details from the product
-
-    the Uselocation have 3 properties : state,key,pathname;
-
-  4)Created Redux to handle the (Add to Cart , Remove from Cart and clear Cart) 
-  
-  5)Created Cart Page , To get All the Products from the Cart that are being added to the cart , 
-  (used UseSelector to get the current state of the cart )
-  (used Dispatch to perform the operations based on the selected case reducers)
-  
-     
