@@ -26,7 +26,7 @@ const Header = () => {
           <CiSearch className="relative top-8 left-8 text-xl" />
           <input
             type="text"
-            className="w-full pl-10 rounded-lg border-2 border-black font-medium text-2xl focus:outline-none bg-gray-100"
+            className="w-full pl-10 rounded-lg border-2 border-black font-medium text-2xl focus:outline-none bg-gray-50"
             placeholder="Search for Products , Brands and More"
           ></input>
         </div>
