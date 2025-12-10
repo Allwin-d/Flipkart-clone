@@ -1,4 +1,4 @@
-import { Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
@@ -10,11 +10,13 @@ const App = () => {
   return (
     <div>
       <Header />
-      <Route path="/" element={<Home />}></Route>
-      <Route path="/Cart" element={<Cart />}></Route>
-      <Route path="/About" element={<About />}></Route>
-      <Route path="/Product" element={<Product />}></Route>
-      <Route path="/ProductDetials:/id" element={<ProductDetails />}></Route>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/product" element={<Product />} />
+        <Route path="/product-details/:id" element={<ProductDetails />} />
+      </Routes>
     </div>
   );
 };
