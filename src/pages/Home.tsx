@@ -14,10 +14,10 @@ const Home = () => {
   const { data, isError, isLoading } = useQuery({
     queryKey: ["Products"],
     queryFn: fetchProducts,
-    // refetchInterval : we use this because after the specific time , it will refetch the data from the server , for eg :in the weather app , the weather updates for like every sec 
+    // refetchInterval : we use this because after the specific time , it will refetch the data from the server , for eg :in the weather app , the weather updates for like every sec
   });
 
-  console.log("Data : ", data);
+  console.log("Data : ", data?.data.products);
 
   if (isLoading) {
     return (
@@ -35,9 +35,7 @@ const Home = () => {
     );
   }
 
-  return <div>
-    
-  </div>;
+  return <div></div>;
 };
 
 export default Home;

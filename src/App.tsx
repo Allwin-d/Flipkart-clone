@@ -8,12 +8,14 @@ import ProductDetails from "./pages/ProductDetails";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const App = () => {
-  const queryClient = new QueryClient(); //this is the central data store / cache 
+  const queryClient = new QueryClient(); //this is the central data store / cache
   console.log("This is Query Client : ", queryClient);
+
+  //this QueryClientProvider this is like a power supply
 
   return (
     <div>
-      <QueryClientProvider client={queryClient}> //this QueryClientProvider this is like a power supply 
+      <QueryClientProvider client={queryClient}>
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
