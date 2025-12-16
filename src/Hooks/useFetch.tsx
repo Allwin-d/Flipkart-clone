@@ -12,12 +12,13 @@ const useFetch = (url: string) => {
       try {
         setLoading(true);
         setError(false);
-
         const response = await axios.get<ApiResponse>(url);
         setData(response.data);
+        setLoading(false);
       } catch (err) {
         console.error(err);
         setError(true);
+        setLoading(false);
       } finally {
         setLoading(false);
       }
