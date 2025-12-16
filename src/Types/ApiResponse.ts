@@ -4,7 +4,7 @@ type Dimensions = {
   depth: number;
 };
 
-type Reviews = {
+type Review = {
   rating: number;
   comment: string;
   date: string;
@@ -19,7 +19,7 @@ type Meta = {
   qrCode: string;
 };
 
-type ApiResponse = {
+type Product = {
   id: number;
   title: string;
   description: string;
@@ -27,14 +27,16 @@ type ApiResponse = {
   price: number;
   discountPercentage: number;
   rating: number;
+  stock: number;
   tags: string[];
   brand: string;
   sku: string;
-  dimension: Dimensions;
+  weight: number;
+  dimensions: Dimensions;
   warrantyInformation: string;
   shippingInformation: string;
   availabilityStatus: string;
-  reviews: Reviews[];
+  reviews: Review[];
   returnPolicy: string;
   minimumOrderQuantity: number;
   meta: Meta;
@@ -42,8 +44,8 @@ type ApiResponse = {
   thumbnail: string;
 };
 
-export type ApiResponses = {
-  products: ApiResponse[];
+export type ApiResponse = {
+  products: Product[];
   total: number;
   skip: number;
   limit: number;
