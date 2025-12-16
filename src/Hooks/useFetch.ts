@@ -12,7 +12,7 @@ const useFetch = (url: string) => {
       try {
         setLoading(true);
         setError(false);
-        const response = await axios.get<ApiResponse>(url);
+        const response = await axios.get<ApiResponse>(url); //by using axios we don't need to convert it to JSON format 
         setData(response.data);
         setLoading(false);
       } catch (err) {
@@ -25,7 +25,7 @@ const useFetch = (url: string) => {
     };
 
     fetchData();
-  }, [url]);
+  }, [url]);  //when ever the url changes this hook runs 
 
   return { data, loading, error };
 };
