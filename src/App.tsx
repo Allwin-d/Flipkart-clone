@@ -5,18 +5,24 @@ import Cart from "./pages/Cart";
 import About from "./pages/About";
 import Product from "./pages/Products";
 import ProductDetails from "./pages/ProductDetails";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const App = () => {
+  const queryClient = new QueryClient(); //this is the central data store / cache 
+  console.log("This is Query Client : ", queryClient);
+
   return (
     <div>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/product" element={<Product />} />
-        <Route path="/product-details/:id" element={<ProductDetails />} />
-      </Routes>
+      <QueryClientProvider client={queryClient}> //this QueryClientProvider this is like a power supply 
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/product" element={<Product />} />
+          <Route path="/product-details/:id" element={<ProductDetails />} />
+        </Routes>
+      </QueryClientProvider>
     </div>
   );
 };
