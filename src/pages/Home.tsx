@@ -19,6 +19,40 @@ const Home = () => {
 
   console.log("Data : ", data?.data.products);
 
+  const categories = new Set(data?.data.products.map((item) => item.category));
+  console.log("Categories ", categories); //this are the different categories for the products
+
+  const beautyProducts = data?.data.products.filter(
+    (item) => item.category === "beauty"
+  );
+  console.log("beautyProducts: ", beautyProducts);
+
+  const Fragrances = data?.data.products.filter(
+    (item) => item.category === "fragrances"
+  );
+  console.log("Fragrances: ", Fragrances);
+
+  const Laptops = data?.data.products.filter(
+    (item) => item.category === "laptops"
+  );
+  console.log("Laptops: ", Laptops);
+
+  const smartPhones = data?.data.products.filter(
+    (item) => item.category === "smartphones"
+  );
+  console.log("SmartPhones : ", smartPhones);
+
+  const mensShirts = data?.data.products.filter(
+    (item) => item.category === "mens-shirts"
+  );
+  console.log("Mens Shirts : ", mensShirts);
+
+  const womansDresses = data?.data.products.filter(
+    (item) => item.category === "womens-dresses"
+  );
+
+  console.log("Womans Dresses : ", womansDresses);
+
   if (isLoading) {
     return (
       <div>
