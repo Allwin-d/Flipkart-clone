@@ -81,10 +81,10 @@ const Home = () => {
         </h1>
         <div className="flex flex-row space-x-40 items-center">
           {beautyProducts?.map((item) => (
-            <div className="flex flex-col space-y-3 cursor-pointer hover:scale-110 transition-transform">
+            <div className="flex flex-col space-y-3 cursor-pointer hover:scale-110 transition-transform text-center">
               <img src={item.images[0]} width={190} height={170}></img>
               <p>{item.title}</p>
-              <span>{CurrConverter(item.price)}</span>
+              <span>₹{CurrConverter(item.price)}</span>
             </div>
           ))}
         </div>
@@ -97,10 +97,10 @@ const Home = () => {
         </h1>
         <div className="flex flex-row space-x-40 items-center">
           {Fragrances?.map((item) => (
-            <div className="flex flex-col space-y-3 cursor-pointer hover:scale-110 transition-transform">
+            <div className="flex flex-col space-y-3 cursor-pointer hover:scale-110 transition-transform text-center">
               <img src={item.images[0]} width={190} height={170}></img>
               <p>{item.title}</p>
-              <span>{CurrConverter(item.price)}</span>
+              <span>₹{CurrConverter(item.price)}</span>
             </div>
           ))}
         </div>
@@ -111,10 +111,10 @@ const Home = () => {
         <h1 className="text-2xl flex items-center justify-center"> Laptops</h1>
         <div className="flex flex-row space-x-40 items-center">
           {Laptops?.map((item) => (
-            <div className="flex flex-col space-y-3 cursor-pointer hover:scale-110 transition-transform">
+            <div className="flex flex-col space-y-3 cursor-pointer hover:scale-110 transition-transform text-center">
               <img src={item.images[0]} width={190} height={170}></img>
               <p>{item.title}</p>
-              <span>{CurrConverter(item.price)}</span>
+              <span>₹{CurrConverter(item.price)}</span>
             </div>
           ))}
         </div>
@@ -125,10 +125,10 @@ const Home = () => {
         <h1 className="text-2xl flex items-center justify-center"> Mobiles</h1>
         <div className="flex flex-row space-x-40 items-center">
           {smartPhones?.map((item) => (
-            <div className="flex flex-col space-y-3 cursor-pointer hover:scale-110 transition-transform">
+            <div className="flex flex-col space-y-3 cursor-pointer hover:scale-110 transition-transform text-center">
               <img src={item.images[0]} width={190} height={170}></img>
               <p>{item.title}</p>
-              <span>{CurrConverter(item.price)}</span>
+              <span>₹{CurrConverter(item.price)}</span>
             </div>
           ))}
         </div>
@@ -139,12 +139,12 @@ const Home = () => {
         <h1 className="text-2xl flex items-center justify-center">
           Men's Shirts{" "}
         </h1>
-        <div className="flex flex-row space-x-40 items-center">
+        <div className="flex flex-row space-x-40 items-center justify-center">
           {mensShirts?.map((item) => (
-            <div className="flex flex-col space-y-3 cursor-pointer hover:scale-110 transition-transform">
+            <div className="flex flex-col space-y-3 cursor-pointer hover:scale-110 transition-transform text-center">
               <img src={item.images[0]} width={190} height={170}></img>
-              <p>{item.title}</p>
-              <span>{CurrConverter(item.price)}</span>
+              <p className="">{item.title}</p>
+              <span>₹{CurrConverter(item.price)}</span>
             </div>
           ))}
         </div>
@@ -158,10 +158,10 @@ const Home = () => {
         </h1>
         <div className="flex flex-row space-x-40 items-center">
           {womansDresses?.map((item) => (
-            <div className="flex flex-col space-y-3 cursor-pointer hover:scale-110 transition-transform">
+            <div className="flex flex-col space-y-3 cursor-pointer hover:scale-110 transition-transform text-center">
               <img src={item.images[0]} width={190} height={170}></img>
               <p>{item.title}</p>
-              <span>{CurrConverter(item.price)}</span>
+              <span>₹{CurrConverter(item.price)}</span>
             </div>
           ))}
         </div>
