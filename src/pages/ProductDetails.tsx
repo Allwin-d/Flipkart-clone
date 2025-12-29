@@ -57,7 +57,9 @@ const ProductDetails = () => {
           <p className="text-xl font-sans  text-white bg-green-700 w-32 text-center rounded-lg py-2">
             Rating {data?.rating}
           </p>
-          <p className="text-xl font-sans bg-gray-500 w-40 py-2 text-center rounded-lg text-white  ">Category {data?.category}</p>
+          <p className="text-xl font-sans bg-gray-500 w-40 py-2 text-center rounded-lg text-white  ">
+            Category {data?.category}
+          </p>
           <p className="text-xl font-sans font-bold">
             Price :₹ {CurrConverter(data?.price)}
           </p>
