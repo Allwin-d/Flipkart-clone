@@ -1,3 +1,3 @@
-export const CurrConverter = (price: number) => {
-  return Math.floor(price * 83);
+export const CurrConverter = (price: number | undefined) => {
+  return Math.floor(price ? price * 83 : 0);
 };

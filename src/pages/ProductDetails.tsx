@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import type { Product } from "../Types/ApiResponse";
+import { CurrConverter } from "../utils/CurrConveter";
 
 const ProductDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -31,8 +32,39 @@ const ProductDetails = () => {
   }
 
   return (
-    <div className="h-full w-full ">
-      <p>{data?.category}</p>
+    <div className="max-w-full max-h-full ">
+      {/* This is for the Pic left side  */}
+      <div className="w-full flex flex-row justify-around items-center h-[900px]">
+        <section className="float-left">
+          <img
+            src={data?.images[0]}
+            alt={data?.title}
+            className="w-full h-96"
+          ></img>
+          <section className="flex flex-row justify-center items-center space-x-9 mt-16">
+            <button className="text-md rounded-md text-white bg-yellow-500 px-8 py-4  cursor-pointer  hover:bg-yellow-700">
+              Add To Cart{" "}
+            </button>
+            <button className="text-md rounded-md text-white bg-orange-500 px-8 py-4 cursor-pointer hover:bg-orange-700">
+              Buy Now
+            </button>
+          </section>
+        </section>
+        <section className="float-right mt-8 space-y-14">
+          <p className="text-4xl font-sans ">{data?.brand}</p>
+          <p className="text-xl font-sans ">{data?.title}</p>
+          <p className="text-xl font-sans ">{data?.description}</p>
+          <p className="text-xl font-sans  text-white bg-green-700 w-32 text-center rounded-lg py-2">
+            Rating {data?.rating}
+          </p>
+          <p className="text-xl font-sans ">Category {data?.category}</p>
+          <p className="text-xl font-sans font-bold">
+            Price :₹ {CurrConverter(data?.price)}
+          </p>
+          <p className="text-2xl">Discount : {data?.discountPercentage} % </p>
+          <p className="text-2xl text-blue-600">Warranty {data?.warrantyInformation}</p>
+        </section>
+      </div>
     </div>
   );
 };
