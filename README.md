@@ -6,3 +6,5 @@ The Header component is built using React.js with Tailwind CSS for layout and st
 
 Day 2 - 
 implemented the Custom hook (UseFetch) for data fetching , and returning the data , loading and error state ;
+
+Day 3 -> gonna implement the product details page 
