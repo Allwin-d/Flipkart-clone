@@ -16,7 +16,7 @@ const Home = () => {
   };
 
   function handleClick(id: number) {
-    navigate(`/product-details/:${id}`);
+    navigate(`/product-details/${id}`);
   }
 
   const { data, isError, isLoading } = useQuery({
