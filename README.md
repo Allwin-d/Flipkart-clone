@@ -8,3 +8,7 @@ Day 2 -
 implemented the Custom hook (UseFetch) for data fetching , and returning the data , loading and error state ;
 
 Day 3 -> gonna implement the product details page 
+use useQuery to fetch single product data using axios 
+displayed  single product data includes (name,desc, price and brand etc...)
+used enabled key additionally inside the useQuery key 
+also used useParams to get the value from the Url  

@@ -53,16 +53,18 @@ const ProductDetails = () => {
         <section className="float-right mt-8 space-y-14">
           <p className="text-4xl font-sans ">{data?.brand}</p>
           <p className="text-xl font-sans ">{data?.title}</p>
-          <p className="text-xl font-sans ">{data?.description}</p>
+          <p className="text-xl font-bold leading-10 ">{data?.description}</p>
           <p className="text-xl font-sans  text-white bg-green-700 w-32 text-center rounded-lg py-2">
             Rating {data?.rating}
           </p>
-          <p className="text-xl font-sans ">Category {data?.category}</p>
+          <p className="text-xl font-sans bg-gray-500 w-40 py-2 text-center rounded-lg text-white  ">Category {data?.category}</p>
           <p className="text-xl font-sans font-bold">
             Price :₹ {CurrConverter(data?.price)}
           </p>
           <p className="text-2xl">Discount : {data?.discountPercentage} % </p>
-          <p className="text-2xl text-blue-600">Warranty {data?.warrantyInformation}</p>
+          <p className="text-2xl text-blue-600">
+            Warranty {data?.warrantyInformation}
+          </p>
         </section>
       </div>
     </div>
