@@ -53,7 +53,7 @@ const ProductDetails = () => {
         <section className="float-right mt-8 space-y-14">
           <p className="text-4xl font-sans ">{data?.brand}</p>
           <p className="text-xl font-sans ">{data?.title}</p>
-          <p className="text-xl font-bold leading-10 ">{data?.description}</p>
+          <p className="text-xl font-bold leading-10  ">{data?.description}</p>
           <p className="text-xl font-sans  text-white bg-green-700 w-32 text-center rounded-lg py-2">
             Rating {data?.rating}
           </p>

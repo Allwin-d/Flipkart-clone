@@ -1,8 +1,11 @@
-const Cart =()=>{
-    return (
-        <div>
+const Cart = () => {
 
-        </div>
-    )
-}
+    const InitialState = [];
+
+
+  return <div>
+
+  </div>;
+};
+
 export default Cart;
