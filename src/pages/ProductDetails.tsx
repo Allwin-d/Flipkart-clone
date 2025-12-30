@@ -3,9 +3,12 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import type { Product } from "../Types/ApiResponse";
 import { CurrConverter } from "../utils/CurrConveter";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../Slices/CartSlice";
 
 const ProductDetails = () => {
   const { id } = useParams<{ id: string }>();
+  const dispatch = useDispatch();
   const SingleProdApi = import.meta.env.VITE_SINGLE_PRODUCT_API;
 
   const fetchSingle = async () => {
@@ -18,6 +21,11 @@ const ProductDetails = () => {
     queryFn: fetchSingle,
     enabled: !!id, // only fetch if id exists
   });
+
+  const AddtoCart = (prod: Product) => {
+    console.log("Added Product from Product Details page : ", prod);
+    dispatch(addToCart(prod));
+  };
 
   if (!id) {
     return <div>Invalid product ID</div>;
@@ -42,7 +50,10 @@ const ProductDetails = () => {
             className="w-full h-96"
           ></img>
           <section className="flex flex-row justify-center items-center space-x-9 mt-16">
-            <button className="text-md rounded-md text-white bg-yellow-500 px-8 py-4  cursor-pointer  hover:bg-yellow-700">
+            <button
+              onClick={() => data && AddtoCart(data)}
+              className="text-md rounded-md text-white bg-yellow-500 px-8 py-4  cursor-pointer  hover:bg-yellow-700"
+            >
               Add To Cart{" "}
             </button>
             <button className="text-md rounded-md text-white bg-orange-500 px-8 py-4 cursor-pointer hover:bg-orange-700">
