@@ -12,3 +12,6 @@ use useQuery to fetch single product data using axios
 displayed  single product data includes (name,desc, price and brand etc...)
 used enabled key additionally inside the useQuery key 
 also used useParams to get the value from the Url  
+
+Day 5 -
+Implemented the Cart page , using the useSelector i got the current state, and using that , i can able to remove the product from the cart in the cart page , and in the Product Details page , i can able to add the product to the Cart Page, main stack (useSelector -> get the current state from redux store , dispatch-> to tell what actions needs to be performed )

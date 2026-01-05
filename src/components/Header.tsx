@@ -11,6 +11,10 @@ const Header = () => {
     navigate("/");
   }
 
+  function handleCart() {
+    navigate("/cart");
+  }
+
   return (
     <div className="w-full p-6 flex flex-row space-x-5 bg-yellow-100 ">
       <div className="flex flex-row space-x-5 w-3/5">
@@ -36,7 +40,10 @@ const Header = () => {
           <FaRegUserCircle className="mt-1" />
           <span>Login</span>
         </div>
-        <div className="flex space-x-2 font-medium text-2xl cursor-pointer">
+        <div
+          className="flex space-x-2 font-medium text-2xl cursor-pointer"
+          onClick={handleCart}
+        >
           <IoCartOutline className="mt-1" />
           <span>Cart</span>
         </div>
