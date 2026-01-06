@@ -12,7 +12,11 @@ const CartSlice = createSlice({
     },
 
     removeFromCart: (state, action: PayloadAction<number>) => {
-      return state.filter((item) => item.id !== action.payload);
+      const index = state.findIndex((item) => item.id === action.payload);
+
+      if (index !== -1) {
+        state.splice(index, 1);
+      }
     },
   },
 });
