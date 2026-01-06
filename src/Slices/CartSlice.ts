@@ -8,10 +8,7 @@ const CartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<Product>) => {
-      const exist = state.some((item) => item.id === action.payload.id);
-      if (!exist) {
-        state.push(action.payload);
-      }
+      state.push(action.payload);
     },
 
     removeFromCart: (state, action: PayloadAction<number>) => {
