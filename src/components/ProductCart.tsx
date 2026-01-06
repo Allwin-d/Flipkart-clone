@@ -33,7 +33,7 @@ const ProductCart = ({
     <div className="flex flex-row w-full space-x-7" key={id}>
       {/* This is for the image section  */}
       <div className="float-left">
-        <img src={img} alt={title} className="w-80 h-80" />
+        <img src={img} alt={title} className="w-80 h-60" />
       </div>
 
       {/* This is for the product details section  */}
