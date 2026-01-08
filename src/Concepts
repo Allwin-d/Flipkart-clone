@@ -1,0 +1,1091 @@
+# Complete JavaScript & TypeScript Tutorial Using This Project
+
+## Table of Contents
+
+1. [Project Overview](#project-overview)
+2. [JavaScript Fundamentals](#javascript-fundamentals)
+3. [TypeScript Fundamentals](#typescript-fundamentals)
+4. [React Concepts](#react-concepts)
+5. [State Management](#state-management)
+6. [Data Fetching & Async Operations](#data-fetching--async-operations)
+7. [Custom Hooks](#custom-hooks)
+8. [Type System & Interfaces](#type-system--interfaces)
+9. [Modern JavaScript Features](#modern-javascript-features)
+10. [Project Architecture Patterns](#project-architecture-patterns)
+
+---
+
+## Project Overview
+
+This is a **React 18 + TypeScript** application built with:
+
+- **Vite** - Modern build tool (faster than Webpack)
+- **TanStack Router** - Type-safe routing
+- **Redux Toolkit** - State management
+- **React Query** - Server state management & data fetching
+- **TypeScript** - Type-safe JavaScript
+
+---
+
+## JavaScript Fundamentals
+
+### 1. Variables & Constants
+
+**JavaScript has 3 ways to declare variables:**
+
+```javascript
+// From main.tsx
+const rootElement = document.getElementById("root") as HTMLElement;
+const root = ReactDOM.createRoot(rootElement);
+```
+
+**Key Concepts:**
+
+- `const` - Cannot be reassigned (immutable reference)
+- `let` - Can be reassigned (block-scoped)
+- `var` - Old way (function-scoped, avoid in modern code)
+
+**Example from your code:**
+
+```typescript
+// From useDebounce.ts
+const [debouncedValue, setDebouncedValue] = useState<T>(value);
+const timer = setTimeout(() => {
+  setDebouncedValue(value);
+}, delay);
+```
+
+### 2. Functions
+
+**Three ways to define functions:**
+
+```typescript
+// 1. Function Declaration
+function useDebounce<T>(value: T, delay = 500): T {
+  // ...
+}
+
+// 2. Arrow Function (most common in React)
+const useAuth = () => {
+  return {
+    logIn: (token: string) => {
+      localStorage.setItem("token", token);
+    },
+  };
+};
+
+// 3. Regular Function Expression
+const hasChangesInStepper = (
+  venueData: VenueChecklistState,
+  stepperName: string
+): boolean => {
+  // ...
+};
+```
+
+**Arrow Functions Benefits:**
+
+- Shorter syntax
+- `this` binding (important in React)
+- Implicit return for single expressions
+
+### 3. Arrays & Array Methods
+
+**Your project uses many array methods:**
+
+```typescript
+// From VenueChecklist.tsx
+const basicFields = [venueName, contactName, phoneNumber, email];
+const hasBasicContent = basicFields.some(
+  (field) =>
+    field !== null && field !== undefined && String(field).trim() !== ""
+);
+
+// .some() - Returns true if ANY element passes the test
+// .every() - Returns true if ALL elements pass the test
+// .filter() - Creates new array with filtered elements
+// .map() - Transforms each element
+// .find() - Returns first matching element
+// .reduce() - Reduces array to single value
+```
+
+**Common Array Patterns:**
+
+```typescript
+// Filter
+const activeItems = items.filter((item) => item.isActive);
+
+// Map (transform)
+const names = users.map((user) => user.name);
+
+// Find
+const user = users.find((u) => u.id === 5);
+
+// Some/Every
+const hasActive = users.some((u) => u.isActive);
+const allActive = users.every((u) => u.isActive);
+```
+
+### 4. Objects & Destructuring
+
+**Object Destructuring (used everywhere in your project):**
+
+```typescript
+// From App.tsx
+const { queryClient, authentication: undefined! } = context;
+
+// From VenueChecklist.tsx
+const { venueName, contactName, phoneNumber, email, questions } = venueData;
+
+// Nested destructuring
+const {
+  setHasUnsavedChanges,
+  setHasAnyFieldContent,
+  showReloadModal,
+} = reloadHandlerContext;
+```
+
+**Object Spread Operator:**
+
+```typescript
+// From fetcher.ts
+const config: RequestInit = {
+  ...opt,
+  headers: {
+    ...defaultHeaders,
+    ...options?.headers,
+  },
+};
+```
+
+### 5. Template Literals
+
+```typescript
+// Backticks allow string interpolation
+const message = `Hello ${userName}, welcome!`;
+
+// Multi-line strings
+const html = `
+  <div>
+    <p>Content</p>
+  </div>
+`;
+```
+
+### 6. Conditional Logic
+
+```typescript
+// Ternary operator
+const status = isActive ? "active" : "inactive";
+
+// Logical AND (short-circuit)
+{isLoading && <Loader />}
+
+// Nullish coalescing (??)
+const name = userName ?? "Guest";
+
+// Optional chaining (?.)
+const email = user?.profile?.email;
+```
+
+---
+
+## TypeScript Fundamentals
+
+### 1. Type Annotations
+
+**TypeScript adds types to JavaScript:**
+
+```typescript
+// From dropdown.type.ts
+export type OptionType = {
+  value: number; // number type
+  label: string; // string type
+  labelInfo?: string; // optional (string | undefined)
+  iconSrc?: string;
+  isActive?: boolean; // boolean type
+};
+
+// Function with type annotations
+function useDebounce<T>(value: T, delay = 500): T {
+  // T is a generic type parameter
+  return debouncedValue;
+}
+```
+
+**Basic Types:**
+
+```typescript
+let name: string = "John";
+let age: number = 30;
+let isActive: boolean = true;
+let items: string[] = ["a", "b"]; // Array of strings
+let user: { name: string; age: number } = { name: "John", age: 30 };
+```
+
+### 2. Interfaces vs Types
+
+**Interfaces (for objects/shapes):**
+
+```typescript
+// From hooks.ts
+export interface VendorVenueChecklistPayload {
+  vendorId: number;
+  venueName: string;
+  contactName: string;
+  phoneNumber: string;
+  email: string;
+  isDraft: boolean;
+  questions: VendorVenueChecklistQuestion[];
+}
+```
+
+**Type Aliases (more flexible):**
+
+```typescript
+// From dropdown.type.ts
+export type OptionType = {
+  value: number;
+  label: string;
+};
+
+// Union types
+type Status = "pending" | "active" | "inactive";
+
+// Function types
+type Handler = (value: number) => void;
+```
+
+**Key Difference:**
+
+- Interfaces can be extended/merged
+- Types can represent unions, intersections, primitives
+
+### 3. Generics
+
+**Generics make code reusable:**
+
+```typescript
+// From useDebounce.ts
+function useDebounce<T>(value: T, delay = 500): T {
+  // T can be any type - string, number, object, etc.
+  const [debouncedValue, setDebouncedValue] = useState<T>(value);
+  return debouncedValue;
+}
+
+// Usage
+const debouncedName = useDebounce<string>("John");
+const debouncedCount = useDebounce<number>(42);
+
+// From fetcher.ts
+export const fetcher = <T>(
+  url: string,
+  options?: {...}
+): Promise<T> => {
+  // Returns a Promise that resolves to type T
+};
+```
+
+### 4. Union Types
+
+```typescript
+// A value can be one of several types
+type ID = string | number;
+type Status = "loading" | "success" | "error";
+
+// In your code
+type SingleValue<T> = T | null;
+type MultiValue<T> = readonly T[];
+```
+
+### 5. Optional Properties
+
+```typescript
+// ? makes a property optional
+export type OptionType = {
+  value: number;
+  label: string;
+  labelInfo?: string; // Optional - may or may not exist
+  iconSrc?: string;
+};
+```
+
+### 6. Type Assertions
+
+```typescript
+// From main.tsx
+const rootElement = document.getElementById("root") as HTMLElement;
+// "as HTMLElement" tells TypeScript: "trust me, this is HTMLElement"
+
+// Alternative syntax
+const element = <HTMLElement>document.getElementById("root");
+```
+
+### 7. Type Guards
+
+```typescript
+// Check if something is a certain type
+if (error instanceof Error) {
+  console.log(error.message);
+}
+
+// Custom type guard
+function isString(value: unknown): value is string {
+  return typeof value === "string";
+}
+```
+
+---
+
+## React Concepts
+
+### 1. Components
+
+**Functional Components (modern React):**
+
+```typescript
+// From App.tsx
+const App = () => {
+  const authentication = useAuth();
+  return (
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        {/* JSX content */}
+      </QueryClientProvider>
+    </ErrorBoundary>
+  );
+};
+
+export default App;
+```
+
+**Component Props:**
+
+```typescript
+// Component receives props
+interface ButtonProps {
+  label: string;
+  onClick: () => void;
+  disabled?: boolean;
+}
+
+const Button = ({ label, onClick, disabled }: ButtonProps) => {
+  return (
+    <button onClick={onClick} disabled={disabled}>
+      {label}
+    </button>
+  );
+};
+```
+
+### 2. JSX (JavaScript XML)
+
+**JSX lets you write HTML-like syntax in JavaScript:**
+
+```typescript
+// JSX
+return (
+  <div className="container">
+    <h1>Title</h1>
+    {isLoading && <Loader />}
+    <button onClick={handleClick}>Click Me</button>
+  </div>
+);
+
+// Gets compiled to:
+React.createElement("div", { className: "container" },
+  React.createElement("h1", null, "Title"),
+  isLoading && React.createElement(Loader),
+  React.createElement("button", { onClick: handleClick }, "Click Me")
+);
+```
+
+**JSX Rules:**
+
+- Must return single element (or Fragment `<>...</>`)
+- Use `className` instead of `class`
+- Use `{}` for JavaScript expressions
+- Self-closing tags need `/`: `<img />`
+
+### 3. State Management with useState
+
+```typescript
+// From useDebounce.ts
+const [debouncedValue, setDebouncedValue] = useState<T>(value);
+
+// useState returns [currentValue, setterFunction]
+const [count, setCount] = useState(0);
+const [name, setName] = useState("");
+
+// Update state
+setCount(count + 1);
+setName("New Name");
+```
+
+**State Updates:**
+
+```typescript
+// Functional update (for previous state)
+setCount((prev) => prev + 1);
+
+// Object state
+const [user, setUser] = useState({ name: "", age: 0 });
+setUser((prev) => ({ ...prev, name: "John" }));
+```
+
+### 4. useEffect Hook
+
+**Side effects (API calls, subscriptions, DOM manipulation):**
+
+```typescript
+// From useDebounce.ts
+useEffect(() => {
+  const timer = setTimeout(() => {
+    setDebouncedValue(value);
+  }, delay);
+
+  // Cleanup function (runs when component unmounts or dependencies change)
+  return () => {
+    clearTimeout(timer);
+  };
+}, [value, delay]); // Dependencies array
+```
+
+**useEffect Patterns:**
+
+```typescript
+// Run once on mount
+useEffect(() => {
+  fetchData();
+}, []); // Empty array = run once
+
+// Run when dependency changes
+useEffect(() => {
+  fetchData(id);
+}, [id]); // Runs when id changes
+
+// Cleanup
+useEffect(() => {
+  const subscription = subscribe();
+  return () => subscription.unsubscribe(); // Cleanup
+}, []);
+```
+
+### 5. useMemo & useCallback
+
+**Performance optimization:**
+
+```typescript
+// From VenueChecklist.tsx
+const memoizedValue = useMemo(() => {
+  // Expensive calculation
+  return expensiveFunction(data);
+}, [data]); // Only recalculate when data changes
+
+// Memoize functions
+const handleClick = useCallback(() => {
+  doSomething(id);
+}, [id]); // Function reference stays same unless id changes
+```
+
+**When to use:**
+
+- `useMemo`: Expensive calculations
+- `useCallback`: Functions passed as props to memoized components
+
+### 6. useRef
+
+**Access DOM elements or store mutable values:**
+
+```typescript
+// From VenueChecklist.tsx
+const inputRef = useRef<HTMLInputElement>(null);
+
+// Access DOM
+inputRef.current?.focus();
+
+// Store mutable value (doesn't cause re-render)
+const countRef = useRef(0);
+countRef.current = countRef.current + 1;
+```
+
+### 7. Conditional Rendering
+
+```typescript
+// From your components
+{isLoading && <Loader />}
+{error ? <Error /> : <Content />}
+{items.length > 0 && items.map(item => <Item key={item.id} />)}
+```
+
+---
+
+## State Management
+
+### 1. Redux Toolkit (Global State)
+
+**Your project uses Redux for global state:**
+
+```typescript
+// From store.ts
+export const store = configureStore({
+  reducer: {
+    token: tokenReducer,
+    client: clientReducer,
+    common: commonReducer,
+    // ... many more reducers
+  },
+});
+```
+
+**Redux Slice (from clientSlice.ts):**
+
+```typescript
+const clientSlice = createSlice({
+  name: "client",
+  initialState: {
+    activeClient: {
+      endPointUrl: null,
+      logo: null,
+      name: null,
+    },
+  },
+  reducers: {
+    setActiveClient: (state, action: PayloadAction<ClientState>) => {
+      state.activeClient = action.payload.activeClient;
+    },
+  },
+});
+
+export const { setActiveClient } = clientSlice.actions;
+export default clientSlice.reducer;
+```
+
+**Using Redux in Components:**
+
+```typescript
+// From VenueChecklist.tsx
+import { useDispatch, useSelector } from "react-redux";
+
+const Component = () => {
+  const dispatch = useDispatch();
+  const activeClient = useSelector(
+    (state: RootState) => state.client.activeClient
+  );
+
+  const handleClick = () => {
+    dispatch(setActiveClient({ activeClient: newClient }));
+  };
+};
+```
+
+**Redux Concepts:**
+
+- **Store**: Global state container
+- **Actions**: Events that describe what happened
+- **Reducers**: Pure functions that update state
+- **Dispatch**: Function to send actions
+
+### 2. React Query (Server State)
+
+**React Query manages server/API state:**
+
+```typescript
+// From App.tsx
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000, // Data fresh for 5 minutes
+      gcTime: 10 * 60 * 1000, // Cache for 10 minutes
+      refetchOnWindowFocus: false,
+      retry: 1,
+    },
+  },
+});
+```
+
+**Using React Query:**
+
+```typescript
+// From hooks.ts
+export const useViewVenueCheckList = (
+  vendorVenueId: number,
+  enabled = true
+) => {
+  return useQuery({
+    queryKey: ["venueChecklist", vendorVenueId],
+    queryFn: () =>
+      fetcher<VenueCheckListResponse>(url, {
+        method: METHOD.GET,
+      }),
+    enabled,
+  });
+};
+
+// In component
+const { data, isLoading, error } = useViewVenueCheckList(id);
+```
+
+**Mutations (POST/PUT/DELETE):**
+
+```typescript
+const mutation = useMutation({
+  mutationFn: (data) =>
+    fetcher(url, {
+      method: METHOD.POST,
+      body: data,
+    }),
+  onSuccess: () => {
+    queryClient.invalidateQueries({ queryKey: ["venueChecklist"] });
+  },
+});
+
+mutation.mutate({ venueName: "New Venue" });
+```
+
+---
+
+## Data Fetching & Async Operations
+
+### 1. Promises & Async/Await
+
+**Promises handle asynchronous operations:**
+
+```typescript
+// From fetcher.ts
+return fetch(url, config)
+  .then(handleError) // Chain .then() calls
+  .then(toJSON)
+  .catch((error) => {
+    // Handle errors
+    throw error;
+  });
+```
+
+**Async/Await (cleaner syntax):**
+
+```typescript
+// Instead of .then()
+const fetchData = async () => {
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+```
+
+**Your project's fetcher function:**
+
+```typescript
+export const fetcher = <T>(
+  url: string,
+  options?: {
+    method: METHODS;
+    body?: Record<string, unknown>;
+  }
+): Promise<T> => {
+  // Returns a Promise that resolves to type T
+  return fetch(url, config).then(handleError).then(toJSON);
+};
+
+// Usage
+const data = await fetcher<VenueCheckListResponse>(url, {
+  method: METHOD.GET,
+});
+```
+
+### 2. Error Handling
+
+```typescript
+// Try-catch for async operations
+try {
+  const data = await fetchData();
+} catch (error) {
+  if (error instanceof Error) {
+    console.error(error.message);
+  }
+}
+
+// From your code
+.catch((error) => {
+  if (error.name === "TypeError" && error.message.includes("fetch")) {
+    throw new Error("Network connection failed...");
+  }
+  throw error;
+});
+```
+
+### 3. Fetch API
+
+**Modern way to make HTTP requests:**
+
+```typescript
+// From fetcher.ts
+const config: RequestInit = {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+  },
+  body: JSON.stringify(data),
+};
+
+fetch(url, config)
+  .then((response) => response.json())
+  .then((data) => console.log(data));
+```
+
+---
+
+## Custom Hooks
+
+**Hooks let you reuse stateful logic:**
+
+### 1. useDebounce Hook
+
+```typescript
+// From useDebounce.ts
+function useDebounce<T>(value: T, delay = 500): T {
+  const [debouncedValue, setDebouncedValue] = useState<T>(value);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => clearTimeout(timer); // Cleanup
+  }, [value, delay]);
+
+  return debouncedValue;
+}
+
+// Usage: Delays value update until user stops typing
+const [searchTerm, setSearchTerm] = useState("");
+const debouncedSearch = useDebounce(searchTerm, 500);
+```
+
+### 2. useAuth Hook
+
+```typescript
+// From useAuth.ts
+export const useAuth = () => {
+  return {
+    logIn: (token: string) => {
+      localStorage.setItem("token", token);
+    },
+    logOut: () => {
+      localStorage.removeItem("token");
+    },
+    isLogged: () => !!localStorage.getItem("token"),
+    isExpired: () => isTokenExpired(localStorage.getItem("token")),
+  };
+};
+
+// Usage
+const { logIn, logOut, isLogged } = useAuth();
+```
+
+**Hook Rules:**
+
+1. Only call hooks at top level (not in loops/conditions)
+2. Only call hooks from React functions
+3. Custom hooks must start with "use"
+
+---
+
+## Type System & Interfaces
+
+### 1. Type Definitions
+
+**Your project has extensive type definitions:**
+
+```typescript
+// From dropdown.type.ts
+export type OptionType = {
+  value: number;
+  label: string;
+  labelInfo?: string;
+  iconSrc?: string;
+  isActive?: boolean;
+  IconComponent?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+};
+
+// Complex nested types
+export interface VendorVenueChecklistPayload {
+  vendorId: number;
+  venueName: string;
+  questions: VendorVenueChecklistQuestion[];
+  roomId: number;
+  isVendorAvailable: boolean;
+}
+```
+
+### 2. Generic Types
+
+```typescript
+// Generic function
+function useDebounce<T>(value: T, delay = 500): T {
+  // Works with any type
+}
+
+// Generic interface
+interface ApiResponse<T> {
+  data: T;
+  success: boolean;
+}
+
+// Usage
+type UserResponse = ApiResponse<User>;
+```
+
+### 3. Utility Types
+
+**TypeScript provides utility types:**
+
+```typescript
+// Partial - makes all properties optional
+type PartialUser = Partial<User>;
+
+// Pick - select specific properties
+type UserName = Pick<User, "name" | "email">;
+
+// Omit - exclude properties
+type UserWithoutId = Omit<User, "id">;
+
+// ReturnType - get return type of function
+type AuthContext = ReturnType<typeof useAuth>;
+```
+
+---
+
+## Modern JavaScript Features
+
+### 1. ES6+ Features Used
+
+**Destructuring:**
+
+```typescript
+const { name, age } = user;
+const [first, second] = array;
+```
+
+**Spread Operator:**
+
+```typescript
+const newObj = { ...oldObj, newProp: "value" };
+const newArray = [...oldArray, newItem];
+```
+
+**Arrow Functions:**
+
+```typescript
+const add = (a: number, b: number) => a + b;
+const handleClick = () => console.log("clicked");
+```
+
+**Template Literals:**
+
+```typescript
+const message = `Hello ${name}, you are ${age} years old`;
+```
+
+**Default Parameters:**
+
+```typescript
+function useDebounce<T>(value: T, delay = 500): T {
+  // delay defaults to 500
+}
+```
+
+**Optional Chaining:**
+
+```typescript
+const email = user?.profile?.email;
+const length = array?.length ?? 0;
+```
+
+**Nullish Coalescing:**
+
+```typescript
+const name = userName ?? "Guest";
+const count = items?.length ?? 0;
+```
+
+### 2. Modules (Import/Export)
+
+```typescript
+// Named export
+export const useDebounce = () => {};
+export type OptionType = {};
+
+// Default export
+export default App;
+
+// Import
+import { useDebounce } from "./hooks";
+import App from "./App";
+import type { OptionType } from "./types";
+```
+
+### 3. Enums
+
+```typescript
+// From enums.ts
+enum APP_MODULE {
+  CLIENT = "Client",
+  FA = "FunctionalArea",
+  ROLE = "Role",
+}
+
+// Usage
+const module = APP_MODULE.CLIENT;
+```
+
+---
+
+## Project Architecture Patterns
+
+### 1. File Structure
+
+```
+src/
+  ├── components/     # Reusable UI components
+  ├── pages/          # Page components
+  ├── hooks/          # Custom React hooks
+  ├── store/          # Redux store & slices
+  ├── api/            # API endpoints
+  ├── constants/      # Constants & enums
+  ├── utils/          # Utility functions
+  ├── routes/         # Route definitions
+  └── styles/         # CSS/SCSS files
+```
+
+### 2. Component Pattern
+
+**Container/Presentational Pattern:**
+
+- Container: Handles logic, state, API calls
+- Presentational: Receives props, renders UI
+
+### 3. Custom Hooks Pattern
+
+**Extract reusable logic:**
+
+```typescript
+// Instead of writing logic in component
+const useVenueChecklist = (id: number) => {
+  const { data, isLoading } = useQuery(...);
+  const mutation = useMutation(...);
+  return { data, isLoading, submit: mutation.mutate };
+};
+```
+
+### 4. Type Safety Pattern
+
+**Define types close to usage:**
+
+```typescript
+// types.ts
+export type VenueChecklistState = { ... };
+
+// component.tsx
+import type { VenueChecklistState } from "./types";
+```
+
+### 5. Error Boundaries
+
+```typescript
+// From App.tsx
+<ErrorBoundary>
+  <App />
+</ErrorBoundary>
+```
+
+### 6. Provider Pattern
+
+**Context providers wrap app:**
+
+```typescript
+<QueryClientProvider client={queryClient}>
+  <Provider store={store}>
+    <TokenProvider>
+      <App />
+    </TokenProvider>
+  </Provider>
+</QueryClientProvider>
+```
+
+---
+
+## Key Concepts Summary
+
+### JavaScript Concepts:
+
+1. ✅ Variables (`const`, `let`)
+2. ✅ Functions (arrow functions, regular)
+3. ✅ Arrays & methods (map, filter, find, some)
+4. ✅ Objects & destructuring
+5. ✅ Promises & async/await
+6. ✅ Modules (import/export)
+7. ✅ Template literals
+8. ✅ Spread operator
+9. ✅ Optional chaining (`?.`)
+10. ✅ Nullish coalescing (`??`)
+
+### TypeScript Concepts:
+
+1. ✅ Type annotations
+2. ✅ Interfaces & Types
+3. ✅ Generics (`<T>`)
+4. ✅ Union types (`|`)
+5. ✅ Optional properties (`?`)
+6. ✅ Type assertions (`as`)
+7. ✅ Utility types (`Partial`, `Pick`, `Omit`)
+
+### React Concepts:
+
+1. ✅ Functional components
+2. ✅ JSX syntax
+3. ✅ Hooks (useState, useEffect, useMemo, useCallback, useRef)
+4. ✅ Props & prop types
+5. ✅ Conditional rendering
+6. ✅ Event handling
+7. ✅ Component composition
+
+### Advanced Patterns:
+
+1. ✅ Custom hooks
+2. ✅ Redux Toolkit (state management)
+3. ✅ React Query (server state)
+4. ✅ Type-safe routing
+5. ✅ Error boundaries
+6. ✅ Context API
+7. ✅ Code splitting & lazy loading
+
+---
+
+## Practice Exercises
+
+1. **Create a custom hook** that fetches user data
+2. **Add a new Redux slice** for managing notifications
+3. **Create a typed API function** using the fetcher pattern
+4. **Build a reusable component** with proper TypeScript types
+5. **Implement debounced search** using useDebounce
+
+---
+
+## Resources
+
+- [TypeScript Handbook](https://www.typescriptlang.org/docs/)
+- [React Documentation](https://react.dev/)
+- [Redux Toolkit](https://redux-toolkit.js.org/)
+- [TanStack Query](https://tanstack.com/query/latest)
+- [MDN JavaScript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide)
+
+---
+
+This tutorial covers all major JavaScript and TypeScript concepts used in your project. Study the actual code files to see these patterns in action!
