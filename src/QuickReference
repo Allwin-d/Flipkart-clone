@@ -1,0 +1,370 @@
+# JavaScript & TypeScript Quick Reference
+
+A cheat sheet for common patterns used in this project.
+
+---
+
+## TypeScript Basics
+
+### Type Annotations
+```typescript
+let name: string = "John";
+let age: number = 30;
+let isActive: boolean = true;
+let items: string[] = ["a", "b"];
+let user: { name: string; age: number } = { name: "John", age: 30 };
+```
+
+### Optional Properties
+```typescript
+type User = {
+  name: string;
+  email?: string;  // Optional
+};
+```
+
+### Union Types
+```typescript
+type ID = string | number;
+type Status = "pending" | "active" | "inactive";
+```
+
+### Generics
+```typescript
+function identity<T>(arg: T): T {
+  return arg;
+}
+```
+
+---
+
+## React Hooks
+
+### useState
+```typescript
+const [value, setValue] = useState(initialValue);
+setValue(newValue);
+setValue(prev => prev + 1);  // Functional update
+```
+
+### useEffect
+```typescript
+useEffect(() => {
+  // Side effect
+  return () => {
+    // Cleanup
+  };
+}, [dependencies]);
+```
+
+### useMemo
+```typescript
+const memoized = useMemo(() => expensive(), [deps]);
+```
+
+### useCallback
+```typescript
+const memoizedFn = useCallback(() => {
+  doSomething();
+}, [deps]);
+```
+
+### useRef
+```typescript
+const ref = useRef(initialValue);
+ref.current = newValue;  // Doesn't trigger re-render
+```
+
+---
+
+## Array Methods
+
+```typescript
+// Transform
+const doubled = numbers.map(n => n * 2);
+
+// Filter
+const evens = numbers.filter(n => n % 2 === 0);
+
+// Find
+const user = users.find(u => u.id === 5);
+
+// Some/Every
+const hasActive = users.some(u => u.isActive);
+const allActive = users.every(u => u.isActive);
+
+// Reduce
+const sum = numbers.reduce((acc, n) => acc + n, 0);
+```
+
+---
+
+## Object Operations
+
+### Destructuring
+```typescript
+const { name, age } = user;
+const { name: userName, age: userAge } = user;  // Rename
+const { name, ...rest } = user;  // Rest
+```
+
+### Spread
+```typescript
+const newObj = { ...oldObj, newProp: "value" };
+const newArray = [...oldArray, newItem];
+```
+
+---
+
+## Modern JavaScript
+
+### Optional Chaining
+```typescript
+const email = user?.profile?.email;
+const length = array?.length ?? 0;
+```
+
+### Nullish Coalescing
+```typescript
+const name = userName ?? "Guest";
+const count = items?.length ?? 0;
+```
+
+### Template Literals
+```typescript
+const message = `Hello ${name}, you are ${age} years old`;
+```
+
+### Arrow Functions
+```typescript
+const add = (a: number, b: number) => a + b;
+const greet = () => console.log("Hello");
+```
+
+---
+
+## Async/Await
+
+```typescript
+// Async function
+const fetchData = async () => {
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+```
+
+---
+
+## Redux Toolkit
+
+### Create Slice
+```typescript
+const slice = createSlice({
+  name: "feature",
+  initialState: { value: 0 },
+  reducers: {
+    increment: (state) => {
+      state.value += 1;
+    },
+  },
+});
+
+export const { increment } = slice.actions;
+export default slice.reducer;
+```
+
+### Use in Component
+```typescript
+const dispatch = useDispatch();
+const value = useSelector((state: RootState) => state.feature.value);
+
+dispatch(increment());
+```
+
+---
+
+## React Query
+
+### Query
+```typescript
+const { data, isLoading, error } = useQuery({
+  queryKey: ["key", id],
+  queryFn: () => fetcher(url),
+});
+```
+
+### Mutation
+```typescript
+const mutation = useMutation({
+  mutationFn: (data) => fetcher(url, { method: "POST", body: data }),
+  onSuccess: () => {
+    queryClient.invalidateQueries({ queryKey: ["key"] });
+  },
+});
+
+mutation.mutate({ name: "John" });
+```
+
+---
+
+## Type Definitions
+
+### Interface
+```typescript
+interface User {
+  id: number;
+  name: string;
+  email?: string;
+}
+```
+
+### Type Alias
+```typescript
+type Status = "pending" | "active";
+type Handler = (value: number) => void;
+```
+
+### Utility Types
+```typescript
+type PartialUser = Partial<User>;
+type UserName = Pick<User, "name" | "email">;
+type UserWithoutId = Omit<User, "id">;
+type AuthContext = ReturnType<typeof useAuth>;
+```
+
+---
+
+## Common Patterns
+
+### Conditional Rendering
+```typescript
+{isLoading && <Loader />}
+{error ? <Error /> : <Content />}
+{items.length > 0 && items.map(item => <Item key={item.id} />)}
+```
+
+### Type Guards
+```typescript
+if (error instanceof Error) {
+  console.log(error.message);
+}
+```
+
+### Type Assertions
+```typescript
+const element = document.getElementById("root") as HTMLElement;
+```
+
+---
+
+## File Structure Patterns
+
+```
+component/
+  ├── Component.tsx      # Main component
+  ├── component.type.ts  # Type definitions
+  ├── component.module.scss  # Styles
+  └── index.ts           # Exports
+```
+
+---
+
+## Import/Export
+
+```typescript
+// Named export
+export const function = () => { };
+export type Type = { };
+
+// Default export
+export default Component;
+
+// Import
+import Component, { function, type Type } from "./file";
+```
+
+---
+
+## Error Handling
+
+```typescript
+try {
+  const data = await fetchData();
+} catch (error) {
+  if (error instanceof Error) {
+    console.error(error.message);
+  }
+}
+```
+
+---
+
+## Quick Tips
+
+1. **Always type your function parameters and return types**
+2. **Use `const` by default, `let` only when needed**
+3. **Use arrow functions in React components**
+4. **Use optional chaining (`?.`) for nested properties**
+5. **Use nullish coalescing (`??`) for defaults**
+6. **Use `useMemo` and `useCallback` for performance**
+7. **Clean up effects with return functions**
+8. **Use TypeScript generics for reusable code**
+9. **Use Redux for global state, React Query for server state**
+10. **Always handle errors in async operations**
+
+---
+
+## Common Mistakes to Avoid
+
+❌ **Don't mutate state directly**
+```typescript
+// Wrong
+state.items.push(newItem);
+
+// Right
+state.items = [...state.items, newItem];
+```
+
+❌ **Don't forget dependencies in useEffect**
+```typescript
+// Wrong
+useEffect(() => {
+  fetchData(id);
+}, []);  // Missing id
+
+// Right
+useEffect(() => {
+  fetchData(id);
+}, [id]);
+```
+
+❌ **Don't use `any` type**
+```typescript
+// Wrong
+const data: any = fetchData();
+
+// Right
+const data: UserData = fetchData();
+```
+
+---
+
+## Useful VS Code Shortcuts
+
+- `Ctrl + Space` - Autocomplete
+- `Ctrl + Click` - Go to definition
+- `F12` - Go to definition
+- `Shift + F12` - Find all references
+- `Ctrl + .` - Quick fix
+- `Alt + Shift + F` - Format document
+
+---
+
+Keep this reference handy while coding!
+
+
