@@ -181,7 +181,7 @@ const status = isActive ? "active" : "inactive";
 // Logical AND (short-circuit)
 {isLoading && <Loader />}
 
-// Nullish coalescing (??)
+// Nullish coalescing (??) it is used to handle the null & undefined  
 const name = userName ?? "Guest";
 
 // Optional chaining (?.)
@@ -238,7 +238,31 @@ export interface VendorVenueChecklistPayload {
   isDraft: boolean;
   questions: VendorVenueChecklistQuestion[];
 }
+
+
+//interface can be extended 
+interface Person {
+  name: string;
+}
+
+interface Employee extends Person {
+  empId: number;
+}
+
+//interface can be merged 
+interface personal {
+  name:string
+}
+interface personal{
+  age:number
+}
+
+const user:personal = {
+   name:"Allwin",
+   age:24
+}
 ```
+
 
 **Type Aliases (more flexible):**
 
@@ -249,8 +273,34 @@ export type OptionType = {
   label: string;
 };
 
+//type can be intersected 
+type Person = {
+  name: string;
+};
+
+type Employee = {
+  empId: number;
+};
+type Staff = Person & Employee; 
+
 // Union types
 type Status = "pending" | "active" | "inactive";
+let userStatus: Status;
+
+userStatus = "pending";   // ✅ valid
+userStatus = "active";    // ✅ valid
+userStatus = "inactive";  // ✅ valid
+userStatus = "deleted";   // ❌ error
+
+
+//type with the primitives
+type Id = number | string;
+let userId: Id;
+
+userId = 10;      // ✅
+userId = "A123";  // ✅
+userId = true;    // ❌
+
 
 // Function types
 type Handler = (value: number) => void;
@@ -271,6 +321,11 @@ function useDebounce<T>(value: T, delay = 500): T {
   // T can be any type - string, number, object, etc.
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
   return debouncedValue;
+}
+
+//using arrow function 
+const useDebounce = <T>(value:T):T => {
+           
 }
 
 // Usage
@@ -319,6 +374,12 @@ const rootElement = document.getElementById("root") as HTMLElement;
 
 // Alternative syntax
 const element = <HTMLElement>document.getElementById("root");
+
+//basic example 
+let value: any = "Allwin";
+let name = value as string;
+console.log(name.toUpperCase()); // works
+
 ```
 
 ### 7. Type Guards
@@ -333,6 +394,37 @@ if (error instanceof Error) {
 function isString(value: unknown): value is string {
   return typeof value === "string";
 }
+
+function printValue(value: string | number) {
+  if (typeof value === "string") {
+    console.log(value.toUpperCase()); // string
+  } else {
+    console.log(value.toFixed(2)); // number
+  }
+}
+
+//Discriminated Union
+type Success = {
+  status: "success";
+  data: string[];
+};
+
+type ErrorRes = {
+  status: "error";
+  message: string;
+};
+
+type ApiResponse = Success | ErrorRes;
+
+function handleResponse(res: ApiResponse) {
+  if (res.status === "success") {
+    console.log(res.data);
+  } else {
+    console.log(res.message);
+  }
+}
+
+
 ```
 
 ---
