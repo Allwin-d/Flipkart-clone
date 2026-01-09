@@ -1226,6 +1226,7 @@ type UserWithoutEmail = Omit<User, "email">;
 const user: UserWithoutEmail = {
   id: 1,
   name: "Allwin",
+  //email is omitted 
 };
 
 // ReturnType - get return type of function
