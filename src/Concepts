@@ -1316,6 +1316,7 @@ import type { OptionType } from "./types";
 ### 3. Enums
 
 ```typescript
+//An enum is used to define a set of named constants.
 // From enums.ts
 enum APP_MODULE {
   CLIENT = "Client",
@@ -1325,6 +1326,19 @@ enum APP_MODULE {
 
 // Usage
 const module = APP_MODULE.CLIENT;
+
+enum Status {
+  Pending,
+  Approved,
+  Rejected,
+}
+let currentStatus: Status = Status.Pending;
+
+if (currentStatus === Status.Approved) {
+  console.log("Approved!");
+}
+
+
 ```
 
 ---
