@@ -885,25 +885,28 @@ const UsersCRUD = () => {
   const { data: users, isLoading } = useQuery({
     queryKey: ["users"],
     queryFn: fetchUsers,
-  });
+  }); //this is for the (get) , make an http request 
 
   // Add User
   const addMutation = useMutation({
     mutationFn: addUser,
     onSuccess: () => queryClient.invalidateQueries(["users"]),
-  });
+  });//this is for the (post)
+
+  //why we use invalidate queries :(queryClient.invalidateQueries)
+//Purpose: To tell React Query that some data is stale and needs to be refetched from the server.
 
   // Update User
   const updateMutation = useMutation({
     mutationFn: updateUser,
     onSuccess: () => queryClient.invalidateQueries(["users"]),
-  });
+  });//this is for the (update)
 
   // Delete User
   const deleteMutation = useMutation({
     mutationFn: deleteUser,
     onSuccess: () => queryClient.invalidateQueries(["users"]),
-  });
+  });//this is for the delete
 
   const [newName, setNewName] = useState("");
   const [newEmail, setNewEmail] = useState("");
@@ -1168,6 +1171,24 @@ interface ApiResponse<T> {
 
 // Usage
 type UserResponse = ApiResponse<User>;
+
+//Basic Genereic Usage : 
+function identity<T>(value: T): T {
+  return value;
+}
+const num = identity<number>(10);       // T = number
+const str = identity<string>("Hello");  // T = string
+
+//Generic with Array : 
+function getFirstElement<T>(arr: T[]): T {
+  return arr[0];
+}
+
+const firstNum = getFirstElement<number>([1, 2, 3]);
+const firstName = getFirstElement<string>(["Allwin", "John", "Sam"]);
+
+
+
 ```
 
 ### 3. Utility Types
@@ -1176,16 +1197,48 @@ type UserResponse = ApiResponse<User>;
 
 ```typescript
 // Partial - makes all properties optional
+type User = {
+  id: number;
+  name: string;
+  email: string;
+};
+
 type PartialUser = Partial<User>;
+const user1: PartialUser = {
+  name: "Allwin", // ✅ allowed
+};
+
+const user2: PartialUser = {
+  id: 1,
+  email: "a@gmail.com", // ✅ allowed
+};
 
 // Pick - select specific properties
-type UserName = Pick<User, "name" | "email">;
+type UserPreview = Pick<User, "id" | "name">;
+const user: UserPreview = {
+  id: 1,
+  name: "Allwin",
+  // email ❌ not allowed
+};
 
 // Omit - exclude properties
-type UserWithoutId = Omit<User, "id">;
+type UserWithoutEmail = Omit<User, "email">;
+const user: UserWithoutEmail = {
+  id: 1,
+  name: "Allwin",
+};
 
 // ReturnType - get return type of function
-type AuthContext = ReturnType<typeof useAuth>;
+function getUser() {
+  return {
+    id: 1,
+    name: "Allwin",
+    email: "a@gmail.com",
+  };
+}
+
+type GetUserReturn = ReturnType<typeof getUser>;
+
 ```
 
 ---
