@@ -1,20 +1,28 @@
-export type product = {
-  id: string;
+export type ApiResponse = {
+  products: Product[];
+  total: number;
+  skip: number;
+  limit: number;
+};
+
+export type Product = {
+  id: number;
   title: string;
   description: string;
   category: string;
   price: number;
+  discountPercentage?: number;
   rating: number;
+  stock: number;
   tags: string[];
   brand: string;
   sku: string;
   weight: number;
   dimensions: Dimensions;
-  warrantyInformation: string;
-  shippingInformation: string;
-  availabilityStatus: string;
-  reviews: Reviews[];
-  returnPolicy: string;
+  warrantyInformation?: string;
+  shippingInformation?: string;
+  availabilityStatus?: string;
+  reviews: Review[];
   minimumOrderQuantity: number;
   meta: Meta;
   images: string[];
@@ -27,7 +35,7 @@ export type Dimensions = {
   depth: number;
 };
 
-export type Reviews = {
+export type Review = {
   rating: number;
   comment: string;
   date: string;
@@ -40,11 +48,4 @@ export type Meta = {
   updatedAt: string;
   barcode: string;
   qrCode: string;
-};
-
-export type ApiResponse = {
-  products: product[];
-  total: number;
-  skip: number;
-  limit: number;
 };
