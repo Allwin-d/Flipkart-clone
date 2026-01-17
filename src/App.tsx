@@ -8,6 +8,8 @@
 // import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 // import Footer from "./components/Footer";
 
+import Navbar from "./components/Navbar";
+
 const App = () => {
   // const queryClient = new QueryClient(); //this is the central data store / cache
   // console.log("This is Query Client : ", queryClient);
@@ -27,6 +29,7 @@ const App = () => {
         </Routes>
         <Footer />
       </QueryClientProvider> */}
+      <Navbar />
     </div>
   );
 };
