@@ -10,29 +10,29 @@ const Navbar = () => {
   console.log("The Search Value : ", search);
 
   return (
-    <div className="w-full flex flex-row ">
+    <div className="w-full flex flex-row mt-4 ">
       {/* This is for the Flip logo and Search Section */}
-      <div className="w-3/5">
-        <img src={Logo} />
+      <div className="w-3/5 flex space-x-6 ">
+        <img src={Logo} className="w-40 h-20 ml-4" />
         <input
           type="text"
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full bg-gray"
+          className="w-full bg-gray-50 pl-12 text-xl"
         />
       </div>
 
       {/* This is for the Sidebar section  */}
-      <div className="w-2/5 flex flex-row justify-between items-center">
-        <div className="flex">
-          <CiUser />
+      <div className="w-2/5 flex flex-row justify-around items-center">
+        <div className="flex space-x-1 cursor-pointer text-2xl">
+          <CiUser className="mt-1" />
           <span>Login</span>
         </div>
-        <div className="flex">
-          <IoCartOutline />
+        <div className="flex space-x-1 cursor-pointer text-2xl">
+          <IoCartOutline className="mt-1" />
           <span>Cart </span>
         </div>
-        <div className="flex">
-          <AiOutlineHome />
+        <div className="flex space-x-1 cursor-pointer text-2xl">
+          <AiOutlineHome className="mt-1" />
           <span>Become a Seller</span>
         </div>
       </div>
