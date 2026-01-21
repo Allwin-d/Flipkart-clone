@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import type { ApiResponse } from "../Types/ApiResponse";
+import ProductTile from "../components/ProductTile";
 
 const Home = () => {
   const API_URL = import.meta.env.VITE_PRODUCTS_API;
@@ -35,9 +36,9 @@ const Home = () => {
   );
   console.log("Beauty Products: ", beauty);
 
-  const phone = data?.data.products.filter(
-    (item) => item.category === "smartphones" && item.rating > 3,
-  );
+  const phone = data?.data.products
+    .filter((item) => item.category === "smartphones" && item.rating > 3)
+    .slice(0, 5);
   console.log("Mobile Phone : ", phone);
 
   const mensDresses = data?.data.products.filter(
@@ -46,7 +47,7 @@ const Home = () => {
   console.log("Mens Dresses : ", mensDresses);
 
   const laptop = data?.data.products.filter(
-    (item) => item.category === "Laptops" && item.rating >= 3,
+    (item) => item.category === "laptops" && item.rating > 2,
   );
   console.log("Laptops : ", laptop);
 
@@ -71,7 +72,53 @@ const Home = () => {
     );
   }
 
-  return <div></div>;
+  return (
+    <div className="bg-gray-50">
+      {/* This is for the Beauty section  */}
+      <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 mx-auto  mt-4 pb-8 gap-10 ">
+        <h1 className="flex items-center justify-center text-3xl ">Beauty </h1>
+        {beauty?.map((item) => (
+          <ProductTile item={item} />
+        ))}
+      </div>
+
+      {/* This is for the Mobile Phone Section */}
+      <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 mx-auto mt-4 pb-8 gap-10 ">
+        <h1 className="flex items-center justify-center text-3xl ">Phone</h1>
+        {phone?.map((item) => (
+          <ProductTile item={item} />
+        ))}
+      </div>
+
+      {/* This is for the Mens Dress Section */}
+      <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 mx-auto mt-4 pb-8 gap-10">
+        <h1 className="flex items-center justify-center text-3xl">
+          Men's Dress
+        </h1>
+      {mensDresses?.map((item) => (
+          <ProductTile item={item} />
+        ))}
+      </div>
+
+      {/* This is for the Laptop Section */}
+      <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 mx-auto mt-4 pb-8 gap-10">
+        <h1 className="flex items-center justify-center text-3xl ">Laptop</h1>
+        {laptop?.map((item) => (
+          <ProductTile item={item} />
+        ))}
+      </div>
+
+      {/* This is for the Women's dress section */}
+      <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 mx-auto mt-4 pb-8  gap-10  ">
+        <h1 className="flex items-center justify-center text-3xl">
+          Women's Dress
+        </h1>
+        {womensDresses?.map((item) => (
+          <ProductTile item={item} />
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default Home;
