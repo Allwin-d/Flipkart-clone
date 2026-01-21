@@ -3,6 +3,7 @@ import Logo from "../images/Flipkart-logo.png";
 import { CiUser } from "react-icons/ci";
 import { IoCartOutline } from "react-icons/io5";
 import { AiOutlineHome } from "react-icons/ai";
+import { CiSearch } from "react-icons/ci";
 
 const Navbar = () => {
   const [search, setSearch] = useState("");
@@ -14,11 +15,15 @@ const Navbar = () => {
       {/* This is for the Flip logo and Search Section */}
       <div className="w-3/5 flex space-x-6 ">
         <img src={Logo} className="w-40 h-20 ml-4" />
-        <input
-          type="text"
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-full bg-gray-50 pl-12 text-xl"
-        />
+        <div className="relative w-full flex border-4 border-gray-200 ">
+          <input
+            type="text"
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full bg-gray-50 pl-12 text-xl border-none focus:outline-none"
+          />
+
+          <CiSearch className="absolute top-6 left-4 text-2xl" />
+        </div>
       </div>
 
       {/* This is for the Sidebar section  */}
