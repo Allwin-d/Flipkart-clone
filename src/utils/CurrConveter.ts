@@ -1,3 +1,3 @@
 export const currConveter = (price: number) => {
-  return ` ₹ ${price * 91}`;
+  return ` ₹ ${Number(price * 91).toFixed(3)}`;
 };
