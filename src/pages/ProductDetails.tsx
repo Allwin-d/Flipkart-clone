@@ -27,7 +27,19 @@ const ProductDetails = () => {
 
   console.log("Single Product Data: ", data);
 
-  return <div></div>;
+  return (
+    <div className="w-full bg-gray-50">
+      {/* This is for the Left SideBar for image */}
+      <div className="float-left w-2/5">
+        <p>Hello</p>
+      </div>
+
+      {/* This is for the Right Sidebar for the Product Detials */}
+      <div className="float-right w-3/5">
+        <p>World</p>
+      </div>
+    </div>
+  );
 };
 
 export default ProductDetails;

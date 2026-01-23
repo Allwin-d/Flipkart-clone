@@ -11,4 +11,4 @@ Inside the (Product Tile) component, I used useNavigate to navigate to the (Prod
 
 ProductDetails Page:
 On the ProductDetails page, instead of using useQuery to fetch a single product, I used the useEffect hook to fetch the data.
-I used the Product type to handle the single product data.
+I used the Product type to handle the single product data.  
