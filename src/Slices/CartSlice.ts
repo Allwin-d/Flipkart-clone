@@ -9,7 +9,9 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<Product>) => {
-      // Logic for adding to cart goes here
+      if (action.payload) {
+        return [...state, action.payload];
+      }
       console.log(state, action);
     },
   },
