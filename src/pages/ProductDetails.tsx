@@ -29,7 +29,7 @@ const ProductDetails = () => {
   console.log("Single Product Data: ", data);
 
   return (
-    <div className="w-full min-h-screen bg-gray-50 flex ">
+    <div className="w-full min-h-screen bg-gray-50 flex " key={data?.id}>
       {/* Left Sidebar */}
       <div className="w-2/5 flex flex-col items-center justify-center bg-white space-y-16">
         <img

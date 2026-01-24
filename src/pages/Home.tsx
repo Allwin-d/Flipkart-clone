@@ -78,7 +78,7 @@ const Home = () => {
       <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 mx-auto  mt-4 pb-8 gap-10 ">
         <h1 className="flex items-center justify-center text-3xl ">Beauty </h1>
         {beauty?.map((item) => (
-          <ProductTile item={item} />
+          <ProductTile item={item} key={item.id} />
         ))}
       </div>
 
@@ -86,7 +86,7 @@ const Home = () => {
       <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 mx-auto mt-4 pb-8 gap-10 ">
         <h1 className="flex items-center justify-center text-3xl ">Phone</h1>
         {phone?.map((item) => (
-          <ProductTile item={item} />
+          <ProductTile item={item} key={item.id} />
         ))}
       </div>
 
@@ -95,8 +95,8 @@ const Home = () => {
         <h1 className="flex items-center justify-center text-3xl">
           Men's Dress
         </h1>
-      {mensDresses?.map((item) => (
-          <ProductTile item={item} />
+        {mensDresses?.map((item) => (
+          <ProductTile item={item} key={item.id} />
         ))}
       </div>
 
@@ -104,7 +104,7 @@ const Home = () => {
       <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 mx-auto mt-4 pb-8 gap-10">
         <h1 className="flex items-center justify-center text-3xl ">Laptop</h1>
         {laptop?.map((item) => (
-          <ProductTile item={item} />
+          <ProductTile key={item.id} item={item} />
         ))}
       </div>
 
@@ -114,7 +114,7 @@ const Home = () => {
           Women's Dress
         </h1>
         {womensDresses?.map((item) => (
-          <ProductTile item={item} />
+          <ProductTile item={item} key={item.id} />
         ))}
       </div>
     </div>
