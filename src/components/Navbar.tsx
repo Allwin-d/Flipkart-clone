@@ -4,17 +4,27 @@ import { CiUser } from "react-icons/ci";
 import { IoCartOutline } from "react-icons/io5";
 import { AiOutlineHome } from "react-icons/ai";
 import { CiSearch } from "react-icons/ci";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [search, setSearch] = useState("");
 
+  const navigate = useNavigate();
   console.log("The Search Value : ", search);
+
+  const handleLogo = () => {
+    navigate("/");
+  };
 
   return (
     <div className="w-full flex flex-row mt-4 ">
       {/* This is for the Flip logo and Search Section */}
       <div className="w-3/5 flex space-x-6 ">
-        <img src={Logo} className="w-40 h-20 ml-4" />
+        <img
+          onClick={handleLogo}
+          src={Logo}
+          className="w-40 h-20 ml-4 cursor-pointer"
+        />
         <div className="relative w-full flex border-4 border-gray-200 ">
           <input
             type="text"

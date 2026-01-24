@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import type { Product } from "../Types/ApiResponse";
+import { currConveter } from "../utils/CurrConveter";
 
 const ProductDetails = () => {
   const [data, setData] = useState<Product | null>(null);
@@ -34,7 +35,7 @@ const ProductDetails = () => {
         <img
           src={data?.images[0]}
           alt={data?.title}
-          className="w-96 object-contain bg-gray-200"
+          className="w-96 object-contain bg-gray-200 h-[32rem]"
         />
         <div className="w-full flex items-center justify-evenly mt-4">
           <button className="rounded-md px-8 py-2 text-white bg-orange-400 text-2xl">
@@ -51,10 +52,11 @@ const ProductDetails = () => {
         <p className="font-bold text-3xl ">{data?.category.toUpperCase()}</p>
         <p className="text-2xl font-md">{data?.title}</p>
         <p className="text-xl font-sm w-3/4 leading-8 ">{data?.description}</p>
-        <p className="text-2xl ">{data?.rating}</p>
+        <p className="text-2xl ">{data?.rating}⭐</p>
         <p className="text-2xl">
-          {data?.price} <span>{data?.discountPercentage} % Offer</span>
+          {`${currConveter(Number(data?.price.toFixed(1)))}`}
         </p>
+        <p className="text-2xl">{data?.discountPercentage} % Discount </p>
         <p className="text-2xl">Only {data?.stock} Left</p>
       </div>
     </div>
