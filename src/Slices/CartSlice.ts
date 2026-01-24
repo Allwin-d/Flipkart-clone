@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
 import type { Product } from "../Types/ApiResponse";
 
 const initialState: Product[] = [];
@@ -7,15 +8,12 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addToCart: () => {
-
-    },
-    removeFromCart: () => {
-
+    addToCart: (state, action: PayloadAction<Product>) => {
+      // Logic for adding to cart goes here
+      console.log(state, action);
     },
   },
 });
 
-export const { addToCart, removeFromCart } = cartSlice.actions; // Exporting the action creators so components can dispatch these actions
-export default cartSlice.reducer;                                // Exporting the reducer to include it in the store
-
+export const { addToCart } = cartSlice.actions;
+export default cartSlice.reducer;

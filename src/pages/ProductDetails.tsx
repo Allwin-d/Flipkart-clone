@@ -3,11 +3,14 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import type { Product } from "../Types/ApiResponse";
 import { currConveter } from "../utils/CurrConveter";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../Slices/CartSlice";
 
 const ProductDetails = () => {
   const [data, setData] = useState<Product | null>(null);
   const { id } = useParams();
   const SINGLE_PRODUCTAPIURL = import.meta.env.VITE_SINGLE_PRODUCT_API;
+  const dispatch = useDispatch();
 
   console.log("This is the id from the Product Details page : ", id);
 
@@ -28,6 +31,10 @@ const ProductDetails = () => {
 
   console.log("Single Product Data: ", data);
 
+  const handleAddToCart = (item: Product) => {
+    dispatch(addToCart(item));
+  };
+
   return (
     <div className="w-full min-h-screen bg-gray-50 flex " key={data?.id}>
       {/* Left Sidebar */}
@@ -38,9 +45,13 @@ const ProductDetails = () => {
           className="w-96 object-contain bg-gray-200 h-[32rem]"
         />
         <div className="w-full flex items-center justify-evenly mt-4">
-          <button className="rounded-md px-8 py-2 text-white bg-orange-400 text-2xl">
+          <button
+            className="rounded-md px-8 py-2 text-white bg-orange-400 text-2xl"
+            onClick={() => data && handleAddToCart(data)}
+          >
             Add to Cart
           </button>
+
           <button className="rounded-md px-8 py-2 text-white bg-orange-600 text-2xl">
             Buy Now
           </button>
