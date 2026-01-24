@@ -28,15 +28,34 @@ const ProductDetails = () => {
   console.log("Single Product Data: ", data);
 
   return (
-    <div className="w-full bg-gray-50">
-      {/* This is for the Left SideBar for image */}
-      <div className="float-left w-2/5">
-        <p>Hello</p>
+    <div className="w-full min-h-screen bg-gray-50 flex ">
+      {/* Left Sidebar */}
+      <div className="w-2/5 flex flex-col items-center justify-center bg-white space-y-16">
+        <img
+          src={data?.images[0]}
+          alt={data?.title}
+          className="w-96 object-contain bg-gray-200"
+        />
+        <div className="w-full flex items-center justify-evenly mt-4">
+          <button className="rounded-md px-8 py-2 text-white bg-orange-400 text-2xl">
+            Add to Cart
+          </button>
+          <button className="rounded-md px-8 py-2 text-white bg-orange-600 text-2xl">
+            Buy Now
+          </button>
+        </div>
       </div>
 
-      {/* This is for the Right Sidebar for the Product Detials */}
-      <div className="float-right w-3/5">
-        <p>World</p>
+      {/* Right Sidebar */}
+      <div className="w-3/5 flex flex-col justify-center bg-white pl-10 space-y-14">
+        <p className="font-bold text-3xl ">{data?.category.toUpperCase()}</p>
+        <p className="text-2xl font-md">{data?.title}</p>
+        <p className="text-xl font-sm w-3/4 leading-8 ">{data?.description}</p>
+        <p className="text-2xl ">{data?.rating}</p>
+        <p className="text-2xl">
+          {data?.price} <span>{data?.discountPercentage} % Offer</span>
+        </p>
+        <p className="text-2xl">Only {data?.stock} Left</p>
       </div>
     </div>
   );
