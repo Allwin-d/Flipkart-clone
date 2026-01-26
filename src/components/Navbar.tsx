@@ -16,6 +16,10 @@ const Navbar = () => {
     navigate("/");
   };
 
+  const handleCart = () => {
+    navigate("/cart");
+  };
+
   return (
     <div className="w-full flex flex-row mt-4 ">
       {/* This is for the Flip logo and Search Section */}
@@ -42,7 +46,10 @@ const Navbar = () => {
           <CiUser className="mt-1" />
           <span>Login</span>
         </div>
-        <div className="flex space-x-1 cursor-pointer text-2xl">
+        <div
+          className="flex space-x-1 cursor-pointer text-2xl"
+          onClick={handleCart}
+        >
           <IoCartOutline className="mt-1" />
           <span>Cart </span>
         </div>

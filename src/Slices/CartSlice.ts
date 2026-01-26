@@ -8,14 +8,21 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    // Add a product to the cart
     addToCart: (state, action: PayloadAction<Product>) => {
-      if (action.payload) {
-        return [...state, action.payload];
+      // Directly mutate the state array using push (Immer handles immutability)
+      state.push(action.payload);
+    },
+
+    // Remove a product from the cart by its ID
+    removeFromCart: (state, action: PayloadAction<Product>) => {
+      const index = state.findIndex((item) => item.id === action.payload.id);
+      if (index !== -1) {
+        state.splice(index, 1); // remove the item at that index
       }
-      console.log(state, action);
     },
   },
 });
 
-export const { addToCart } = cartSlice.actions;
+export const { addToCart, removeFromCart } = cartSlice.actions;
 export default cartSlice.reducer;
