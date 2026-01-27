@@ -1,14 +1,29 @@
-First, I defined TypeScript types for the API responses that I receive from the Dummy JSON Products API.
-File name: ApiResponse.ts
+Project Overview
 
-Home Page:
+This project is built using React + TypeScript and consumes data from the Dummy JSON Products API.
 
-On the Home page, I used useQuery to fetch the product data (useQuery is used for GET requests).
-I rendered the products on the Home page.
-For displaying each product individually, I used a Product Tile component.
-Inside the (Product Tile) component, I used useNavigate to navigate to the (ProductDetails) page for a single product.
+API Types
+Defined TypeScript types for the API responses.
+File: ApiResponse.ts
 
+Home Page
+Used useQuery to fetch product data (GET request).
+Rendered the list of products on the Home page.
+Created a Product Tile component to display each product.
+Used useNavigate inside the Product Tile component to navigate to the ProductDetails page for a selected product.
 
-ProductDetails Page:
-On the ProductDetails page, instead of using useQuery to fetch a single product, I used the useEffect hook to fetch the data.
-I used the Product type to handle the single product data.  
+Product Details Page
+Used the useEffect hook to fetch data for a single product.
+Did not use useQuery for this page.
+Used the Product type to handle and display single product data.
+
+Cart Functionality
+Created a Redux slice:
+File: CartSlice.ts
+Handles adding and removing cart items.
+Created the Redux store:
+File: Store.ts
+
+Created Cart.tsx to:
+Access cart data from the Redux store
+Render cart items on the Cart page
