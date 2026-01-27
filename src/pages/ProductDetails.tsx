@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import type { Product } from "../Types/ApiResponse";
-import { currConveter } from "../utils/CurrConveter";
+import { currConveter } from "../utils/utilityFunctions";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../Slices/CartSlice";
 

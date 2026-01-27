@@ -1,16 +1,32 @@
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../Store/store";
-import { currConveter } from "../utils/CurrConveter";
+import { currConveter } from "../utils/utilityFunctions";
 import { removeFromCart } from "../Slices/CartSlice";
 import type { Product } from "../Types/ApiResponse";
+import { useEffect, useState } from "react";
 
 const Cart = () => {
   const data = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
 
+  const [total, setTotal] = useState(0);
+  const [discount, setDiscount] = useState(0);
+
   const handleRemove = (val: Product) => {
     dispatch(removeFromCart(val));
   };
+
+  useEffect(() => {
+    const totalPrice = data.reduce((curr, val) => curr + val.price, 0);
+    setTotal(totalPrice);
+
+    const totalDiscount = data.reduce((curr, val) => {
+      const discountPercentage = val.discountPercentage ?? 0;
+      return curr + val.price * (discountPercentage / 100);
+    }, 0);
+
+    setDiscount(totalDiscount);
+  }, [data]);
 
   return (
     <div className="w-full min-h-screen bg-gray-50 flex justify-center">
@@ -56,11 +72,15 @@ const Cart = () => {
           {/* Right Section – Price Details */}
           <div className="col-span-4 bg-white rounded-xl shadow-sm p-6 h-fit">
             <p className="font-semibold text-lg mb-4">Price Details</p>
-            {/* content later */}
+            <p>Price : {currConveter(total)}</p>
+            <p>Discount : {currConveter(discount)}</p>
+            <p className="font-semibold mt-2">
+              Total Price : {currConveter(total - discount)}
+            </p>
           </div>
         </div>
       ) : (
-        <div className="flex items-center justify-center text-4xl text-red-600 ">
+        <div className="flex items-center justify-center text-4xl text-red-600">
           Your Cart is Empty
         </div>
       )}

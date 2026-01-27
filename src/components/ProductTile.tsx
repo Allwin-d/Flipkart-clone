@@ -1,4 +1,4 @@
-import { currConveter } from "../utils/CurrConveter";
+import { currConveter } from "../utils/utilityFunctions";
 import type { Product } from "../Types/ApiResponse";
 import { useNavigate } from "react-router-dom";
 
