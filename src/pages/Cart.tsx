@@ -1,9 +1,16 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../Store/store";
 import { currConveter } from "../utils/CurrConveter";
+import { removeFromCart } from "../Slices/CartSlice";
+import type { Product } from "../Types/ApiResponse";
 
 const Cart = () => {
   const data = useSelector((state: RootState) => state.cart);
+  const dispatch = useDispatch();
+
+  const handleRemove = (val: Product) => {
+    dispatch(removeFromCart(val));
+  };
 
   return (
     <div className="w-full min-h-screen bg-gray-50 flex justify-center">
@@ -35,7 +42,10 @@ const Cart = () => {
                     {currConveter(item.price)}
                   </p>
 
-                  <button className="mt-2 w-fit bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition">
+                  <button
+                    className="mt-2 w-fit bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition"
+                    onClick={() => handleRemove(item)}
+                  >
                     Remove
                   </button>
                 </div>
