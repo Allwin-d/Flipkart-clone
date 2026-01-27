@@ -46,13 +46,13 @@ const ProductDetails = () => {
         />
         <div className="w-full flex items-center justify-evenly mt-4">
           <button
-            className="rounded-md px-8 py-2 text-white bg-orange-400 text-2xl"
+            className="rounded-md px-8 py-2 text-white bg-orange-400 text-2xl hover:bg-orange-600 transition duration-150"
             onClick={() => data && handleAddToCart(data)}
           >
             Add to Cart
           </button>
 
-          <button className="rounded-md px-8 py-2 text-white bg-orange-600 text-2xl">
+          <button className="rounded-md px-8 py-2 text-white bg-orange-600 text-2xl hover:bg-orange-900 transition duration-150">
             Buy Now
           </button>
         </div>
