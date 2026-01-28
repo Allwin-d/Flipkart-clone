@@ -37,7 +37,7 @@ const Cart = () => {
             {data.map((item) => (
               <div
                 key={item.id}
-                className="flex items-start gap-6 bg-white p-6 rounded-xl shadow-sm"
+                className="flex items-start gap-12 bg-white p-6 rounded-xl shadow-sm"
               >
                 {/* Image */}
                 <div className="w-32 h-32 flex items-center justify-center">
