@@ -70,10 +70,10 @@ const Cart = () => {
           </div>
 
           {/* Right Section – Price Details */}
-          <div className="col-span-4 bg-white rounded-xl shadow-sm p-6 h-fit">
+          <div className="col-span-4 bg-white rounded-xl shadow-md p-6 h-fit">
             <p className="font-semibold text-lg mb-4">Price Details</p>
-            <p>Price : {currConveter(total)}</p>
-            <p>Discount : {currConveter(discount)}</p>
+            <p className="text-lg">Price : {currConveter(total)}</p>
+            <p className="text-lg">Discount : {currConveter(discount)}</p>
             <p className="font-semibold mt-2">
               Total Price : {currConveter(total - discount)}
             </p>
