@@ -1,13 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Logo from "../images/Flipkart-logo.png";
 import { CiUser } from "react-icons/ci";
 import { IoCartOutline } from "react-icons/io5";
 import { AiOutlineHome } from "react-icons/ai";
 import { CiSearch } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import type { Product } from "../Types/ApiResponse";
 
 const Navbar = () => {
   const [search, setSearch] = useState("");
+  const API_URL = import.meta.env.VITE_SEARCH_PRODUCT;
+  const [data, setData] = useState<Product[] | null>(null);
 
   const navigate = useNavigate();
   console.log("The Search Value : ", search);
@@ -16,9 +20,21 @@ const Navbar = () => {
     navigate("/");
   };
 
+  console.log(data);
+
   const handleCart = () => {
     navigate("/cart");
   };
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const response = await axios.get(`${API_URL}${search}`);
+      setData(response.data);
+      console.log("Data from the Navbar :", response.data);
+    };
+
+    fetchProduct();
+  }, [search, API_URL]);
 
   return (
     <div className="w-full flex flex-row mt-4 ">
