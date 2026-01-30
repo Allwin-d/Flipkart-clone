@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../images/Flipkart-logo.png";
 import { CiUser } from "react-icons/ci";
 import { IoCartOutline } from "react-icons/io5";
@@ -6,35 +6,47 @@ import { AiOutlineHome } from "react-icons/ai";
 import { CiSearch } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import type { Product } from "../Types/ApiResponse";
+import { useDebounce } from "../Hooks/useDebounce";
 
 const Navbar = () => {
   const [search, setSearch] = useState("");
   const API_URL = import.meta.env.VITE_SEARCH_PRODUCT;
-  const [data, setData] = useState<Product[] | null>(null);
+  const value = useDebounce(search, 500);
 
   const navigate = useNavigate();
-  console.log("The Search Value : ", search);
 
   const handleLogo = () => {
     navigate("/");
   };
 
-  console.log(data);
-
   const handleCart = () => {
     navigate("/cart");
   };
 
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+  };
+
   useEffect(() => {
     const fetchProduct = async () => {
-      const response = await axios.get(`${API_URL}${search}`);
-      setData(response.data);
-      console.log("Data from the Navbar :", response.data);
+      if (!value) return;
+
+      try {
+        const response = await axios.get(`${API_URL}${value}`);
+        const products = response.data.products;
+
+        if (products && products.length > 0) {
+          navigate("/products", {
+            state: products,
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
     };
 
     fetchProduct();
-  }, [search, API_URL]);
+  }, [value, API_URL, navigate]);
 
   return (
     <div className="w-full flex flex-row mt-4 ">
@@ -48,7 +60,7 @@ const Navbar = () => {
         <div className="relative w-full flex border-4 border-gray-200 ">
           <input
             type="text"
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={handleSearch}
             className="w-full bg-gray-50 pl-12 text-xl border-none focus:outline-none"
           />
 
