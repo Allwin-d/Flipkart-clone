@@ -11,7 +11,7 @@ import { useDebounce } from "../Hooks/useDebounce";
 const Navbar = () => {
   const [search, setSearch] = useState("");
   const API_URL = import.meta.env.VITE_SEARCH_PRODUCT;
-  const value = useDebounce(search, 500);
+  const value = useDebounce(search, 500); //the hooks should always be used at the top level
 
   const navigate = useNavigate();
 
@@ -37,7 +37,7 @@ const Navbar = () => {
 
         if (products && products.length > 0) {
           navigate("/products", {
-            state: products,
+            state: products, //this is where we are sending the products value , using the useNavigate , inside the object
           });
         }
       } catch (error) {

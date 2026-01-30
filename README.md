@@ -27,3 +27,13 @@ File: Store.ts
 Created Cart.tsx to:
 Access cart data from the Redux store
 Render cart items on the Cart page
+
+Navbar
+Implemented a search functionality with debouncing (500ms delay).
+Used useDebounce custom hook to optimize API calls.
+On search input, fetches product data from the API.
+Automatically navigates to the Products page with search results passed via navigation state.
+Includes navigation handlers for:
+- Logo click → Home page
+- Cart icon → Cart page
+Handles errors during product search with try-catch.
