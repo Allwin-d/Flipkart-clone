@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import Products from "./pages/Products";
+import BecomeAseller from "./pages/BecomeAseller";
 
 const queryClient = new QueryClient();
 
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/productDetails/:id" element={<ProductDetails />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
         <Route path="/products" element={<Products />}></Route>
+        <Route path="/becomeAseller" element={<BecomeAseller />}></Route>
       </Routes>
     </QueryClientProvider>
   );

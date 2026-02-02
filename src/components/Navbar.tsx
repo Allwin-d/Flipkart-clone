@@ -34,7 +34,7 @@ const Navbar = () => {
       
       // Don't navigate if we're on product details or cart page
       if (location.pathname.includes('/productDetails') || 
-          location.pathname === '/cart') {
+          location.pathname === '/cart' || location.pathname === "/" || location.pathname === "/becomeAseller") {
         return;
       }
 
