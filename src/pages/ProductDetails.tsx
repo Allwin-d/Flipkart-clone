@@ -8,7 +8,7 @@ import { addToCart } from "../Slices/CartSlice";
 
 const ProductDetails = () => {
   const [data, setData] = useState<Product | null>(null);
-  const { id } = useParams(); //this is used to get the ID which is available in the URL , or in simple words it is used to get the value from path parameters 
+  const { id } = useParams();
   const SINGLE_PRODUCTAPIURL = import.meta.env.VITE_SINGLE_PRODUCT_API;
   const dispatch = useDispatch();
 
@@ -35,19 +35,28 @@ const ProductDetails = () => {
     dispatch(addToCart(item));
   };
 
+  // Show loading state while data is being fetched
+  if (!data) {
+    return (
+      <div className="w-full min-h-screen flex items-center justify-center">
+        <p className="text-2xl">Loading...</p>
+      </div>
+    );
+  }
+
   return (
-    <div className="w-full min-h-screen bg-gray-50 flex " key={data?.id}>
+    <div className="w-full min-h-screen bg-gray-50 flex">
       {/* Left Sidebar */}
       <div className="w-2/5 flex flex-col items-center justify-center bg-white space-y-16">
         <img
-          src={data?.images[0]}
-          alt={data?.title}
+          src={data.images[0]}
+          alt={data.title}
           className="w-96 object-contain bg-gray-200 h-[32rem]"
         />
         <div className="w-full flex items-center justify-evenly mt-4">
           <button
             className="rounded-md px-8 py-2 text-white bg-orange-400 text-2xl hover:bg-orange-600 transition duration-150"
-            onClick={() => data && handleAddToCart(data)}
+            onClick={() => handleAddToCart(data)}
           >
             Add to Cart
           </button>
@@ -60,15 +69,15 @@ const ProductDetails = () => {
 
       {/* Right Sidebar */}
       <div className="w-3/5 flex flex-col justify-center bg-white pl-10 space-y-14">
-        <p className="font-bold text-3xl ">{data?.category.toUpperCase()}</p>
-        <p className="text-2xl font-md">{data?.title}</p>
-        <p className="text-xl font-sm w-3/4 leading-8 ">{data?.description}</p>
-        <p className="text-2xl ">{data?.rating}⭐</p>
+        <p className="font-bold text-3xl ">{data.category.toUpperCase()}</p>
+        <p className="text-2xl font-md">{data.title}</p>
+        <p className="text-xl font-sm w-3/4 leading-8 ">{data.description}</p>
+        <p className="text-2xl ">{data.rating}⭐</p>
         <p className="text-2xl">
-          {`${currConveter(Number(data?.price.toFixed(1)))}`}
+          {currConveter(Number(data.price.toFixed(1)))}
         </p>
-        <p className="text-2xl">{data?.discountPercentage} % Discount </p>
-        <p className="text-2xl">Only {data?.stock} Left</p>
+        <p className="text-2xl">{data.discountPercentage} % Discount </p>
+        <p className="text-2xl">Only {data.stock} Left</p>
       </div>
     </div>
   );
