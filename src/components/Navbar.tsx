@@ -32,7 +32,7 @@ const Navbar = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       // Only proceed if there's a search value
-      if (!value.trim()) return;
+      if (value.trim() === "") return;
 
       // Only trigger search navigation from home page or products page
       // This prevents unwanted redirects from other pages
