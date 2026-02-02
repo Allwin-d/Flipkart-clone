@@ -8,7 +8,7 @@ import { addToCart } from "../Slices/CartSlice";
 
 const ProductDetails = () => {
   const [data, setData] = useState<Product | null>(null);
-  const { id } = useParams();
+  const { id } = useParams(); //this is used to get the ID which is available in the URL , or in simple words it is used to get the value from path parameters 
   const SINGLE_PRODUCTAPIURL = import.meta.env.VITE_SINGLE_PRODUCT_API;
   const dispatch = useDispatch();
 
