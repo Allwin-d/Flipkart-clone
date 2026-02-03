@@ -55,14 +55,14 @@ const ProductDetails = () => {
 
   return (
     <div className="w-full min-h-screen bg-gray-50 flex">
-      <div className="flex flex-col space-y-2 items-center px-4 bg-white">
+      <div className="flex flex-col space-y-2 items-center px-4 bg-white mt-8">
         {data.images.map((item, index) => (
           <img
             key={item}
             src={item}
             alt="Images"
             className={`w-56 h-56 cursor-pointer ${
-              active === index ? "border-blue-500 border-2" : ""
+              active === index ? "border-blue-500 border-4 rounded-md" : ""
             }`}
             onClick={() => handleActive(item, index)}
           />
