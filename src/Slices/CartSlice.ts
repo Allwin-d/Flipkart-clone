@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { Product } from "../Types/ApiResponse";
 
-const initialState: Product[] = [];
+const initialState: Product[] | number = [];
 
 const cartSlice = createSlice({
   name: "cart",

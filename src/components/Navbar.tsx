@@ -7,6 +7,8 @@ import { CiSearch } from "react-icons/ci";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { useDebounce } from "../Hooks/useDebounce";
+import { useSelector } from "react-redux";
+import type { RootState } from "../Store/store";
 
 const Navbar = () => {
   const [search, setSearch] = useState("");
@@ -15,6 +17,7 @@ const Navbar = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const productlength = useSelector((state: RootState) => state.cart);
 
   const handleLogo = () => {
     setSearch(""); // Clear search when going home
@@ -88,7 +91,7 @@ const Navbar = () => {
           onClick={handleCart}
         >
           <IoCartOutline className="mt-1" />
-          <span>Cart</span>
+          <span>Cart<span className="ml-2">{productlength.length}</span></span>
         </div>
         <div className="flex space-x-1 cursor-pointer text-2xl hover:text-blue-600 transition-colors">
           <AiOutlineHome className="mt-1" />
