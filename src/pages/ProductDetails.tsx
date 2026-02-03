@@ -23,6 +23,8 @@ const ProductDetails = () => {
           `${SINGLE_PRODUCTAPIURL}${id}`,
         );
         setData(response.data);
+        setImage(response.data.images[0]);
+        setActive(0);
       } catch (err) {
         console.log(err);
       }
@@ -53,7 +55,7 @@ const ProductDetails = () => {
 
   return (
     <div className="w-full min-h-screen bg-gray-50 flex">
-      <div className="flex flex-col space-y-2 items-center px-4">
+      <div className="flex flex-col space-y-2 items-center px-4 bg-white">
         {data.images.map((item, index) => (
           <img
             key={item}
