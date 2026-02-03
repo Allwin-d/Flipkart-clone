@@ -8,6 +8,8 @@ import { addToCart } from "../Slices/CartSlice";
 
 const ProductDetails = () => {
   const [data, setData] = useState<Product | null>(null);
+  const [image, setImage] = useState("");
+  const [active, setActive] = useState<number | null>(null);
   const { id } = useParams();
   const SINGLE_PRODUCTAPIURL = import.meta.env.VITE_SINGLE_PRODUCT_API;
   const dispatch = useDispatch();
@@ -38,18 +40,37 @@ const ProductDetails = () => {
   // Show loading state while data is being fetched
   if (!data) {
     return (
-      <div className="w-full min-h-screen flex items-center justify-center">
+      <div className="w-full min-h-screen flex items-center justify-center ">
         <p className="text-2xl">Loading...</p>
       </div>
     );
   }
 
+  const handleActive = (item: string, index: number) => {
+    setImage(item);
+    setActive(index);
+  };
+
   return (
     <div className="w-full min-h-screen bg-gray-50 flex">
+      <div className="flex flex-col space-y-2 items-center px-4">
+        {data.images.map((item, index) => (
+          <img
+            key={item}
+            src={item}
+            alt="Images"
+            className={`w-56 h-56 cursor-pointer ${
+              active === index ? "border-blue-500 border-2" : ""
+            }`}
+            onClick={() => handleActive(item, index)}
+          />
+        ))}
+      </div>
+
       {/* Left Sidebar */}
       <div className="w-2/5 flex flex-col items-center justify-center bg-white space-y-16">
         <img
-          src={data.images[0]}
+          src={image}
           alt={data.title}
           className="w-96 object-contain bg-gray-200 h-[32rem]"
         />

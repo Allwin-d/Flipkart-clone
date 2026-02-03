@@ -44,11 +44,9 @@ const Navbar = () => {
         const response = await axios.get(`${API_URL}${value}`);
         const products = response.data.products;
 
-        if (products && products.length > 0) {
-          navigate("/products", {
-            state: products,
-          });
-        }
+        navigate("/products", {
+          state: products ? products : [],
+        });
       } catch (error) {
         console.error("Error fetching products:", error);
       }
