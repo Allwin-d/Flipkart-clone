@@ -37,9 +37,13 @@ const Navbar = () => {
       // Only proceed if there's a search value
       if (value.trim() === "") return;
 
-      // Only trigger search navigation from home page or products page
+      // Only trigger search navigation from home page or products page or product details page 
       // This prevents unwanted redirects from other pages
-      if (location.pathname !== "/" && location.pathname !== "/products") {
+      if (
+        location.pathname !== "/" &&
+        location.pathname !== "/products" &&
+        location.pathname.startsWith("productDetails")
+      ) {
         return;
       }
 
@@ -91,7 +95,9 @@ const Navbar = () => {
           onClick={handleCart}
         >
           <IoCartOutline className="mt-1" />
-          <span>Cart<span className="ml-2">{productlength.length}</span></span>
+          <span>
+            Cart<span className="ml-2">{productlength.length}</span>
+          </span>
         </div>
         <div className="flex space-x-1 cursor-pointer text-2xl hover:text-blue-600 transition-colors">
           <AiOutlineHome className="mt-1" />
