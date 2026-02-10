@@ -16,6 +16,15 @@ Product Details Page
 Used the useEffect hook to fetch data for a single product.
 Did not use useQuery for this page.
 Used the Product type to handle and display single product data.
+Reviews / Comments Section:
+Displays customer reviews for each product.
+Each review shows:
+Reviewer name
+Rating
+Comment
+Reviewer email
+Review date
+Reviews are dynamically rendered from the product API response.
 
 Cart Functionality
 Created a Redux slice:
@@ -37,3 +46,17 @@ Includes navigation handlers for:
 - Logo click → Home page
 - Cart icon → Cart page
 Handles errors during product search with try-catch.
+
+Products Page
+Receives searched product data through React Router navigation state using useLocation.
+Displays products in a responsive grid layout.
+Each product tile shows:
+Product image
+Title and description
+Rating
+Price with discount percentage
+Remaining stock
+Implemented currency formatting using a utility function.
+Added click navigation using useNavigate:
+Clicking a product image navigates to the Product Details page using the product ID.
+Displays a fallback message when no search results are found.
