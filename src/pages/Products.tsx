@@ -12,7 +12,7 @@ const Products = () => {
     return state || [];
   }, [state]);
 
-  const [sortType, setSortType] = useState<"low" | "high" | null>(null); //This is the union type 
+  const [sortType, setSortType] = useState<"low" | "high" | null>(null); //This is the union type
 
   const handleClick = (val: number) => {
     navigate(`/productDetails/${val}`);
@@ -20,9 +20,9 @@ const Products = () => {
 
   // Memoized sorting (BEST PRACTICE)
   const sortedData = useMemo(() => {
-    if (!sortType) return products; //if there is no sortType is triggered then the default products is returned 
+    if (!sortType) return products; //if there is no sortType is triggered then the default products is returned
 
-    const copy = [...products];   //here we are copying it  ,because sorting mutates the original array 
+    const copy = [...products]; //here we are copying it  ,because sorting mutates the original array
 
     if (sortType === "low") {
       return copy.sort((a, b) => a.price - b.price);
@@ -36,9 +36,9 @@ const Products = () => {
   }, [products, sortType]);
 
   return sortedData.length > 0 ? (
-    <div className="flex">
+    <div className="flex pt-20">
       {/* Sidebar */}
-      <div className="flex flex-col fixed bg-red-300 w-56 h-screen items-center pt-40 space-y-4">
+      <div className="flex flex-col fixed bg-gray-100 w-56 h-screen items-center pt-40 space-y-4">
         <p className="text-2xl font-bold">Price Filter</p>
 
         <div className="flex space-x-2">

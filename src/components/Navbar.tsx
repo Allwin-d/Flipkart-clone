@@ -37,7 +37,7 @@ const Navbar = () => {
       // Only proceed if there's a search value
       if (value.trim() === "") return;
 
-      // Only trigger search navigation from home page or products page or product details page 
+      // Only trigger search navigation from home page or products page or product details page
       // This prevents unwanted redirects from other pages
       if (
         location.pathname !== "/" &&
@@ -63,7 +63,7 @@ const Navbar = () => {
   }, [value, API_URL, navigate, location.pathname]);
 
   return (
-    <div className="w-full flex flex-row mt-4">
+    <div className="w-full flex flex-row fixed top-0 z-50 bg-white shadow-md h-20 items-center">
       {/* Logo and Search Section */}
       <div className="w-3/5 flex space-x-6">
         <img
