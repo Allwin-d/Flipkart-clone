@@ -60,3 +60,12 @@ Implemented currency formatting using a utility function.
 Added click navigation using useNavigate:
 Clicking a product image navigates to the Product Details page using the product ID.
 Displays a fallback message when no search results are found.
+Price Sorting Feature
+Implemented sorting using checkbox filters:
+Low to High Price
+High to Low Price
+Used union type state for sorting:
+const [sortType, setSortType] = useState<"low" | "high" | null>(null);
+Used controlled checkbox components to manage sorting state.
+Used useMemo to optimize sorting performance.
+Copied the products array before sorting to avoid mutating original data.

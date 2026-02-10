@@ -73,7 +73,7 @@ const Home = () => {
   }
 
   return (
-    <div className="bg-gray-50">
+    <div className="bg-gray-50 mt-20">
       {/* This is for the Beauty section  */}
       <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 mx-auto  mt-4 pb-8 gap-10 ">
         <h1 className="flex items-center justify-center text-3xl ">Beauty </h1>
