@@ -13,6 +13,7 @@ const Products = () => {
   }, [state]);
 
   const [sortType, setSortType] = useState<"low" | "high" | null>(null); //This is the union type
+  const [ratingType, setRatingType] = useState<1 | 2 | 3 | 4 | null>(null); //this is also a union type 
 
   const handleClick = (val: number) => {
     navigate(`/productDetails/${val}`);
@@ -20,7 +21,7 @@ const Products = () => {
 
   // Memoized sorting (BEST PRACTICE)
   const sortedData = useMemo(() => {
-    if (!sortType) return products; //if there is no sortType is triggered then the default products is returned
+    if (!sortType && !ratingType) return products; //if there is no sortType is triggered then the default products is returned
 
     const copy = [...products]; //here we are copying it  ,because sorting mutates the original array
 
@@ -32,8 +33,24 @@ const Products = () => {
       return copy.sort((a, b) => b.price - a.price);
     }
 
+    if (ratingType === 1) {
+      return copy.filter((item) => item.rating >= 1);
+    }
+
+    if (ratingType === 2) {
+      return copy.filter((item) => item.rating >= 2);
+    }
+
+    if (ratingType === 3) {
+      return copy.filter((item) => item.rating >= 3);
+    }
+
+    if (ratingType === 4) {
+      return copy.filter((item) => item.rating >= 4);
+    }
+
     return copy;
-  }, [products, sortType]);
+  }, [products, sortType, ratingType]);
 
   return sortedData.length > 0 ? (
     <div className="flex pt-20">
@@ -57,6 +74,41 @@ const Products = () => {
             onChange={() => setSortType(sortType === "high" ? null : "high")}
           />
           <p className="text-xl">High to Low</p>
+        </div>
+        <div className="flex flex-col space-y-4 pt-4">
+          <p className="text-2xl font-bold">Filter By Rating</p>
+          <div className="flex space-x-2">
+            <input
+              type="checkbox"
+              checked={ratingType === 1}
+              onChange={() => setRatingType(ratingType === 1 ? null : 1)}
+            />
+            <p>🌟1 & Above</p>
+          </div>
+          <div className="flex space-x-2">
+            <input
+              type="checkbox"
+              checked={ratingType === 2}
+              onChange={() => setRatingType(ratingType === 2 ? null : 2)}
+            />
+            <p>🌟2 & Above</p>
+          </div>
+          <div className="flex space-x-2">
+            <input
+              type="checkbox"
+              checked={ratingType === 3}
+              onChange={() => setRatingType(ratingType === 3 ? null : 3)}
+            />
+            <p>🌟3 & Above</p>
+          </div>
+          <div className="flex space-x-2">
+            <input
+              type="checkbox"
+              checked={ratingType === 4}
+              onChange={() => setRatingType(ratingType === 4 ? null : 4)}
+            />
+            <p>🌟4 & Above</p>
+          </div>
         </div>
       </div>
 
