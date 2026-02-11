@@ -13,15 +13,17 @@ const Products = () => {
   }, [state]);
 
   const [sortType, setSortType] = useState<"low" | "high" | null>(null); //This is the union type
-  const [ratingType, setRatingType] = useState<1 | 2 | 3 | 4 | null>(null); //this is also a union type 
+  const [ratingType, setRatingType] = useState<1 | 2 | 3 | 4 | null>(null); //this is also a union type
+  const [brand, setBrand] = useState<string | null>(null);
 
   const handleClick = (val: number) => {
+    console.log("handle click clicked ");
     navigate(`/productDetails/${val}`);
   };
 
   // Memoized sorting (BEST PRACTICE)
   const sortedData = useMemo(() => {
-    if (!sortType && !ratingType) return products; //if there is no sortType is triggered then the default products is returned
+    if (!sortType && !ratingType && !brand) return products; //if there is no sortType is triggered then the default products is returned
 
     const copy = [...products]; //here we are copying it  ,because sorting mutates the original array
 
@@ -49,8 +51,15 @@ const Products = () => {
       return copy.filter((item) => item.rating >= 4);
     }
 
+    if (brand) {
+      return copy.filter((item) => item.brand === brand);
+    }
+
     return copy;
-  }, [products, sortType, ratingType]);
+  }, [products, sortType, ratingType, brand]);
+
+  const BrandData = [...new Set(products.map((item) => item.brand))];
+  console.log("Brand Data: ", BrandData);
 
   return sortedData.length > 0 ? (
     <div className="flex pt-20">
@@ -109,6 +118,19 @@ const Products = () => {
             />
             <p>🌟4 & Above</p>
           </div>
+        </div>
+        <div className="flex flex-col space-y-4 pt-4">
+          <p className="text-2xl font-bold">Filter By Brand</p>
+          {BrandData.map((item) => (
+            <div className="flex space-x-2">
+              <input
+                type="checkbox"
+                checked={brand === item}
+                onChange={() => setBrand(brand === item ? null : item)}
+              />
+              <p>{item}</p>
+            </div>
+          ))}
         </div>
       </div>
 
