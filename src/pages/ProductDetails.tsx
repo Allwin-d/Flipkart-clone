@@ -34,6 +34,7 @@ const ProductDetails = () => {
         console.log(err);
       } finally {
         setLoading(false);
+        setError(false);
       }
     };
 
