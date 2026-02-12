@@ -10,6 +10,8 @@ const ProductDetails = () => {
   const [data, setData] = useState<Product | null>(null);
   const [image, setImage] = useState("");
   const [active, setActive] = useState<number | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const { id } = useParams();
   const SINGLE_PRODUCTAPIURL = import.meta.env.VITE_SINGLE_PRODUCT_API;
   const dispatch = useDispatch();
@@ -18,6 +20,8 @@ const ProductDetails = () => {
 
   useEffect(() => {
     const fetchSingleProduct = async () => {
+      setLoading(true);
+      setError(false);
       try {
         const response = await axios.get<Product>(
           `${SINGLE_PRODUCTAPIURL}/${id}`,
@@ -26,7 +30,10 @@ const ProductDetails = () => {
         setImage(response.data.images[0]);
         setActive(0);
       } catch (err) {
+        setError(true);
         console.log(err);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -39,11 +46,26 @@ const ProductDetails = () => {
     dispatch(addToCart(item));
   };
 
-  // Show loading state while data is being fetched
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center text-blue-600 w-full min-h-screen ">
+        <p>Loading Data ...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center text-red-600 w-full min-h-screen">
+        <p>Failed To fetch Data </p>
+      </div>
+    );
+  }
+
   if (!data) {
     return (
       <div className="w-full min-h-screen flex items-center justify-center ">
-        <p className="text-2xl">Loading...</p>
+        <p className="text-2xl">There is no data Available</p>
       </div>
     );
   }
@@ -107,8 +129,11 @@ const ProductDetails = () => {
       {/* This is for the Product Review Section */}
       <div className="flex flex-col space-y-3 ml-52 mb-10">
         <p className="text-4xl font-bold">Reviews</p>
-        {data.reviews.map((item) => (
-          <div className="ml-8 flex flex-col space-y-3 justify-center pt-5 ">
+        {data.reviews.map((item, id) => (
+          <div
+            className="ml-8 flex flex-col space-y-3 justify-center pt-5 "
+            key={id}
+          >
             <p className="text-2xl">{item.reviewerName}</p>
             <div className="flex text-xl">
               <p className="text-white bg-green-700 rounded-full p-1 px-4">
