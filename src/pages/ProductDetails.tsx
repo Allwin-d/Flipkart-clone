@@ -20,7 +20,7 @@ const ProductDetails = () => {
     const fetchSingleProduct = async () => {
       try {
         const response = await axios.get<Product>(
-          `${SINGLE_PRODUCTAPIURL}${id}`,
+          `${SINGLE_PRODUCTAPIURL}/${id}`,
         );
         setData(response.data);
         setImage(response.data.images[0]);

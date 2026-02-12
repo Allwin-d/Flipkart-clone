@@ -16,9 +16,9 @@ const Products = () => {
   const [ratingType, setRatingType] = useState<1 | 2 | 3 | 4 | null>(null); //this is also a union type
   const [brand, setBrand] = useState<string | null>(null);
 
-  const handleClick = (val: number) => {
+  const handleClick = (id: number) => {
     console.log("handle click clicked ");
-    navigate(`/productDetails/${val}`);
+    navigate(`/productDetails/${id}`);
   };
 
   const fetchSearchProduct = async (): Promise<Product[]> => {
@@ -39,7 +39,7 @@ const Products = () => {
     isLoading,
     isError,
   } = useQuery<Product[], Error>({
-    queryKey: ["search"],
+    queryKey: ["search", searchValue],
     queryFn: fetchSearchProduct,
   });
 
@@ -57,20 +57,8 @@ const Products = () => {
       return copy.sort((a, b) => b.price - a.price);
     }
 
-    if (ratingType === 1) {
-      return copy.filter((item) => item.rating >= 1);
-    }
-
-    if (ratingType === 2) {
-      return copy.filter((item) => item.rating >= 2);
-    }
-
-    if (ratingType === 3) {
-      return copy.filter((item) => item.rating >= 3);
-    }
-
-    if (ratingType === 4) {
-      return copy.filter((item) => item.rating >= 4);
+    if (ratingType) {
+      return copy.filter((item) => item.rating >= ratingType);
     }
 
     if (brand) {
@@ -107,7 +95,7 @@ const Products = () => {
 
         <div className="flex space-x-2">
           <input
-            type="checkbox"
+            type="radio"
             checked={sortType === "low"}
             onChange={() => setSortType(sortType === "low" ? null : "low")}
           />
@@ -116,7 +104,7 @@ const Products = () => {
 
         <div className="flex space-x-2">
           <input
-            type="checkbox"
+            type="radio"
             checked={sortType === "high"}
             onChange={() => setSortType(sortType === "high" ? null : "high")}
           />
@@ -126,7 +114,7 @@ const Products = () => {
           <p className="text-2xl font-bold">Filter By Rating</p>
           <div className="flex space-x-2">
             <input
-              type="checkbox"
+              type="radio"
               checked={ratingType === 1}
               onChange={() => setRatingType(ratingType === 1 ? null : 1)}
             />
@@ -134,7 +122,7 @@ const Products = () => {
           </div>
           <div className="flex space-x-2">
             <input
-              type="checkbox"
+              type="radio"
               checked={ratingType === 2}
               onChange={() => setRatingType(ratingType === 2 ? null : 2)}
             />
@@ -142,7 +130,7 @@ const Products = () => {
           </div>
           <div className="flex space-x-2">
             <input
-              type="checkbox"
+              type="radio"
               checked={ratingType === 3}
               onChange={() => setRatingType(ratingType === 3 ? null : 3)}
             />
@@ -150,7 +138,7 @@ const Products = () => {
           </div>
           <div className="flex space-x-2">
             <input
-              type="checkbox"
+              type="radio"
               checked={ratingType === 4}
               onChange={() => setRatingType(ratingType === 4 ? null : 4)}
             />
@@ -159,8 +147,8 @@ const Products = () => {
         </div>
         <div className="flex flex-col space-y-4 pt-4">
           <p className="text-2xl font-bold">Filter By Brand</p>
-          {BrandData.map((item) => (
-            <div className="flex space-x-2">
+          {BrandData.map((item, id) => (
+            <div className="flex space-x-2" key={id}>
               <input
                 type="checkbox"
                 checked={brand === item}

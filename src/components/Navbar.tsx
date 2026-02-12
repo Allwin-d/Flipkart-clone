@@ -4,7 +4,7 @@ import { CiUser } from "react-icons/ci";
 import { IoCartOutline } from "react-icons/io5";
 import { AiOutlineHome } from "react-icons/ai";
 import { CiSearch } from "react-icons/ci";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDebounce } from "../Hooks/useDebounce";
 import { useSelector } from "react-redux";
 import type { RootState } from "../Store/store";
@@ -14,6 +14,7 @@ const Navbar = () => {
   const value = useDebounce(search, 500);
 
   const navigate = useNavigate();
+  const location = useLocation();
   const productlength = useSelector((state: RootState) => state.cart);
 
   const handleLogo = () => {
@@ -22,6 +23,7 @@ const Navbar = () => {
   };
 
   const handleCart = () => {
+    setSearch("")
     navigate("/cart");
   };
 
@@ -29,11 +31,25 @@ const Navbar = () => {
     setSearch(e.target.value);
   };
 
+  // Clear search when navigating away from products page
   useEffect(() => {
-    if (value) {
+    if (location.pathname !== "/products") {
+      setSearch("");
+    }
+  }, [location.pathname]);
+
+  useEffect(() => {
+    // Only navigate if there's a value AND we're on the products page or need to go there
+    if (value && location.pathname === "/products") {
+      const currentSearch = new URLSearchParams(location.search).get("search");
+      if (currentSearch !== value) {
+        navigate(`/products?search=${value}`, { replace: true });
+      }
+    } else if (value && location.pathname !== "/products") {
+      // Only navigate to products if user is actively searching (not just residual state)
       navigate(`/products?search=${value}`);
     }
-  }, [value, navigate]);
+  }, [value, location.search, location.pathname, navigate]); // Remove location and navigate from dependencies
 
   return (
     <div className="w-full flex flex-row fixed top-0 z-50 bg-white shadow-md h-20 items-center">
