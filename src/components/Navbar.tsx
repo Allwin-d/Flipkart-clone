@@ -4,19 +4,16 @@ import { CiUser } from "react-icons/ci";
 import { IoCartOutline } from "react-icons/io5";
 import { AiOutlineHome } from "react-icons/ai";
 import { CiSearch } from "react-icons/ci";
-import { useNavigate, useLocation } from "react-router-dom";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useDebounce } from "../Hooks/useDebounce";
 import { useSelector } from "react-redux";
 import type { RootState } from "../Store/store";
 
 const Navbar = () => {
   const [search, setSearch] = useState("");
-  const API_URL = import.meta.env.VITE_SEARCH_PRODUCT;
   const value = useDebounce(search, 500);
 
   const navigate = useNavigate();
-  const location = useLocation();
   const productlength = useSelector((state: RootState) => state.cart);
 
   const handleLogo = () => {
@@ -33,34 +30,10 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      // Only proceed if there's a search value
-      if (value.trim() === "") return;
-
-      // Only trigger search navigation from home page or products page or product details page
-      // This prevents unwanted redirects from other pages
-      if (
-        location.pathname !== "/" &&
-        location.pathname !== "/products" &&
-        location.pathname.startsWith("productDetails")
-      ) {
-        return;
-      }
-
-      try {
-        const response = await axios.get(`${API_URL}${value}`);
-        const products = response.data.products;
-
-        navigate("/products", {
-          state: products ? products : [],
-        });
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    };
-
-    fetchProduct();
-  }, [value, API_URL, navigate, location.pathname]);
+    if (value) {
+      navigate(`/products?search=${value}`);
+    }
+  }, [value, navigate]);
 
   return (
     <div className="w-full flex flex-row fixed top-0 z-50 bg-white shadow-md h-20 items-center">

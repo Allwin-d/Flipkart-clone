@@ -1,16 +1,16 @@
-import { useLocation, useNavigate } from "react-router-dom";
-import type { Product } from "../Types/ApiResponse";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import type { Product, SearchResponse } from "../Types/ApiResponse";
 import { currConveter } from "../utils/utilityFunctions";
 import { useMemo, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 const Products = () => {
-  const { state } = useLocation();
+  const [searchParams] = useSearchParams();
+  const searchValue = searchParams.get("search");
+  console.log("This is the Search Value : ", searchValue);
   const navigate = useNavigate();
-
-  // Safe fallback if state is undefined
-  const products = useMemo<Product[]>(() => {
-    return state || [];
-  }, [state]);
+  const SEARCH_API_URL = import.meta.env.VITE_SEARCH_PRODUCT;
 
   const [sortType, setSortType] = useState<"low" | "high" | null>(null); //This is the union type
   const [ratingType, setRatingType] = useState<1 | 2 | 3 | 4 | null>(null); //this is also a union type
@@ -21,11 +21,33 @@ const Products = () => {
     navigate(`/productDetails/${val}`);
   };
 
+  const fetchSearchProduct = async (): Promise<Product[]> => {
+    try {
+      const data = await axios.get<SearchResponse>(
+        `${SEARCH_API_URL}${searchValue}`,
+      );
+      console.log("Data from the Products Page : ", data.data);
+      return data.data.products;
+    } catch (err) {
+      console.error("Failded to fetch Data ", err);
+      return [];
+    }
+  };
+
+  const {
+    data = [],
+    isLoading,
+    isError,
+  } = useQuery<Product[], Error>({
+    queryKey: ["search"],
+    queryFn: fetchSearchProduct,
+  });
+
   // Memoized sorting (BEST PRACTICE)
   const sortedData = useMemo(() => {
-    if (!sortType && !ratingType && !brand) return products; //if there is no sortType is triggered then the default products is returned
+    if (!sortType && !ratingType && !brand) return data; //if there is no sortType is triggered then the default products is returned
 
-    const copy = [...products]; //here we are copying it  ,because sorting mutates the original array
+    const copy = [...data]; //here we are copying it  ,because sorting mutates the original array
 
     if (sortType === "low") {
       return copy.sort((a, b) => a.price - b.price);
@@ -56,10 +78,26 @@ const Products = () => {
     }
 
     return copy;
-  }, [products, sortType, ratingType, brand]);
+  }, [data, sortType, ratingType, brand]);
 
-  const BrandData = [...new Set(products.map((item) => item.brand))];
+  const BrandData = [...new Set(data?.map((item) => item.brand))];
   console.log("Brand Data: ", BrandData);
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center ">
+        <p className="text-blue-600 text-4xl">Loading Data ..</p>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="flex items-center justify-center">
+        <p className="text-red-600 text-4xl">Failed To Fetch Data</p>
+      </div>
+    );
+  }
 
   return sortedData.length > 0 ? (
     <div className="flex pt-20">

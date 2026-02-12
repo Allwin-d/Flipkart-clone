@@ -49,3 +49,10 @@ export type Meta = {
   barcode: string;
   qrCode: string;
 };
+
+export type SearchResponse = {
+  limit : number,
+  products : Product[],
+  skip: number,
+  total : number
+}
