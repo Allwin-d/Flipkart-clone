@@ -6,6 +6,7 @@ import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import Products from "./pages/Products";
 import BecomeAseller from "./pages/BecomeAseller";
+import Footer from "./components/Footer";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/products" element={<Products />}></Route>
         <Route path="/becomeAseller" element={<BecomeAseller />}></Route>
       </Routes>
+      <Footer />
     </QueryClientProvider>
   );
 };
