@@ -1,63 +1,52 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import type { Product } from "../Types/ApiResponse";
 import { currConveter } from "../utils/utilityFunctions";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../Slices/CartSlice";
+import { useQuery } from "@tanstack/react-query";
 
 const ProductDetails = () => {
-  const [data, setData] = useState<Product | null>(null);
   const [image, setImage] = useState("");
   const [active, setActive] = useState<number | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
   const { id } = useParams();
   const SINGLE_PRODUCTAPIURL = import.meta.env.VITE_SINGLE_PRODUCT_API;
   const dispatch = useDispatch();
 
   console.log("This is the id from the Product Details page : ", id);
 
-  useEffect(() => {
-    const fetchSingleProduct = async () => {
-      setLoading(true);
-      setError(false);
-      try {
-        const response = await axios.get<Product>(
-          `${SINGLE_PRODUCTAPIURL}/${id}`,
-        );
-        setData(response.data);
-        setImage(response.data.images[0]);
-        setActive(0);
-      } catch (err) {
-        setError(true);
-        console.log(err);
-      } finally {
-        setLoading(false);
-        setError(false);
-      }
-    };
-
-    fetchSingleProduct();
-  }, [id, SINGLE_PRODUCTAPIURL]);
-
-  console.log("Single Product Data: ", data);
-
   const handleAddToCart = (item: Product) => {
     dispatch(addToCart(item));
   };
 
-  if (loading) {
+  const fetchSingleProduct = async () => {
+    try {
+      const data = await axios.get<Product>(`${SINGLE_PRODUCTAPIURL}/${id}`);
+      return data.data;
+    } catch (err) {
+      console.error("Failed to Fetch Data: ", err);
+    }
+  };
+
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["singleProduct"],
+    queryFn: fetchSingleProduct,
+  });
+
+  console.log("Single Product Data: ", data);
+
+  if (isLoading) {
     return (
-      <div className="flex items-center justify-center text-blue-600 w-full min-h-screen ">
+      <div className="flex items-center justify-center text-blue-600 w-full min-h-screen text-4xl ">
         <p>Loading Data ...</p>
       </div>
     );
   }
 
-  if (error) {
+  if (isError) {
     return (
-      <div className="flex items-center justify-center text-red-600 w-full min-h-screen">
+      <div className="flex items-center justify-center text-red-600 w-full min-h-screen text-4xl">
         <p>Failed To fetch Data </p>
       </div>
     );
