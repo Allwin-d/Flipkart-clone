@@ -11,7 +11,8 @@ import type { RootState } from "../Store/store";
 
 const Navbar = () => {
   const [search, setSearch] = useState("");
-  const value = useDebounce(search, 500);
+  const value = useDebounce<string>(search, 500);
+
 
   const navigate = useNavigate();
   const location = useLocation();

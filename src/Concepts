@@ -183,6 +183,7 @@ const status = isActive ? "active" : "inactive";
 
 // Nullish coalescing (??) it is used to handle the null & undefined  
 const name = userName ?? "Guest";
+//if the userName in here is null or undefined then the value Guest is gets executed ,if not the left side is gets executed 
 
 // Optional chaining (?.)
 const email = user?.profile?.email;
@@ -207,7 +208,7 @@ export type OptionType = {
 };
 
 // Function with type annotations
-function useDebounce<T>(value: T, delay = 500): T {
+function useDebounce<T>(value: T, delay = 500): T { //generic type allows any type to be received , like we can pass the string , numbers , boolean etc...
   // T is a generic type parameter
   return debouncedValue;
 }
@@ -260,7 +261,7 @@ interface personal{
 const user:personal = {
    name:"Allwin",
    age:24
-}
+} //here both the defined personal are being merged under one object name , which consist of two properties of personal (interface);
 ```
 
 
@@ -284,7 +285,7 @@ type Employee = {
 type Staff = Person & Employee; 
 
 // Union types
-type Status = "pending" | "active" | "inactive";
+type Status = "pending" | "active" | "inactive"; //this is used when we know , what are the values will comes up 
 let userStatus: Status;
 
 userStatus = "pending";   // ✅ valid
@@ -299,7 +300,7 @@ let userId: Id;
 
 userId = 10;      // ✅
 userId = "A123";  // ✅
-userId = true;    // ❌
+userId = true;    // ❌ //we can't use boolean because that type is not defined 
 
 
 // Function types
@@ -360,7 +361,7 @@ type MultiValue<T> = readonly T[];
 export type OptionType = {
   value: number;
   label: string;
-  labelInfo?: string; // Optional - may or may not exist
+  labelInfo?: string; // Optional - may or may not exist, it either be some values or else undefined , this is same exactly as writing labelInfo : string | undefined ;
   iconSrc?: string;
 };
 ```
@@ -816,8 +817,6 @@ const Users = () => {
     queryFn: fetchUsers,
     refetchInterval: 5000 //auto refetch  every 5 seconds
     refetchIntervalInBackground = false //It controls whether the query should keep refetching even when the browser tab is in the background (not focused).
-
-
   });
 
   if (isLoading) return <p>Loading...</p>;
@@ -1201,7 +1200,7 @@ type User = {
   id: number;
   name: string;
   email: string;
-};
+}; //this is the common object for all the below utility types examples
 
 type PartialUser = Partial<User>;
 const user1: PartialUser = {
