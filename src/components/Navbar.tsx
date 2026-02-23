@@ -13,10 +13,10 @@ const Navbar = () => {
   const [search, setSearch] = useState("");
   const value = useDebounce<string>(search, 500);
 
-
   const navigate = useNavigate();
   const location = useLocation();
   const productlength = useSelector((state: RootState) => state.cart);
+  const [currentTab, setCurrentTab] = useState("");
 
   const handleLogo = () => {
     setSearch(""); // Clear search when going home
@@ -24,7 +24,8 @@ const Navbar = () => {
   };
 
   const handleCart = () => {
-    setSearch("")
+    setCurrentTab("Cart");
+    setSearch("");
     navigate("/cart");
   };
 
@@ -76,22 +77,34 @@ const Navbar = () => {
 
       {/* Sidebar Navigation */}
       <div className="w-2/5 flex flex-row justify-around items-center">
-        <div className="flex space-x-1 cursor-pointer text-2xl hover:text-blue-600 transition-colors">
+        <div
+          className="flex space-x-1 cursor-pointer text-2xl hover:text-blue-600 transition-colors"
+          onClick={() => setCurrentTab("Login")}
+        >
           <CiUser className="mt-1" />
-          <span>Login</span>
+          <span className={`${currentTab === "Login" ? "underline " : ""}`}>
+            Login
+          </span>
         </div>
         <div
           className="flex space-x-1 cursor-pointer text-2xl hover:text-blue-600 transition-colors"
           onClick={handleCart}
         >
           <IoCartOutline className="mt-1" />
-          <span>
+          <span className={`${currentTab === "Cart" ? "underline" : ""}`}>
             Cart<span className="ml-2">{productlength.length}</span>
           </span>
         </div>
-        <div className="flex space-x-1 cursor-pointer text-2xl hover:text-blue-600 transition-colors">
+        <div
+          className="flex space-x-1 cursor-pointer text-2xl hover:text-blue-600 transition-colors"
+          onClick={() => setCurrentTab("Become a Seller")}
+        >
           <AiOutlineHome className="mt-1" />
-          <span>Become a Seller</span>
+          <span
+            className={`${currentTab === "Become a Seller" ? "underline" : ""}`}
+          >
+            Become a Seller
+          </span>
         </div>
       </div>
     </div>
