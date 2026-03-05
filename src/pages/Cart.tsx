@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "../Store/store";
+import { type AppDispatch, type RootState } from "../Store/store";
 import { currConveter } from "../utils/utilityFunctions";
 import { removeFromCart } from "../Slices/CartSlice";
 import type { Product } from "../Types/ApiResponse";
@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 const Cart = () => {
   const data = useSelector((state: RootState) => state.cart);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const [total, setTotal] = useState(0);
   const [discount, setDiscount] = useState(0);
