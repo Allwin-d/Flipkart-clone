@@ -11,7 +11,6 @@ const Search = () => {
   return (
     <div className="w-3/4 p-4 relative">
       <IoIosSearch className="absolute left-7 top-1/2 -translate-y-1/2 text-gray-500" />
-
       <input
         type="text"
         placeholder="Search Products..."
