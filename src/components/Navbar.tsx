@@ -3,6 +3,7 @@ import Search from "./Search";
 // import { IoIosSearch } from "react-icons/io";
 
 const Navbar = () => {
+
   return (
     <div className="w-full h-24 bg-blue-600 sticky top-0 z-50 flex flex-row">
       {/* This is the left side section contains the logo and searchbar */}
