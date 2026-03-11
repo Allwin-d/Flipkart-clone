@@ -13,7 +13,7 @@ const App = () => {
   const queryClient = new QueryClient();
 
   return (
-    <div>
+    <div className="min-h-screen flex flex-col">
       <QueryClientProvider client={queryClient}>
         <Navbar />
         <Routes>
