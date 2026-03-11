@@ -1,7 +1,6 @@
 const Card =()=>{
     return (
         <div>
-            <p>helelooooo</p>
         </div>
     )
 }
