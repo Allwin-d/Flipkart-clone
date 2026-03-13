@@ -54,3 +54,9 @@ export type Meta = {
 export type CartItem = Product & {
   quantity : number
 }
+
+
+  export type Category = {
+    category: string;
+    image: string;
+  };

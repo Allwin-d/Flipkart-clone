@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import type { ApiResponseType } from "../Types/ApiResponse";
+import Categories from "../components/Categories";
+import type { Category } from "../Types/ApiResponse";
 
 const Home = () => {
   const API_URL = import.meta.env.VITE_PRODUCTS_API;
@@ -22,8 +24,25 @@ const Home = () => {
   });
 
   console.log("Products Data : ", data);
-  console.log(isLoading);
-  console.log(isError);
+  console.log("Loading State from the Home Page : ", isLoading);
+  console.log("Error state from the Home page : ", isError);
+
+  // Getting the categories details
+
+  const categories: Category[] = Object.values(
+    //the Object.Values is convert the object into an array
+    (data?.products ?? []).reduce<Record<string, Category>>((acc, product) => {
+      if (!acc[product.category]) {
+        acc[product.category] = {
+          category: product.category,
+          image: product.thumbnail,
+        };
+      }
+      return acc;
+    }, {}), //initially the acc is just empty object ,
+  );
+
+  console.log("Categories from the Home Page : ", categories);
 
   if (isLoading) {
     return (
@@ -41,7 +60,12 @@ const Home = () => {
     );
   }
 
-  return <div></div>;
+  return (
+    <div className="min-h-screen">
+      {/* This is for the Categories Section  */}
+      <Categories category={categories} />
+    </div>
+  );
 };
 
 export default Home;
