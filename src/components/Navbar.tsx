@@ -1,9 +1,12 @@
 import FlipkartLogo from "../images/original-logo.png";
 import Search from "./Search";
+import { RiAccountCircleLine } from "react-icons/ri";
+import { IoHomeOutline } from "react-icons/io5";
+import { IoCartOutline } from "react-icons/io5";
+import { CiCircleMore } from "react-icons/ci";
 // import { IoIosSearch } from "react-icons/io";
 
 const Navbar = () => {
-
   return (
     <div className="w-full h-24 bg-blue-600 sticky top-0 z-50 flex flex-row">
       {/* This is the left side section contains the logo and searchbar */}
@@ -14,14 +17,24 @@ const Navbar = () => {
 
       {/* This is the right side section contains more tabs */}
       <div className="w-1/2 flex flex-row items-center justify-around ">
-        <p className="text-white text-xl cursor-pointer font-medium">
-          My Account{" "}
-        </p>
-        <p className="text-white text-xl cursor-pointer font-medium">
-          Become a Seller
-        </p>
-        <p className="text-white text-xl cursor-pointer font-medium">More</p>
-        <p className="text-white text-xl cursor-pointer font-medium">Cart</p>
+        <div className="flex items-center justify-center gap-2 cursor-pointer">
+          <p className="text-white text-xl  font-medium">My Account </p>
+          <RiAccountCircleLine className="text-white text-4xl " />
+        </div>
+        <div className="flex items-center justify-center gap-2 cursor-pointer ">
+          <p className="text-white text-xl font-medium">Become a Seller</p>
+          <IoHomeOutline className="text-white text-4xl" />
+        </div>
+
+        <div className="flex items-center justify-center gap-2 cursor-pointer">
+          <p className="text-white text-xl  font-medium">More</p>
+          <CiCircleMore className="text-white text-4xl" />
+        </div>
+
+        <div className="flex items-center justify-center gap-2 cursor-pointer">
+          <p className="text-white text-xl font-medium">Cart</p>
+          <IoCartOutline className="text-white text-4xl" />
+        </div>
       </div>
     </div>
   );

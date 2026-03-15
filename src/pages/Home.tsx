@@ -46,7 +46,7 @@ const Home = () => {
 
   if (isLoading) {
     return (
-      <div className="flex flex-row items-center justify-center text-blue-600 text-4xl ">
+      <div className="flex flex-row items-center justify-center text-blue-600 text-4xl min-h-screen ">
         <p>Loading Data ....</p>
       </div>
     );
@@ -54,15 +54,17 @@ const Home = () => {
 
   if (isError) {
     return (
-      <div className="flex flex-row items-center justify-center text-red-600 text-4xl">
+      <div className="flex flex-row items-center justify-center text-red-600 text-4xl min-h-screen">
         <p>Failed to fetch Data ..</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen">
-      {/* This is for the Categories Section  */}
+    <div className="min-h-screen mx-12">
+      {/* This is for the Categories Section  
+      in the Categroy section we send data as a prop 
+      */}
       <Categories category={categories} />
     </div>
   );

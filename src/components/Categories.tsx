@@ -49,7 +49,7 @@ const Categories = ({ category }: { category: Category[] }) => {
       {category.map((item) => (
         <div
           key={item.category}
-          className="flex flex-col items-center min-w-[120px] bg-gray-100 rounded-lg hover:cursor-pointer hover:transition-all duration-500 hover:scale-125"
+          className="flex flex-col items-center min-w-[120px] bg-gray-100 rounded-lg hover:cursor-pointer hover:transition-all duration-500 hover:scale-125 p-4"
         >
           <img src={item.image} alt={item.category} />
           <p>{item.category}</p>
