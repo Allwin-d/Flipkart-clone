@@ -3,6 +3,7 @@ import axios from "axios";
 import type { ApiResponseType } from "../Types/ApiResponse";
 import Categories from "../components/Categories";
 import type { Category } from "../Types/ApiResponse";
+import HeroBanner from "../components/HeroBanner";
 
 const Home = () => {
   const API_URL = import.meta.env.VITE_PRODUCTS_API;
@@ -66,6 +67,7 @@ const Home = () => {
       in the Categroy section we send data as a prop 
       */}
       <Categories category={categories} />
+      <HeroBanner />
     </div>
   );
 };
