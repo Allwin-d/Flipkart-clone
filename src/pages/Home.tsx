@@ -4,6 +4,7 @@ import type { ApiResponseType } from "../Types/ApiResponse";
 import Categories from "../components/Categories";
 import type { Category } from "../Types/ApiResponse";
 import HeroBanner from "../components/HeroBanner";
+import ProductDetails from "./ProductDetails";
 
 const Home = () => {
   const API_URL = import.meta.env.VITE_PRODUCTS_API;
@@ -45,6 +46,42 @@ const Home = () => {
 
   console.log("Categories from the Home Page : ", categories);
 
+  const BeautyProducts = data?.products.filter((item) => {
+    return item.category === "beauty";
+  });
+
+  console.log("Beauty: ", BeautyProducts);
+
+  const Laptop = data?.products.filter((item) => {
+    return item.category === "laptops";
+  });
+
+  console.log("Laptops : ", Laptop);
+
+  const mensShirts = data?.products.filter((item) => {
+    return item.category === "mens-shirts";
+  });
+
+  console.log("Mens-Shirts: ", mensShirts);
+
+  const smartPhones = data?.products.filter((item) => {
+    return item.category === "smartphones" && item.rating >= 4;
+  });
+
+  console.log("Smart Phones :", smartPhones);
+
+  const womensDresses = data?.products.filter((item) => {
+    return item.category === "womens-dresses";
+  });
+
+  console.log("Womens-Dresses : ", womensDresses);
+
+  const groceries = data?.products.filter((item) => {
+    return item.category === "groceries" && item.rating > 4;
+  });
+
+  console.log("Groceries : ", groceries?.slice(0, 5));
+
   if (isLoading) {
     return (
       <div className="flex flex-row items-center justify-center text-blue-600 text-4xl min-h-screen ">
@@ -68,6 +105,18 @@ const Home = () => {
       */}
       <Categories category={categories} />
       <HeroBanner />
+      <ProductDetails data={BeautyProducts ?? []} title={"Beauty Products"} />
+      <ProductDetails data={Laptop ?? []} title="Laptops" />
+      <ProductDetails data={mensShirts ?? []} title="Mens-Shirts" />
+      <ProductDetails
+        data={smartPhones?.slice(0, 5) ?? []}
+        title="SmartPhones"
+      />
+      <ProductDetails
+        data={womensDresses?.slice(0, 5) ?? []}
+        title="Womens-Dresses"
+      />
+      <ProductDetails data={groceries?.slice(0, 5) ?? []} title="Groceries" />
     </div>
   );
 };

@@ -16,7 +16,7 @@ const HeroBanner = () => {
     <div className="relative h-[600px] w-3/3 mx-auto mt-4">
       <img
         src={banners[activeImg].image}
-        className="absolute w-full h-full object-cover transition-opacity duration-700 rounded-lg"
+        className="absolute w-full h-full object-cover transition-opacity duration-700 rounded-lg opacity-100"
       />
       <div className="absolute inset-0 flex flex-col items-center justify-center space-y-12">
         <p className=" text-8xl font-bold text-white">
