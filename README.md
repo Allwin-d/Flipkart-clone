@@ -1,20 +1,36 @@
-1) ApiResponse.ts
-Initially, I created the TypeScript types for the project in this file.
-Then, in the App component, I configured routing for different pages using React Router DOM.
+📘 Project Overview
 
-2) Navbar
-I created a Navbar component, which includes a Search component.
-Inside the Search component, I implemented a custom useDebounce hook to handle debouncing for user input.
+1️⃣ API Types (ApiResponse.ts)
+Defined all the required TypeScript types for handling API responses.
+Ensures type safety and better code maintainability across the project.
+Routing for different pages is configured in the main App component using React Router DOM.
 
-3) Home Page
-On the Home page, I fetched all product data using useQuery.
-From useQuery, I also handled the states such as data, isLoading, and isError.
 
-4) Category Component
-In the Home page, I retrieved category data (name and image) and passed it as props to the Category component.
-Inside the Category component, I used destructuring to access the props and rendered the categories accordingly.
-I also defined appropriate types for the received data.
+2️⃣ Navbar
+Created a reusable Navbar component.
+Integrated a Search component inside the Navbar.
+Implemented a custom useDebounce hook in the Search component to efficiently handle user input and avoid unnecessary API calls.
 
-5) Product Section
-In the Home page, I rendered the Product Section component by passing the title and product data as props.
-Inside the Product Section component, I displayed the title along with the corresponding product list.
+3️⃣ Home Page
+Fetched all product data using React Query (useQuery).
+Managed different states:
+data → API response
+isLoading → Loading state
+isError → Error handling
+
+4️⃣ Category Component
+Retrieved category data (such as name and image) on the Home page.
+Passed this data as props to the Category component.
+Used destructuring to access props and render the categories dynamically.
+Defined proper TypeScript types for better structure and safety.
+
+5️⃣ Product Category
+Rendered the Product Section component from the Home page.
+Passed title and product data as props.
+Displayed the section title along with the corresponding list of products.
+
+6️⃣ Product Details Page
+When a user clicks on a specific product, they are navigated to the Product Details page.
+Used React Router’s useParams hook to extract the product ID from the URL.
+With this ID, an API call is made to fetch the details of the selected product.
+The page then handles and displays the fetched product data accordingly.
