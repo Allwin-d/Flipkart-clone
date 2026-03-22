@@ -4,7 +4,7 @@ import type { ApiResponseType } from "../Types/ApiResponse";
 import Categories from "../components/Categories";
 import type { Category } from "../Types/ApiResponse";
 import HeroBanner from "../components/HeroBanner";
-import ProductDetails from "./ProductDetails";
+import ProductCategory from "../components/ProductCategory";
 
 const Home = () => {
   const API_URL = import.meta.env.VITE_PRODUCTS_API;
@@ -105,18 +105,18 @@ const Home = () => {
       */}
       <Categories category={categories} />
       <HeroBanner />
-      <ProductDetails data={BeautyProducts ?? []} title={"Beauty Products"} />
-      <ProductDetails data={Laptop ?? []} title="Laptops" />
-      <ProductDetails data={mensShirts ?? []} title="Mens-Shirts" />
-      <ProductDetails
+      <ProductCategory data={BeautyProducts ?? []} title={"Beauty Products"} />
+      <ProductCategory data={Laptop ?? []} title="Laptops" />
+      <ProductCategory data={mensShirts ?? []} title="Mens-Shirts" />
+      <ProductCategory
         data={smartPhones?.slice(0, 5) ?? []}
         title="SmartPhones"
       />
-      <ProductDetails
+      <ProductCategory
         data={womensDresses?.slice(0, 5) ?? []}
         title="Womens-Dresses"
       />
-      <ProductDetails data={groceries?.slice(0, 5) ?? []} title="Groceries" />
+      <ProductCategory data={groceries?.slice(0, 5) ?? []} title="Groceries" />
     </div>
   );
 };
