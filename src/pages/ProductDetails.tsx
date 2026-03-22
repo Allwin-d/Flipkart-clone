@@ -2,41 +2,34 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import type { Product } from "../Types/ApiResponse";
+import { useState } from "react";
+import BuyAndCart from "../components/BuyAndCart";
 
 const ProductDetails = () => {
-  // 🔹 Hooks
+  const [activeImg, setActiveImg] = useState(0);
+
   const [searchParams] = useSearchParams();
   console.log("useSearchParams:", searchParams.get("category"));
-  // 👉 URL la irukkura query params ah edukka use pannuvom
 
   const location = useLocation();
   console.log("useLocation:", location);
-  // 👉 Current URL oda full details ah kudukkum
 
   const { id } = useParams();
   console.log("Product ID:", id);
-  // 👉 URL path la irukkura dynamic values ah edukka use pannuvom
 
-  // 🔹 API URL
   const SingleProductApi = import.meta.env.VITE_SINGLE_PRODUCT_API;
-  console.log("API URL:", SingleProductApi);
 
-  // 🔹 Fetch function
   const fetchSingleProduct = async (): Promise<Product> => {
     const res = await axios.get<Product>(`${SingleProductApi}${id}`);
     return res.data;
   };
 
-  // 🔹 React Query
   const { data, isError, isLoading } = useQuery({
     queryKey: ["SingleProduct", id],
     queryFn: fetchSingleProduct,
     enabled: !!id,
   });
 
-  console.log("Single Product Data:", data);
-
-  // 🔹 Loading UI
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -45,7 +38,6 @@ const ProductDetails = () => {
     );
   }
 
-  // 🔹 Error UI
   if (isError) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -54,8 +46,55 @@ const ProductDetails = () => {
     );
   }
 
-  // 🔹 No UI rendering (just empty page)
-  return <div className="min-h-screen"></div>;
+  return (
+    <div className="min-h-screen my-4 flex w-full px-6">
+      {/* 🔹 Main Flex Container */}
+      <div className="flex justify-around items-start w-full">
+        {/* 🔹 Left Section (Thumbnails + Image) */}
+        <div className="flex flex-row gap-6">
+          {/* Thumbnails */}
+          <div className="flex flex-col">
+            {data?.images?.length ? (
+              data.images.map((item, index) => (
+                <img
+                  key={index}
+                  src={item}
+                  onClick={() => setActiveImg(index)}
+                  className={
+                    activeImg === index
+                      ? "w-[200px] h-[200px] cursor-pointer border-4 border-blue-500 rounded-lg bg-gray-100"
+                      : "w-[200px] h-[200px] cursor-pointer border-2"
+                  }
+                />
+              ))
+            ) : (
+              <p>There is no Images Here</p>
+            )}
+          </div>
+
+          {/* Main Image + Buttons */}
+          <div className="flex flex-col">
+            <img
+              src={data?.images?.[activeImg]}
+              className="w-[700px] h-[700px] bg-gray-100"
+            />
+            <BuyAndCart />
+          </div>
+        </div>
+
+        {/* 🔹 Right Section (Product Details) */}
+        <div className="flex flex-col">
+          <p className="font-bold text-gray-500">
+            {data?.category?.toUpperCase()}
+          </p>
+
+          <p className="text-blue-600 font-bold">
+            {data?.brand?.toUpperCase()}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default ProductDetails;
