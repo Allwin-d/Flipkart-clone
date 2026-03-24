@@ -4,6 +4,7 @@ import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import type { Product } from "../Types/ApiResponse";
 import { useState } from "react";
 import BuyAndCart from "../components/BuyAndCart";
+import RatingAndStock from "../components/Ratings";
 
 const ProductDetails = () => {
   const [activeImg, setActiveImg] = useState(0);
@@ -49,7 +50,7 @@ const ProductDetails = () => {
   return (
     <div className="min-h-screen my-4 flex w-full px-6">
       {/* 🔹 Main Flex Container */}
-      <div className="flex justify-around items-start w-full">
+      <div className="flex justify-start items-start w-full">
         {/* 🔹 Left Section (Thumbnails + Image) */}
         <div className="flex flex-row gap-6">
           {/* Thumbnails */}
@@ -83,14 +84,22 @@ const ProductDetails = () => {
         </div>
 
         {/* 🔹 Right Section (Product Details) */}
-        <div className="flex flex-col">
-          <p className="font-bold text-gray-500">
+        <div className="flex flex-col space-y-8 ml-20">
+          <p className="font-bold text-gray-500 text-xl">
             {data?.category?.toUpperCase()}
           </p>
 
-          <p className="text-blue-600 font-bold">
+          <p className="text-blue-600 font-bold text-2xl">
             {data?.brand?.toUpperCase()}
           </p>
+          <p className="text-black font-bold text-xl w-3/4 leading-8">
+            {data?.description}
+          </p>
+          <RatingAndStock
+            rating={data?.rating}
+            NoOfRatings={data?.reviews.length}
+            stocks={data?.stock}
+          />
         </div>
       </div>
     </div>
