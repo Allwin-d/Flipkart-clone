@@ -20,7 +20,7 @@ const RatingAndStock = ({ rating, NoOfRatings, stocks }: RatingsProps) => {
             : "bg-red-300 text-red-800 px-8 py-2 rounded-lg font-bold cursor-pointer"
         }
       >
-        {stocks ? "✔️ InStock" : "❌ UnAvailable"}
+        {stocks ? `✔️ InStock (only ${stocks} Available) ` : "❌ UnAvailable"}
       </p>
     </div>
   );

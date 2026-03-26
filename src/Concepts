@@ -135,6 +135,15 @@ const allActive = users.every((u) => u.isActive);
 const { queryClient, authentication: undefined! } = context;
 
 // From VenueChecklist.tsx
+
+const VenueData = {
+  venueName : ,
+  contactName : ,
+  phoneNumber : ,
+  email : ,
+  questions : 
+}
+
 const { venueName, contactName, phoneNumber, email, questions } = venueData;
 
 // Nested destructuring

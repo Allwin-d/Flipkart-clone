@@ -6,6 +6,7 @@ import { useState } from "react";
 import BuyAndCart from "../components/BuyAndCart";
 import RatingAndStock from "../components/Ratings";
 import PriceSection from "../components/PriceSection";
+import AdditionalInformation from "../components/AdditionalInformation";
 
 const ProductDetails = () => {
   const [activeImg, setActiveImg] = useState(0);
@@ -101,7 +102,20 @@ const ProductDetails = () => {
             stocks={data?.stock}
           />
           <hr></hr>
-          <PriceSection FixedPrice = {data?.price} discountPercentage ={data?.discountPercentage} />
+          <PriceSection
+            FixedPrice={data?.price}
+            discountPercentage={data?.discountPercentage}
+          />
+          <hr></hr>
+          <AdditionalInformation
+            Category={data ? data.category : ""}
+            Sku={data ? data.sku : ""}
+            Stock={data ? data.stock : ""}
+            MinimumOrderQuantity={data ? data.minimumOrderQuantity : 0}
+            WarrantyInformation={data ? data.warrantyInformation : ""}
+            ShippingInformation={data ? data.shippingInformation : ""}
+            ReturnPolicy={data ? data.returnPolicy : ""}
+          />
         </div>
       </div>
     </div>
