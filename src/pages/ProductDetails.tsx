@@ -5,6 +5,7 @@ import type { Product } from "../Types/ApiResponse";
 import { useState } from "react";
 import BuyAndCart from "../components/BuyAndCart";
 import RatingAndStock from "../components/Ratings";
+import PriceSection from "../components/PriceSection";
 
 const ProductDetails = () => {
   const [activeImg, setActiveImg] = useState(0);
@@ -88,7 +89,6 @@ const ProductDetails = () => {
           <p className="font-bold text-gray-500 text-xl">
             {data?.category?.toUpperCase()}
           </p>
-
           <p className="text-blue-600 font-bold text-2xl">
             {data?.brand?.toUpperCase()}
           </p>
@@ -100,6 +100,8 @@ const ProductDetails = () => {
             NoOfRatings={data?.reviews.length}
             stocks={data?.stock}
           />
+          <hr></hr>
+          <PriceSection FixedPrice = {data?.price} discountPercentage ={data?.discountPercentage} />
         </div>
       </div>
     </div>

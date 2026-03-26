@@ -10,7 +10,9 @@ const RatingAndStock = ({ rating, NoOfRatings, stocks }: RatingsProps) => {
       <p className="text-white bg-green-700 px-8 py-2 rounded-lg font-bold cursor-pointer">
         ⭐ {rating}
       </p>
-      <p className="text-gray-400 cursor-pointer">{NoOfRatings} Ratings</p>
+      <p className="text-gray-400 cursor-pointer font-bold">
+        {NoOfRatings} Ratings
+      </p>
       <p
         className={
           stocks

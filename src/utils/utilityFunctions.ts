@@ -1,3 +1,10 @@
-export const CurrencyConverter = (price: number) => {
+export const CurrencyConverter = (price: number): number => {
   return Math.floor(price * 83);
+};
+
+export const OriginalPrice = (
+  orgPrice: number,
+  discountPercentage: number,
+): number => {
+  return Math.floor(orgPrice * (discountPercentage / 100) + orgPrice);
 };
