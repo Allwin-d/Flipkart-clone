@@ -110,7 +110,7 @@ const ProductDetails = () => {
           <AdditionalInformation
             Category={data ? data.category : ""}
             Sku={data ? data.sku : ""}
-            Stock={data ? data.stock : ""}
+            Stock={data ? data.stock : 0}
             MinimumOrderQuantity={data ? data.minimumOrderQuantity : 0}
             WarrantyInformation={data ? data.warrantyInformation : ""}
             ShippingInformation={data ? data.shippingInformation : ""}

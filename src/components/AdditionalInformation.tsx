@@ -1,7 +1,7 @@
 type AdditionalInformationProps = {
   Category: string;
   Sku: string;
-  Stock: number | string;
+  Stock: number ;
   MinimumOrderQuantity: number;
   WarrantyInformation: string;
   ShippingInformation: string;
@@ -28,11 +28,11 @@ const AdditionalInformation = ({
         <p className="font-medium">{Sku}</p>
       </div>
       <div className="flex flex-row space-x-4">
-        <p className="text-gray-400 font-bold">Mininum Order Quantity</p>
+        <p className="text-gray-400 font-bold">Stock</p>
         <p className="font-medium">{Stock}</p>
       </div>
       <div className="flex flex-row space-x-4">
-        <p className="text-gray-400 font-bold">Warranty Information</p>
+        <p className="text-gray-400 font-bold">Minimum Order Quantity</p>
         <p className="font-medium">{MinimumOrderQuantity}</p>
       </div>
       <div className="flex flex-row space-x-4">
