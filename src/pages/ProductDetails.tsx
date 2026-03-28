@@ -7,6 +7,7 @@ import BuyAndCart from "../components/BuyAndCart";
 import RatingAndStock from "../components/Ratings";
 import PriceSection from "../components/PriceSection";
 import AdditionalInformation from "../components/AdditionalInformation";
+import Comments from "../components/Commets";
 
 const ProductDetails = () => {
   const [activeImg, setActiveImg] = useState(0);
@@ -21,7 +22,6 @@ const ProductDetails = () => {
   console.log("Product ID:", id);
 
   const SingleProductApi = import.meta.env.VITE_SINGLE_PRODUCT_API;
-
   const fetchSingleProduct = async (): Promise<Product> => {
     const res = await axios.get<Product>(`${SingleProductApi}${id}`);
     return res.data;
@@ -50,74 +50,79 @@ const ProductDetails = () => {
   }
 
   return (
-    <div className="min-h-screen my-4 flex w-full px-6">
-      {/* 🔹 Main Flex Container */}
-      <div className="flex justify-start items-start w-full">
-        {/* 🔹 Left Section (Thumbnails + Image) */}
-        <div className="flex flex-row gap-6">
-          {/* Thumbnails */}
-          <div className="flex flex-col">
-            {data?.images?.length ? (
-              data.images.map((item, index) => (
-                <img
-                  key={index}
-                  src={item}
-                  onClick={() => setActiveImg(index)}
-                  className={
-                    activeImg === index
-                      ? "w-[200px] h-[200px] cursor-pointer border-4 border-blue-500 rounded-lg bg-gray-100"
-                      : "w-[200px] h-[200px] cursor-pointer border-2"
-                  }
-                />
-              ))
-            ) : (
-              <p>There is no Images Here</p>
-            )}
+    <div className="flex flex-col min-h-screen my-4 w-full px-6">
+      <div className="my-4 flex w-full px-6">
+        {/* 🔹 Main Flex Container */}
+        <div className="flex justify-start items-start w-full">
+          {/* 🔹 Left Section (Thumbnails + Image) */}
+          <div className="flex flex-row gap-6">
+            {/* Thumbnails */}
+            <div className="flex flex-col">
+              {data?.images?.length ? (
+                data.images.map((item, index) => (
+                  <img
+                    key={index}
+                    src={item}
+                    onClick={() => setActiveImg(index)}
+                    className={
+                      activeImg === index
+                        ? "w-[200px] h-[200px] cursor-pointer border-4 border-blue-500 rounded-lg bg-gray-100"
+                        : "w-[200px] h-[200px] cursor-pointer border-2"
+                    }
+                  />
+                ))
+              ) : (
+                <p>There is no Images Here</p>
+              )}
+            </div>
+
+            {/* Main Image + Buttons */}
+            <div className="flex flex-col">
+              <img
+                src={data?.images?.[activeImg]}
+                className="w-[700px] h-[700px] bg-gray-100"
+              />
+              <BuyAndCart />
+            </div>
           </div>
 
-          {/* Main Image + Buttons */}
-          <div className="flex flex-col">
-            <img
-              src={data?.images?.[activeImg]}
-              className="w-[700px] h-[700px] bg-gray-100"
+          {/* 🔹 Right Section (Product Details) */}
+          <div className="flex flex-col space-y-8 ml-20">
+            <p className="font-bold text-gray-500 text-xl">
+              {data?.category?.toUpperCase()}
+            </p>
+            <p className="text-blue-600 font-bold text-2xl">
+              {data?.brand?.toUpperCase()}
+            </p>
+            <p className="text-black font-bold text-xl w-3/4 leading-8">
+              {data?.description}
+            </p>
+            <RatingAndStock
+              rating={data?.rating}
+              NoOfRatings={data?.reviews.length}
+              stocks={data?.stock}
             />
-            <BuyAndCart />
+            <hr></hr>
+            <PriceSection
+              FixedPrice={data?.price}
+              discountPercentage={data?.discountPercentage}
+            />
+            <hr></hr>
+            <AdditionalInformation
+              Category={data ? data.category : ""}
+              Sku={data ? data.sku : ""}
+              Stock={data ? data.stock : 0}
+              MinimumOrderQuantity={data ? data.minimumOrderQuantity : 0}
+              WarrantyInformation={data ? data.warrantyInformation : ""}
+              ShippingInformation={data?.shippingInformation || ""}
+              ReturnPolicy={data ? data.returnPolicy : ""}
+            />
           </div>
-        </div>
-
-        {/* 🔹 Right Section (Product Details) */}
-        <div className="flex flex-col space-y-8 ml-20">
-          <p className="font-bold text-gray-500 text-xl">
-            {data?.category?.toUpperCase()}
-          </p>
-          <p className="text-blue-600 font-bold text-2xl">
-            {data?.brand?.toUpperCase()}
-          </p>
-          <p className="text-black font-bold text-xl w-3/4 leading-8">
-            {data?.description}
-          </p>
-          <RatingAndStock
-            rating={data?.rating}
-            NoOfRatings={data?.reviews.length}
-            stocks={data?.stock}
-          />
-          <hr></hr>
-          <PriceSection
-            FixedPrice={data?.price}
-            discountPercentage={data?.discountPercentage}
-          />
-          <hr></hr>
-          <AdditionalInformation
-            Category={data ? data.category : ""}
-            Sku={data ? data.sku : ""}
-            Stock={data ? data.stock : 0}
-            MinimumOrderQuantity={data ? data.minimumOrderQuantity : 0}
-            WarrantyInformation={data ? data.warrantyInformation : ""}
-            ShippingInformation={data ? data.shippingInformation : ""}
-            ReturnPolicy={data ? data.returnPolicy : ""}
-          />
         </div>
       </div>
+
+      {/* This is for the Comment Section */}
+      <Comments productId={id ? id : ""} />
     </div>
   );
 };
