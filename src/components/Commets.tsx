@@ -11,6 +11,7 @@ const Comments = ({ productId }: CommentsProps) => {
   const [comment, setComment] = useState<UserComment>({
     UserName: "",
     Email: "",
+    rating: 0,
     body: "",
   });
 
@@ -54,6 +55,7 @@ const Comments = ({ productId }: CommentsProps) => {
     setComment({
       UserName: "",
       Email: "",
+      rating: 0,
       body: "",
     });
   };
@@ -84,30 +86,55 @@ const Comments = ({ productId }: CommentsProps) => {
       <div className="flex flex-row justify-between p-4">
         <p className="text-2xl font-bold">Comments & Reviews</p>
         <p className="bg-gray-200 text-gray-600 font-medium rounded-lg px-2 py-1">
-          3 Comments
+          {FilteredComments?.length === 1
+            ? `${FilteredComments?.length} Comment`
+            : `${FilteredComments} Comments`}
         </p>
       </div>
       <hr></hr>
 
       <div className="flex flex-col space-y-10 ">
         <h1 className="text-xl text-gray-700 font-medium">Write a Comment</h1>
-        <div className="flex flex-row w-1/2 justify-between">
-          <input
-            type="text"
-            placeholder=" Your Name "
-            onChange={(e) =>
-              setComment({ ...comment, UserName: e.target.value })
-            }
-            value={comment.UserName}
-            className="p-2 border-2 border-gray-300 focus:ring-2 ring-blue-500 focus:outline-none rounded-md px-8"
-          ></input>
-          <input
-            type="email"
-            placeholder="Email (optional) "
-            onChange={(e) => setComment({ ...comment, Email: e.target.value })}
-            value={comment.Email}
-            className="p-2 border-2 border-gray-300 focus:ring-2 ring-blue-500 focus:outline-none rounded-md px-8"
-          ></input>
+        <div className="flex flex-row w-3/4 justify-between">
+          <div>
+            <input
+              type="text"
+              placeholder=" Your Name "
+              onChange={(e) =>
+                setComment({ ...comment, UserName: e.target.value })
+              }
+              value={comment.UserName}
+              className="p-2 border-2 border-gray-300 focus:ring-2 ring-blue-500 focus:outline-none rounded-md px-12 font-medium"
+            ></input>
+          </div>
+          <div>
+            {" "}
+            <input
+              type="email"
+              placeholder="Email (optional) "
+              onChange={(e) =>
+                setComment({ ...comment, Email: e.target.value })
+              }
+              value={comment.Email}
+              className="p-2 border-2 border-gray-300 focus:ring-2 ring-blue-500 focus:outline-none rounded-md px-12 font-medium"
+            ></input>
+          </div>
+          <div className="flex items-center space-x-4">
+            <h1 className="font-medium text-gray-400">Rating</h1>
+            <select
+              className="border border-gray-500 rounded-lg px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium"
+              value={comment.rating}
+              onChange={(e) =>
+                setComment({ ...comment, rating: Number(e.target.value) })
+              }
+            >
+              <option value={1}>1</option>
+              <option value={2}>2</option>
+              <option value={3}>3</option>
+              <option value={4}>4</option>
+              <option value={5}>5</option>
+            </select>
+          </div>
         </div>
         <textarea
           className="w-full h-24 p-3 border-gray-300 border-2 focus:ring-2 focus:ring-blue-500 focus:outline-none rounded-md resize-none"
@@ -125,15 +152,22 @@ const Comments = ({ productId }: CommentsProps) => {
         </div>
 
         {/* This is for the User Comments section */}
-        {FilteredComments && (
+        {FilteredComments?.length ? (
           <div className="flex flex-col space-y-4">
             {FilteredComments.map((item) => (
-              <div className="flex flex-col space-y-2">
-                <p>{item.UserName}</p>
-                <p>{item.Email}</p>
-                <p>{item.body}</p>
+              <div key={item.id} className="flex flex-col space-y-2">
+                <div className="flex items-center w-1/2 justify-between">
+                  <p className="font-bold text-xl">{item.UserName}</p>
+                  <p className="font-medium text-gray-500">{item.Email}</p>
+                </div>
+                <p>{item?.rating ? "⭐".repeat(item.rating) : "⭐"}</p>
+                <p className="text-xl font-bold ">{item.body}</p>
               </div>
             ))}
+          </div>
+        ) : (
+          <div className="text-center">
+            <p className="text-xl font-bold ">No Comments Added Yet 🚫</p>
           </div>
         )}
       </div>

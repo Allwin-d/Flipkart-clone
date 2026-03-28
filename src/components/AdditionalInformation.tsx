@@ -1,7 +1,7 @@
 type AdditionalInformationProps = {
   Category: string;
   Sku: string;
-  Stock: number ;
+  Stock: number;
   MinimumOrderQuantity: number;
   WarrantyInformation: string;
   ShippingInformation: string;
@@ -18,32 +18,33 @@ const AdditionalInformation = ({
   ReturnPolicy,
 }: AdditionalInformationProps) => {
   return (
-    <div className="flex flex-col space-y-2">
-      <div className="flex flex-row space-x-4 ">
+    <div className="flex flex-col space-y-4">
+      <h1 className="text-3xl text-black font-bold">Specification</h1>
+      <div className="flex flex-row space-x-4 text-2xl ">
         <p className="text-gray-400 font-bold">Category</p>
         <p className="font-medium">{Category}</p>
       </div>
-      <div className="flex flex-row space-x-4">
+      <div className="flex flex-row space-x-4 text-2xl">
         <p className="text-gray-400 font-bold">Sku</p>
         <p className="font-medium">{Sku}</p>
       </div>
-      <div className="flex flex-row space-x-4">
+      <div className="flex flex-row space-x-4 text-2xl">
         <p className="text-gray-400 font-bold">Stock</p>
         <p className="font-medium">{Stock}</p>
       </div>
-      <div className="flex flex-row space-x-4">
+      <div className="flex flex-row space-x-4 text-2xl">
         <p className="text-gray-400 font-bold">Minimum Order Quantity</p>
         <p className="font-medium">{MinimumOrderQuantity}</p>
       </div>
-      <div className="flex flex-row space-x-4">
+      <div className="flex flex-row space-x-4 text-2xl">
         <p className="text-gray-400 font-bold">Shipping Information</p>
         <p className="font-medium">{ShippingInformation}</p>
       </div>
-      <div className="flex flex-row space-x-4">
+      <div className="flex flex-row space-x-4 text-2xl">
         <p className="text-gray-400 font-bold">Warranty Information</p>
         <p className="font-medium">{WarrantyInformation}</p>
       </div>
-      <div className="flex flex-row space-x-4">
+      <div className="flex flex-row space-x-4 text-2xl">
         <p className="text-gray-400 font-bold">Return Policy</p>
         <p className="font-medium">{ReturnPolicy}</p>
       </div>
