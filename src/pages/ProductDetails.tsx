@@ -11,6 +11,8 @@ import Comments from "../components/Commets";
 
 const ProductDetails = () => {
   const [activeImg, setActiveImg] = useState(0);
+  const [reviewsCount, setReviewsCount] = useState(0);
+  const [averageRating, setAverageRating] = useState(0);
 
   const [searchParams] = useSearchParams();
   console.log("useSearchParams:", searchParams.get("category"));
@@ -98,8 +100,8 @@ const ProductDetails = () => {
               {data?.description}
             </p>
             <RatingAndStock
-              rating={data?.rating}
-              NoOfRatings={data?.reviews.length}
+              rating={averageRating}
+              NoOfRatings={reviewsCount}
               stocks={data?.stock}
             />
             <hr></hr>
@@ -122,7 +124,11 @@ const ProductDetails = () => {
       </div>
 
       {/* This is for the Comment Section */}
-      <Comments productId={id ? id : ""} />
+      <Comments
+        productId={id ? id : ""}
+        reviewsCount={setReviewsCount}
+        averageRating={setAverageRating}
+      />
     </div>
   );
 };

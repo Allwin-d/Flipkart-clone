@@ -1,13 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { UserComment, UserComments } from "../Types/ApiResponse";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
 type CommentsProps = {
   productId: string;
+  reviewsCount: (count: number) => void;
+  averageRating: (count: number) => void;
 };
 
-const Comments = ({ productId }: CommentsProps) => {
+const Comments = ({
+  productId,
+  reviewsCount,
+  averageRating,
+}: CommentsProps) => {
   const [comment, setComment] = useState<UserComment>({
     UserName: "",
     Email: "",
@@ -60,26 +66,40 @@ const Comments = ({ productId }: CommentsProps) => {
     });
   };
 
+  const FilteredComments = data?.filter(
+    (item) => String(item.productId) === productId,
+  );
+  console.log("Comments for this Product : ", FilteredComments);
+
+  const TotalRating = FilteredComments?.reduce((acc, val) => {
+    return acc + val.rating;
+  }, 0);
+
+  useEffect(() => {
+    reviewsCount(FilteredComments?.length || 0);
+    const AverageRating = TotalRating
+      ? TotalRating / Number(FilteredComments?.length)
+      : 0;
+    averageRating(AverageRating);
+  }, [FilteredComments, reviewsCount, TotalRating, averageRating]);
+
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center">
-        <p>Loading Comments....</p>
+      <div className="flex w-2/4 items-center justify-center m-8  space-y-4">
+        <p className="text-xl font-bold ">Loading Comments....</p>
       </div>
     );
   }
 
   if (isError) {
     return (
-      <div className="flex items-center justify-center">
-        <p>Failed to Fetch Data</p>
+      <div className="flex items-center justify-center w-2/4 m-8  space-y-4">
+        <p className="text-xl font-bold text-red-600">
+          Failed to Fetch Comments
+        </p>
       </div>
     );
   }
-
-  const FilteredComments = data?.filter(
-    (item) => String(item.productId) === productId,
-  );
-  console.log("Comments for this Product : ", FilteredComments);
 
   return (
     <div className="flex flex-col w-2/4 m-8  space-y-4">

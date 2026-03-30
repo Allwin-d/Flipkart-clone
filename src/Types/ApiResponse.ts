@@ -64,7 +64,7 @@ export type UserComment = {
   UserName: string;
   Email: string;
   body: string;
-  rating?: number;
+  rating: number;
   date?: string;
   productId?: number;
   id?: string;
