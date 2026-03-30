@@ -7,7 +7,7 @@ import BuyAndCart from "../components/BuyAndCart";
 import RatingAndStock from "../components/Ratings";
 import PriceSection from "../components/PriceSection";
 import AdditionalInformation from "../components/AdditionalInformation";
-import Comments from "../components/Commets";
+import Comments from "../components/Comments";
 
 const ProductDetails = () => {
   const [activeImg, setActiveImg] = useState(0);

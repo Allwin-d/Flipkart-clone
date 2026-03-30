@@ -75,13 +75,20 @@ const Comments = ({
     return acc + val.rating;
   }, 0);
 
+  const AverageRating = TotalRating
+    ? TotalRating / Number(FilteredComments?.length)
+    : 0;
+
   useEffect(() => {
-    reviewsCount(FilteredComments?.length || 0);
-    const AverageRating = TotalRating
-      ? TotalRating / Number(FilteredComments?.length)
-      : 0;
+    reviewsCount(FilteredComments?.length || 0);   //this lifting state up concept , here using the setter functioning we are updating the reveiwsCount
     averageRating(AverageRating);
-  }, [FilteredComments, reviewsCount, TotalRating, averageRating]);
+  }, [
+    FilteredComments,
+    reviewsCount,
+    TotalRating,
+    averageRating,
+    AverageRating,
+  ]);
 
   if (isLoading) {
     return (
@@ -179,7 +186,7 @@ const Comments = ({
                 <div className="flex items-center w-1/2 justify-start space-x-8">
                   <p className="rounded-full bg-gray-400 text-white px-4 py-2 ">
                     {item.UserName.split(" ").map((item) =>
-                      item[0].toUpperCase(),
+                      item[0]?.toUpperCase(),
                     )}
                   </p>
                   <p className="font-bold text-xl">{item.UserName}</p>
