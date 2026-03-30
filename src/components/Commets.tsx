@@ -153,15 +153,25 @@ const Comments = ({ productId }: CommentsProps) => {
 
         {/* This is for the User Comments section */}
         {FilteredComments?.length ? (
-          <div className="flex flex-col space-y-4">
+          <div className="flex flex-col space-y-14">
             {FilteredComments.map((item) => (
               <div key={item.id} className="flex flex-col space-y-2">
-                <div className="flex items-center w-1/2 justify-between">
+                <div className="flex items-center w-1/2 justify-start space-x-8">
+                  <p className="rounded-full bg-gray-400 text-white px-4 py-2 ">
+                    {item.UserName.split(" ").map((item) =>
+                      item[0].toUpperCase(),
+                    )}
+                  </p>
                   <p className="font-bold text-xl">{item.UserName}</p>
-                  <p className="font-medium text-gray-500">{item.Email}</p>
+                  <p className="font-medium text-gray-500">({item.Email})</p>
                 </div>
-                <p>{item?.rating ? "⭐".repeat(item.rating) : "⭐"}</p>
-                <p className="text-xl font-bold ">{item.body}</p>
+                <p>
+                  Rating
+                  {item?.rating ? "⭐".repeat(Math.floor(item.rating)) : "⭐"}
+                </p>
+                <p className="text-xl font-medium text-gray-700 ">
+                  {item.body}
+                </p>
               </div>
             ))}
           </div>
