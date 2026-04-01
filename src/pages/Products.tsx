@@ -1,11 +1,10 @@
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import type { Product } from "../Types/ApiResponse";
 import { useQuery } from "@tanstack/react-query";
 
 const Products = () => {
-  const location = useLocation();
-  const searchValue = new URLSearchParams(location.search);
+  const [searchValue] = useSearchParams(); //this is used to access query parameter values , for eg: /products?search=chicken&category=bucket&price=200&sort=asc&page=2 (HERE THEERE ARE 4 QUERY PARAMS KEY )
   const productValue = searchValue.get("search");
 
   const PRODUCT_API = import.meta.env.VITE_SEARCH_PRODUCT;
