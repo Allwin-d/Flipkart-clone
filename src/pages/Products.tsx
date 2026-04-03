@@ -2,6 +2,7 @@ import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import type { Product } from "../Types/ApiResponse";
 import { useQuery } from "@tanstack/react-query";
+import { CurrencyConverter, OriginalPrice } from "../utils/utilityFunctions";
 
 const Products = () => {
   const [searchValue] = useSearchParams(); //this is used to access query parameter values , for eg: /products?search=chicken&category=bucket&price=200&sort=asc&page=2 (HERE THEERE ARE 4 QUERY PARAMS KEY )
@@ -44,7 +45,29 @@ const Products = () => {
 
   return (
     <div className="w-full min-h-screen">
-      <p>Hello from the Products page ...</p>
+      {/* This is for the left Side Section */}
+      <div className="float-left w-1/4 bg-gray-300 min-h-screen">helo</div>
+      <div className="lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-1 ">
+        {/* {data?.map((item) => (
+          <div className="flex flex-col space-y-2">
+            <img src={item.images[0]}></img>
+            <p>{item.brand}</p>
+            <p>{item.title}</p>
+            <div className="flex space-x-4">
+              <p>{CurrencyConverter(item.price)}</p>
+              <p>
+                {OriginalPrice(
+                  CurrencyConverter(item.price),
+                  item.discountPercentage,
+                )}
+              </p>
+            </div>
+          </div>
+        ))} */}
+      </div>
+
+      {/* This is for the Right Side Section */}
+      <div className="float-right w-3/4 bg-red-400 min-h-screen">{}</div>
     </div>
   );
 };
