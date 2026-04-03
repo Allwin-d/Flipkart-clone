@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
-import type { Product } from "../Types/ApiResponse";
+import type { ApiResponseType } from "../Types/ApiResponse";
 import { useQuery } from "@tanstack/react-query";
 import { CurrencyConverter, OriginalPrice } from "../utils/utilityFunctions";
 
@@ -10,9 +10,11 @@ const Products = () => {
 
   const PRODUCT_API = import.meta.env.VITE_SEARCH_PRODUCT;
 
-  const fetchProducts = async (): Promise<Product[] | undefined> => {
+  const fetchProducts = async (): Promise<ApiResponseType | undefined> => {
     try {
-      const res = await axios.get(`${PRODUCT_API}${productValue}`);
+      const res = await axios.get<ApiResponseType>(
+        `${PRODUCT_API}${productValue}`,
+      );
       return res.data;
     } catch (err) {
       console.error("Failed to Fetch Data : ", err);
@@ -47,27 +49,41 @@ const Products = () => {
     <div className="w-full min-h-screen">
       {/* This is for the left Side Section */}
       <div className="float-left w-1/4 bg-gray-300 min-h-screen">helo</div>
-      <div className="lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-1 ">
-        {/* {data?.map((item) => (
-          <div className="flex flex-col space-y-2">
-            <img src={item.images[0]}></img>
-            <p>{item.brand}</p>
-            <p>{item.title}</p>
-            <div className="flex space-x-4">
-              <p>{CurrencyConverter(item.price)}</p>
-              <p>
-                {OriginalPrice(
-                  CurrencyConverter(item.price),
-                  item.discountPercentage,
-                )}
-              </p>
-            </div>
-          </div>
-        ))} */}
-      </div>
 
       {/* This is for the Right Side Section */}
-      <div className="float-right w-3/4 bg-red-400 min-h-screen">{}</div>
+      <div className="float-right w-3/4 min-h-screen">
+        <div className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 m-4">
+          {data?.products?.map((item, index) => (
+            <div
+              key={index}
+              className="flex flex-col items-center justify-center space-y-2 m-8 hover:shadow-lg transition duration-200 hover:cursor-pointer p-2 hover:scale-105"
+            >
+              <img
+                src={item.images[0]}
+                alt={item.title}
+                className="w-60 h-60 bg-gray-100 rounded-lg"
+              />
+              <h1 className="font-bold text-xl text-gray-500">{item.brand}</h1>
+              <p className="font-medium text-gray-700">{item.title}</p>
+              <div className="flex flex-row space-x-2">
+                <p className="text-xl font-bold ">
+                  ₹{CurrencyConverter(item.price)}
+                </p>
+                <p className="line-through text-gray-500 font-medium">
+                  ₹
+                  {OriginalPrice(
+                    CurrencyConverter(item.price),
+                    item.discountPercentage,
+                  )}
+                </p>
+                <p className="text-green-600 font-medium text-xl">
+                  {item.discountPercentage} %off
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

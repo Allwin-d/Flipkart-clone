@@ -1,9 +1,5 @@
-const ProductTile =()=>{
-  return (
-    <div>
-
-    </div>
-  )
-}
+const ProductTile = () => {
+  return <div></div>;
+};
 
 export default ProductTile;
