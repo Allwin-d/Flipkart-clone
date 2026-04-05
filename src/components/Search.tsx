@@ -12,10 +12,10 @@ const Search = () => {
   useEffect(() => {
     const trimmed = debouncedValue?.trim();
 
-    if (!trimmed) {
-      navigate("/");
-      return;
-    }
+    if (!trimmed) return;
+
+    // ❌ Prevent override when user is on product details page
+    if (location.pathname.startsWith("/productDetails")) return;
 
     navigate(`/products?search=${trimmed}`);
   }, [debouncedValue, navigate]);

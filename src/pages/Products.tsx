@@ -2,7 +2,7 @@ import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import type { ApiResponseType } from "../Types/ApiResponse";
 import { useQuery } from "@tanstack/react-query";
-import { CurrencyConverter, OriginalPrice } from "../utils/utilityFunctions";
+import ProductTile from "../components/ProductTile";
 
 const Products = () => {
   const [searchValue] = useSearchParams(); //this is used to access query parameter values , for eg: /products?search=chicken&category=bucket&price=200&sort=asc&page=2 (HERE THEERE ARE 4 QUERY PARAMS KEY )
@@ -54,33 +54,15 @@ const Products = () => {
       <div className="float-right w-3/4 min-h-screen">
         <div className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 m-4">
           {data?.products?.map((item, index) => (
-            <div
-              key={index}
-              className="flex flex-col items-center justify-center space-y-2 m-8 hover:shadow-lg transition duration-200 hover:cursor-pointer p-2 hover:scale-105"
-            >
-              <img
-                src={item.images[0]}
-                alt={item.title}
-                className="w-60 h-60 bg-gray-100 rounded-lg"
-              />
-              <h1 className="font-bold text-xl text-gray-500">{item.brand}</h1>
-              <p className="font-medium text-gray-700">{item.title}</p>
-              <div className="flex flex-row space-x-2">
-                <p className="text-xl font-bold ">
-                  ₹{CurrencyConverter(item.price)}
-                </p>
-                <p className="line-through text-gray-500 font-medium">
-                  ₹
-                  {OriginalPrice(
-                    CurrencyConverter(item.price),
-                    item.discountPercentage,
-                  )}
-                </p>
-                <p className="text-green-600 font-medium text-xl">
-                  {item.discountPercentage} %off
-                </p>
-              </div>
-            </div>
+            <ProductTile
+              index={index}
+              images={item.images[0]}
+              title={item.title}
+              brand={item.brand ? item.brand : ""}
+              price={item.price}
+              discountPercentage={item.discountPercentage}
+              id = {item.id}
+            />
           ))}
         </div>
       </div>
