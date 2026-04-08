@@ -1,10 +1,3 @@
-export type ApiResponseType = {
-  products: Product[];
-  total: number;
-  skip: number;
-  limit: number;
-};
-
 export type Product = {
   id: number;
   title: string;
@@ -28,6 +21,13 @@ export type Product = {
   meta: Meta;
   thumbnail: string;
   images: string[];
+};
+
+export type ApiResponseType = {
+  products: Product[];
+  total: number;
+  skip: number;
+  limit: number;
 };
 
 export type Dimensions = {
@@ -72,4 +72,3 @@ export type UserComment = {
 };
 
 export type UserComments = UserComment[];
-

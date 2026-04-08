@@ -109,11 +109,11 @@ const Comments = ({
   }
 
   return (
-    <div className="flex flex-col w-2/4 m-8  space-y-4">
+    <div className="flex flex-col w-3/4 m-8  space-y-4">
       <div className="flex flex-row justify-between p-4">
-        <p className="text-2xl font-bold">Comments & Reviews</p>
+        <p className="text-2xl font-bold">COMMENTS & REVIEWS</p>
         <p className="bg-gray-200 text-gray-600 font-medium rounded-lg px-2 py-1">
-          {FilteredComments?.length === 1 && FilteredComments.length < 1
+          {(FilteredComments?.length ?? 0) <= 1
             ? `${FilteredComments?.length} Comment`
             : `${FilteredComments?.length} Comments`}
         </p>
@@ -199,6 +199,7 @@ const Comments = ({
                 <p className="text-xl font-medium text-gray-700 ">
                   {item.body}
                 </p>
+                <p>{item.date?.slice(0, 10)}</p>
               </div>
             ))}
           </div>

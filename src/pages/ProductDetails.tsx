@@ -9,6 +9,7 @@ import PriceSection from "../components/PriceSection";
 import AdditionalInformation from "../components/AdditionalInformation";
 import Comments from "../components/Comments";
 import { Context } from "../Context/ContextProvider";
+import ProductTile from "../components/ProductTile";
 
 const ProductDetails = () => {
   const [activeImg, setActiveImg] = useState(0);
@@ -77,8 +78,8 @@ const ProductDetails = () => {
                     onClick={() => setActiveImg(index)}
                     className={
                       activeImg === index
-                        ? "w-[200px] h-[200px] cursor-pointer border-4 border-blue-500 rounded-lg bg-gray-100"
-                        : "w-[200px] h-[200px] cursor-pointer border-2"
+                        ? "w-[300px] h-[200px] cursor-pointer border-4 border-blue-500 rounded-lg bg-gray-100"
+                        : "w-[300px] h-[200px] cursor-pointer border-2"
                     }
                   />
                 ))
@@ -129,6 +130,24 @@ const ProductDetails = () => {
               ReturnPolicy={data ? data.returnPolicy : ""}
             />
           </div>
+        </div>
+      </div>
+
+      {/* This is for the Similar Products section */}
+      <div className="flex flex-col m-8 w-full">
+        <h1 className="text-2xl font-bold">SIMILAR PRODUCTS</h1>
+        <div className="flex flex-row overflow-x-auto justify-around items-center scrollbar-hide">
+          {SimilarProducts?.map((item, index) => (
+            <ProductTile
+              id={item.id}
+              index={index}
+              images={item.images[0]}
+              title={item.title}
+              brand={item.brand ?? ""}
+              price={item.price}
+              discountPercentage={item.discountPercentage}
+            ></ProductTile>
+          ))}
         </div>
       </div>
 
