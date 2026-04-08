@@ -5,6 +5,12 @@ import { IoHomeOutline } from "react-icons/io5";
 import { IoCartOutline } from "react-icons/io5";
 import { CiCircleMore } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
+import {
+  BECOME_A_SELLER,
+  CART,
+  MORE,
+  MY_ACCOUNT,
+} from "../Constants/Constants";
 // import { IoIosSearch } from "react-icons/io";
 
 const Navbar = () => {
@@ -26,21 +32,21 @@ const Navbar = () => {
       {/* This is the right side section contains more tabs */}
       <div className="w-1/2 flex flex-row items-center justify-around ">
         <div className="flex items-center justify-center gap-2 cursor-pointer">
-          <p className="text-white text-xl  font-medium">My Account </p>
+          <p className="text-white text-xl  font-medium">{MY_ACCOUNT}</p>
           <RiAccountCircleLine className="text-white text-4xl " />
         </div>
         <div className="flex items-center justify-center gap-2 cursor-pointer ">
-          <p className="text-white text-xl font-medium">Become a Seller</p>
+          <p className="text-white text-xl font-medium">{BECOME_A_SELLER}</p>
           <IoHomeOutline className="text-white text-4xl" />
         </div>
 
         <div className="flex items-center justify-center gap-2 cursor-pointer">
-          <p className="text-white text-xl  font-medium">More</p>
+          <p className="text-white text-xl  font-medium">{MORE}</p>
           <CiCircleMore className="text-white text-4xl" />
         </div>
 
         <div className="flex items-center justify-center gap-2 cursor-pointer">
-          <p className="text-white text-xl font-medium">Cart</p>
+          <p className="text-white text-xl font-medium">{CART}</p>
           <IoCartOutline className="text-white text-4xl" />
         </div>
       </div>

@@ -1,3 +1,5 @@
+import { AVAILABLE_STOCK, UNAVAILABLE } from "../Constants/Constants";
+
 type RatingsProps = {
   rating?: number;
   NoOfRatings?: number;
@@ -20,7 +22,7 @@ const RatingAndStock = ({ rating, NoOfRatings, stocks }: RatingsProps) => {
             : "bg-red-300 text-red-800 px-8 py-2 rounded-lg font-bold cursor-pointer"
         }
       >
-        {stocks ? `✔️ InStock (only ${stocks} Available) ` : "❌ UnAvailable"}
+        {stocks ? `${AVAILABLE_STOCK} ` : `${UNAVAILABLE}`}
       </p>
     </div>
   );

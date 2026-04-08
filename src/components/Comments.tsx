@@ -2,6 +2,15 @@ import { useEffect, useState } from "react";
 import type { UserComment, UserComments } from "../Types/ApiResponse";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import {
+  COMMENTS_REVIEWS,
+  FAILED_LOADING_COMMENTS,
+  LOADING_COMMENTS,
+  NO_COMMENTS,
+  POST_COMMENT,
+  RATING,
+  WRITE_COMMENT,
+} from "../Constants/Constants";
 
 type CommentsProps = {
   productId: string;
@@ -93,7 +102,7 @@ const Comments = ({
   if (isLoading) {
     return (
       <div className="flex w-2/4 items-center justify-center m-8  space-y-4">
-        <p className="text-xl font-bold ">Loading Comments....</p>
+        <p className="text-xl font-bold ">{LOADING_COMMENTS}</p>
       </div>
     );
   }
@@ -102,7 +111,7 @@ const Comments = ({
     return (
       <div className="flex items-center justify-center w-2/4 m-8  space-y-4">
         <p className="text-xl font-bold text-red-600">
-          Failed to Fetch Comments
+          {FAILED_LOADING_COMMENTS}
         </p>
       </div>
     );
@@ -111,7 +120,7 @@ const Comments = ({
   return (
     <div className="flex flex-col w-3/4 m-8  space-y-4">
       <div className="flex flex-row justify-between p-4">
-        <p className="text-2xl font-bold">COMMENTS & REVIEWS</p>
+        <p className="text-2xl font-bold">{COMMENTS_REVIEWS}</p>
         <p className="bg-gray-200 text-gray-600 font-medium rounded-lg px-2 py-1">
           {(FilteredComments?.length ?? 0) <= 1
             ? `${FilteredComments?.length} Comment`
@@ -121,7 +130,7 @@ const Comments = ({
       <hr></hr>
 
       <div className="flex flex-col space-y-10 ">
-        <h1 className="text-xl text-gray-700 font-medium">Write a Comment</h1>
+        <h1 className="text-xl text-gray-700 font-medium">{WRITE_COMMENT}</h1>
         <div className="flex flex-row w-3/4 justify-between">
           <div>
             <input
@@ -147,7 +156,7 @@ const Comments = ({
             ></input>
           </div>
           <div className="flex items-center space-x-4">
-            <h1 className="font-medium text-gray-400">Rating</h1>
+            <h1 className="font-medium text-gray-400">{RATING}</h1>
             <select
               className="border border-gray-500 rounded-lg px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium"
               value={comment.rating}
@@ -155,11 +164,9 @@ const Comments = ({
                 setComment({ ...comment, rating: Number(e.target.value) })
               }
             >
-              <option value={1}>1</option>
-              <option value={2}>2</option>
-              <option value={3}>3</option>
-              <option value={4}>4</option>
-              <option value={5}>5</option>
+              {[1, 2, 3, 4, 5].map((val) => (
+                <option value={val}>{val}</option>
+              ))}
             </select>
           </div>
         </div>
@@ -174,7 +181,7 @@ const Comments = ({
             className="bg-red-600 text-white rounded-lg px-4 py-1"
             onClick={() => handlePost()}
           >
-            Post Comment
+            {POST_COMMENT}
           </button>
         </div>
 
@@ -193,7 +200,7 @@ const Comments = ({
                   <p className="font-medium text-gray-500">({item.Email})</p>
                 </div>
                 <p>
-                  Rating
+                  {RATING}
                   {item?.rating ? "⭐".repeat(Math.floor(item.rating)) : "⭐"}
                 </p>
                 <p className="text-xl font-medium text-gray-700 ">
@@ -205,7 +212,7 @@ const Comments = ({
           </div>
         ) : (
           <div className="text-center">
-            <p className="text-xl font-bold ">No Comments Added Yet 🚫</p>
+            <p className="text-xl font-bold ">{NO_COMMENTS}</p>
           </div>
         )}
       </div>

@@ -10,6 +10,12 @@ import AdditionalInformation from "../components/AdditionalInformation";
 import Comments from "../components/Comments";
 import { Context } from "../Context/ContextProvider";
 import ProductTile from "../components/ProductTile";
+import {
+  ERROR_MESSAGE,
+  LOADING_MESSAGE,
+  NOIMAGE,
+  SIMILAR_PRODUCTS,
+} from "../Constants/Constants";
 
 const ProductDetails = () => {
   const [activeImg, setActiveImg] = useState(0);
@@ -48,7 +54,7 @@ const ProductDetails = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="text-blue-600 text-4xl">Loading Data....</p>
+        <p className="text-blue-600 text-4xl">{LOADING_MESSAGE}</p>
       </div>
     );
   }
@@ -56,7 +62,7 @@ const ProductDetails = () => {
   if (isError) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="text-red-600 text-4xl">Failed to Fetch Data</p>
+        <p className="text-red-600 text-4xl">{ERROR_MESSAGE}</p>
       </div>
     );
   }
@@ -84,7 +90,7 @@ const ProductDetails = () => {
                   />
                 ))
               ) : (
-                <p>There is no Images Here</p>
+                <p>{NOIMAGE}</p>
               )}
             </div>
 
@@ -135,7 +141,7 @@ const ProductDetails = () => {
 
       {/* This is for the Similar Products section */}
       <div className="flex flex-col m-8 w-full">
-        <h1 className="text-2xl font-bold">SIMILAR PRODUCTS</h1>
+        <h1 className="text-2xl font-bold">{SIMILAR_PRODUCTS}</h1>
         <div className="flex flex-row overflow-x-auto justify-around items-center scrollbar-hide">
           {SimilarProducts?.map((item, index) => (
             <ProductTile

@@ -1,3 +1,4 @@
+import { DISCOUNT } from "../Constants/Constants";
 import { CurrencyConverter } from "../utils/utilityFunctions";
 import { OriginalPrice } from "../utils/utilityFunctions";
 
@@ -22,7 +23,9 @@ const PriceSection = ({
           discountPercentage ? discountPercentage : 0,
         )}
       </p>
-      <p className="text-green-700 text-xl">{discountPercentage} % off</p>
+      <p className="text-green-700 text-xl">
+        {discountPercentage} {DISCOUNT}
+      </p>
     </div>
   );
 };

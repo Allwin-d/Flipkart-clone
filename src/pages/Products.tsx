@@ -4,6 +4,12 @@ import type { ApiResponseType, Product } from "../Types/ApiResponse";
 import { useQuery } from "@tanstack/react-query";
 import ProductTile from "../components/ProductTile";
 import { useMemo, useState } from "react";
+import {
+  ERROR_MESSAGE,
+  LOADING_MESSAGE,
+  NO_FILTERED_PRODUCTS_MESSAGE,
+  NO_SEARCHED_PRODUCTS_MESSAGE,
+} from "../Constants/Constants";
 
 const Products = () => {
   const [ratingNumber, setRatingNumber] = useState<null | number>(null);
@@ -47,7 +53,7 @@ const Products = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen w-full flex items-center justify-center">
-        <p className="text-3xl text-blue-600">Loading Data ...</p>
+        <p className="text-3xl text-blue-600">{LOADING_MESSAGE}</p>
       </div>
     );
   }
@@ -55,7 +61,7 @@ const Products = () => {
   if (isError) {
     return (
       <div className="min-h-screen w-full flex items-center justify-center">
-        <p className="text-3xl text-red-600">Failed to Fetch Data</p>
+        <p className="text-3xl text-red-600">{ERROR_MESSAGE}</p>
       </div>
     );
   }
@@ -106,8 +112,8 @@ const Products = () => {
             <div className="flex items-center justify-center w-full min-h-screen col-span-4">
               <p className="text-4xl text-red-600 font-bold text-center">
                 {ratingNumber
-                  ? "No Filtered Products Matched the Selected Rating"
-                  : "Try Using Different Words For Searching"}
+                  ? `${NO_FILTERED_PRODUCTS_MESSAGE}`
+                  : `${NO_SEARCHED_PRODUCTS_MESSAGE}`}
               </p>
             </div>
           )}

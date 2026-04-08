@@ -1,3 +1,14 @@
+import {
+  CATEGORY,
+  MINIMUM_ORDER_QUANTITY,
+  RETURN_POLICY,
+  SHIPPING_INFORMATION,
+  SKU,
+  SPECIFICATION,
+  STOCK,
+  WARRANTY_INFORMATION,
+} from "../Constants/Constants";
+
 type AdditionalInformationProps = {
   Category: string;
   Sku: string;
@@ -19,33 +30,33 @@ const AdditionalInformation = ({
 }: AdditionalInformationProps) => {
   return (
     <div className="flex flex-col space-y-4">
-      <h1 className="text-3xl text-black font-bold">Specification</h1>
+      <h1 className="text-3xl text-black font-bold">{SPECIFICATION}</h1>
       <div className="flex flex-row space-x-4 text-2xl ">
-        <p className="text-gray-400 font-bold">Category</p>
+        <p className="text-gray-400 font-bold">{CATEGORY}</p>
         <p className="font-medium">{Category}</p>
       </div>
       <div className="flex flex-row space-x-4 text-2xl">
-        <p className="text-gray-400 font-bold">Sku</p>
+        <p className="text-gray-400 font-bold">{SKU}</p>
         <p className="font-medium">{Sku}</p>
       </div>
       <div className="flex flex-row space-x-4 text-2xl">
-        <p className="text-gray-400 font-bold">Stock</p>
+        <p className="text-gray-400 font-bold">{STOCK}</p>
         <p className="font-medium">{Stock}</p>
       </div>
       <div className="flex flex-row space-x-4 text-2xl">
-        <p className="text-gray-400 font-bold">Minimum Order Quantity</p>
+        <p className="text-gray-400 font-bold">{MINIMUM_ORDER_QUANTITY}</p>
         <p className="font-medium">{MinimumOrderQuantity}</p>
       </div>
       <div className="flex flex-row space-x-4 text-2xl">
-        <p className="text-gray-400 font-bold">Shipping Information</p>
+        <p className="text-gray-400 font-bold">{SHIPPING_INFORMATION}</p>
         <p className="font-medium">{ShippingInformation}</p>
       </div>
       <div className="flex flex-row space-x-4 text-2xl">
-        <p className="text-gray-400 font-bold">Warranty Information</p>
+        <p className="text-gray-400 font-bold">{WARRANTY_INFORMATION}</p>
         <p className="font-medium">{WarrantyInformation}</p>
       </div>
       <div className="flex flex-row space-x-4 text-2xl">
-        <p className="text-gray-400 font-bold">Return Policy</p>
+        <p className="text-gray-400 font-bold">{RETURN_POLICY}</p>
         <p className="font-medium">{ReturnPolicy}</p>
       </div>
     </div>

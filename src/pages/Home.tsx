@@ -5,6 +5,7 @@ import Categories from "../components/Categories";
 import type { Category } from "../Types/ApiResponse";
 import HeroBanner from "../components/HeroBanner";
 import ProductCategory from "../components/ProductCategory";
+import { ERROR_MESSAGE, LOADING_MESSAGE } from "../Constants/Constants";
 
 const Home = () => {
   const API_URL = import.meta.env.VITE_PRODUCTS_API;
@@ -85,7 +86,7 @@ const Home = () => {
   if (isLoading) {
     return (
       <div className="flex flex-row items-center justify-center text-blue-600 text-4xl min-h-screen ">
-        <p>Loading Data ....</p>
+        <p>{LOADING_MESSAGE}</p>
       </div>
     );
   }
@@ -93,7 +94,7 @@ const Home = () => {
   if (isError) {
     return (
       <div className="flex flex-row items-center justify-center text-red-600 text-4xl min-h-screen">
-        <p>Failed to fetch Data ..</p>
+        <p>{ERROR_MESSAGE}</p>
       </div>
     );
   }
