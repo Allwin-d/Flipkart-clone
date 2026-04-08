@@ -2,12 +2,13 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import type { Product } from "../Types/ApiResponse";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import BuyAndCart from "../components/BuyAndCart";
 import RatingAndStock from "../components/Ratings";
 import PriceSection from "../components/PriceSection";
 import AdditionalInformation from "../components/AdditionalInformation";
 import Comments from "../components/Comments";
+import { Context } from "../Context/ContextProvider";
 
 const ProductDetails = () => {
   const [activeImg, setActiveImg] = useState(0);
@@ -16,6 +17,9 @@ const ProductDetails = () => {
 
   const [searchParams] = useSearchParams();
   console.log("useSearchParams:", searchParams.get("category"));
+
+  const context = useContext(Context);
+  console.log("Context Data : ", context);
 
   const location = useLocation();
   console.log("useLocation:", location);
@@ -34,6 +38,11 @@ const ProductDetails = () => {
     queryFn: fetchSingleProduct,
     enabled: !!id,
   });
+
+  const SimilarProducts = context?.data?.products.filter(
+    (item) => item.category === data?.category && item.id !== data.id,
+  );
+  console.log("Similar Products :", SimilarProducts);
 
   if (isLoading) {
     return (

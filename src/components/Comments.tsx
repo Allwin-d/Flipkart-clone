@@ -80,7 +80,7 @@ const Comments = ({
     : 0;
 
   useEffect(() => {
-    reviewsCount(FilteredComments?.length || 0);   //this lifting state up concept , here using the setter functioning we are updating the reveiwsCount
+    reviewsCount(FilteredComments?.length || 0); //this lifting state up concept , here using the setter functioning we are updating the reveiwsCount
     averageRating(AverageRating);
   }, [
     FilteredComments,
@@ -113,9 +113,9 @@ const Comments = ({
       <div className="flex flex-row justify-between p-4">
         <p className="text-2xl font-bold">Comments & Reviews</p>
         <p className="bg-gray-200 text-gray-600 font-medium rounded-lg px-2 py-1">
-          {FilteredComments?.length === 1
+          {FilteredComments?.length === 1 && FilteredComments.length < 1
             ? `${FilteredComments?.length} Comment`
-            : `${FilteredComments} Comments`}
+            : `${FilteredComments?.length} Comments`}
         </p>
       </div>
       <hr></hr>

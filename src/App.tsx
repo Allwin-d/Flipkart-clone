@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ProductDetails from "./pages/ProductDetails";
+import ContextProvider from "./Context/ContextProvider";
 
 const App = () => {
   const queryClient = new QueryClient();
@@ -15,19 +16,21 @@ const App = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <QueryClientProvider client={queryClient}>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/products" element={<Products />}></Route>
-          <Route path="/cart" element={<Cart />}></Route>
-          <Route path="/checkout" element={<Checkout />}></Route>
-          <Route path="/about" element={<About />}></Route>
-          <Route
-            path="/productDetails/:id"
-            element={<ProductDetails />}
-          ></Route>
-        </Routes>
-        <Footer />
+        <ContextProvider>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />}></Route>
+            <Route path="/products" element={<Products />}></Route>
+            <Route path="/cart" element={<Cart />}></Route>
+            <Route path="/checkout" element={<Checkout />}></Route>
+            <Route path="/about" element={<About />}></Route>
+            <Route
+              path="/productDetails/:id"
+              element={<ProductDetails />}
+            ></Route>
+          </Routes>
+          <Footer />
+        </ContextProvider>
       </QueryClientProvider>
     </div>
   );
