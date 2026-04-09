@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ProductDetails from "./pages/ProductDetails";
 import ContextProvider from "./Context/ContextProvider";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   const queryClient = new QueryClient();
@@ -17,6 +18,7 @@ const App = () => {
     <div className="min-h-screen flex flex-col">
       <QueryClientProvider client={queryClient}>
         <ContextProvider>
+          <Toaster position="top-center" />
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />}></Route>

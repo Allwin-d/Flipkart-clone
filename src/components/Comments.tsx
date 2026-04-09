@@ -3,6 +3,8 @@ import type { UserComment, UserComments } from "../Types/ApiResponse";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import {
+  COMMENT_FAILED,
+  COMMENT_SUCCESS,
   COMMENTS_REVIEWS,
   FAILED_LOADING_COMMENTS,
   LOADING_COMMENTS,
@@ -11,6 +13,7 @@ import {
   RATING,
   WRITE_COMMENT,
 } from "../Constants/Constants";
+import toast from "react-hot-toast";
 
 type CommentsProps = {
   productId: string;
@@ -66,7 +69,12 @@ const Comments = ({
   });
 
   const handlePost = () => {
-    addMutation.mutate(comment);
+    if (comment.UserName === "" || comment.body === "" || comment.rating <= 0) {
+      toast.error(`${COMMENT_FAILED}`);
+    } else {
+      addMutation.mutate(comment);
+      toast.success(`${COMMENT_SUCCESS}`);
+    }
     setComment({
       UserName: "",
       Email: "",
@@ -197,7 +205,9 @@ const Comments = ({
                     )}
                   </p>
                   <p className="font-bold text-xl">{item.UserName}</p>
-                  <p className="font-medium text-gray-500">({item.Email})</p>
+                  <p className="font-medium text-gray-500">
+                    {item.Email.length > 0 ? `(${item.Email})` : ""}
+                  </p>
                 </div>
                 <p>
                   {RATING}

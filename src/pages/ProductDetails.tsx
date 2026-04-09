@@ -43,7 +43,7 @@ const ProductDetails = () => {
   const { data, isError, isLoading } = useQuery({
     queryKey: ["SingleProduct", id],
     queryFn: fetchSingleProduct,
-    enabled: !!id,
+    enabled: !!id,  //here it means that if the id is true , the api call will happen, otherwise it won't , -> it return boolean value 
   });
 
   const SimilarProducts = context?.data?.products.filter(
@@ -160,8 +160,8 @@ const ProductDetails = () => {
       {/* This is for the Comment Section */}
       <Comments
         productId={id ? id : ""}
-        reviewsCount={setReviewsCount}
-        averageRating={setAverageRating}
+        reviewsCount={setReviewsCount}  //here we are passing the setter function to the child component , and in the child component we update value and pass it to parent component 
+        averageRating={setAverageRating} //same as previous line
       />
     </div>
   );

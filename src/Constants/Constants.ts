@@ -9,7 +9,7 @@ export const NO_FILTERED_PRODUCTS_MESSAGE =
 export const NO_SEARCHED_PRODUCTS_MESSAGE =
   "Try Using Different Words For Searching";
 
-// This is for the Product Details page 
+// This is for the Product Details page
 export const SPECIFICATION = "Specification";
 export const CATEGORY = "Category";
 export const SKU = "Sku";
@@ -31,6 +31,8 @@ export const WRITE_COMMENT = "Write a Comment";
 export const RATING = "Rating";
 export const POST_COMMENT = "Post Comment";
 export const NO_COMMENTS = "No Comments Added Yet 🚫";
+export const COMMENT_SUCCESS = "Comment Added Succesfully";
+export const COMMENT_FAILED = "Please fill all the Required Details";
 
 // this is for the NAVBAR section
 export const MY_ACCOUNT = "My Account";
