@@ -84,8 +84,8 @@ const ProductDetails = () => {
                     onClick={() => setActiveImg(index)}
                     className={
                       activeImg === index
-                        ? "w-[300px] h-[200px] cursor-pointer border-4 border-blue-500 rounded-lg bg-gray-100"
-                        : "w-[300px] h-[200px] cursor-pointer border-2"
+                        ? "w-[200px] h-[200px] cursor-pointer border-4 border-blue-500 rounded-lg bg-gray-100"
+                        : "w-[200px] h-[200px] cursor-pointer border-2"
                     }
                   />
                 ))
