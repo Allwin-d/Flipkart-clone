@@ -13,11 +13,16 @@ const Search = () => {
     const trimmed = debouncedValue?.trim();
 
     if (!trimmed) return;
-
-    // ❌ Prevent override when user is on product details page
-    if (location.pathname.startsWith("/productDetails")) return;
-
-    navigate(`/products?search=${trimmed}`);
+    if (
+      location.pathname.startsWith("/productDetails") &&
+      trimmed.length >= 3
+    ) {
+      navigate(`/products?search=${trimmed}`);
+      setValue("");
+    } else if (trimmed.length >= 3) {
+      navigate(`/products?search=${trimmed}`);
+      setValue("");
+    }
   }, [debouncedValue, navigate]);
 
   return (

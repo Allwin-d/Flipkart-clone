@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import ProductTile from "../components/ProductTile";
 import { useMemo, useState } from "react";
 import {
+  DISCOUNT_TITLE,
   ERROR_MESSAGE,
   LOADING_MESSAGE,
   NO_FILTERED_PRODUCTS_MESSAGE,
@@ -13,6 +14,7 @@ import {
 
 const Products = () => {
   const [ratingNumber, setRatingNumber] = useState<null | number>(null);
+  const [discountNumber, setDiscountNumber] = useState<null | number>(null);
   const [searchValue] = useSearchParams();
   const productValue = searchValue.get("search");
 
@@ -43,12 +45,26 @@ const Products = () => {
     }
   };
 
+  const handleDiscount = (num: number) => {
+    if (discountNumber === num) {
+      setDiscountNumber(null);
+    } else {
+      setDiscountNumber(num);
+    }
+  };
+
   const ProductsData: Product[] = useMemo(() => {
     if (ratingNumber) {
       return data?.products.filter((item) => item.rating >= ratingNumber) ?? [];
+    } else if (discountNumber) {
+      return (
+        data?.products.filter(
+          (item) => item.discountPercentage >= discountNumber,
+        ) ?? []
+      );
     }
     return data?.products ?? [];
-  }, [ratingNumber, data]);
+  }, [data, ratingNumber, discountNumber]);
 
   if (isLoading) {
     return (
@@ -69,6 +85,8 @@ const Products = () => {
   return (
     <div className="w-full min-h-screen flex">
       {/* Left Side Section */}
+
+      {/* This is for the Rating filter section */}
       <div className="w-1/4 bg-gray-200 h-screen p-4">
         <div className="flex flex-col space-y-4 justify-center">
           {[1, 2, 3, 4, 5].map((num, index) => (
@@ -86,6 +104,28 @@ const Products = () => {
               <div className="flex flex-row space-x-2">
                 <p className="text-xl">{`⭐`.repeat(num)}</p>
                 <p className="text-xl">{num} Above</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* This is for the Discount Filter Section */}
+        <div className="flex flex-col space-y-4 justify-center my-6">
+          <h1>{DISCOUNT_TITLE}</h1>
+          {[10, 20, 30].map((num, index) => (
+            <div
+              key={index}
+              className="flex space-x-3 items-center justify-start"
+            >
+              <input
+                type="checkbox"
+                value={num}
+                checked={discountNumber === num}
+                onChange={() => handleDiscount(num)}
+                className="text-xl"
+              />
+              <div className="flex flex-row space-x-2">
+                <p className="text-xl ">% {num} Above </p>
               </div>
             </div>
           ))}
