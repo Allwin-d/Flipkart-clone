@@ -112,7 +112,7 @@ const Products = () => {
       {/* Left Side Section */}
 
       {/* This is for the Rating filter section */}
-      <div className="w-1/4 bg-gray-200 h-screen p-4">
+      <div className="w-1/4 bg-gray-200 h-screen p-4 fixed  overflow-x-hidden">
         <div className="flex flex-col space-y-4 justify-center">
           {[1, 2, 3, 4, 5].map((num, index) => (
             <div
@@ -158,7 +158,7 @@ const Products = () => {
       </div>
 
       {/* Right Side Section */}
-      <div className="w-3/4 min-h-screen">
+      <div className="w-3/4 min-h-screen ml-[25%]">
         <div className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 m-4">
           {ProductsData.length ? (
             ProductsData.map((item, key) => (
