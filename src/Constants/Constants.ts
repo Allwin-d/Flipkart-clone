@@ -40,7 +40,7 @@ export const MORE = "More";
 export const BECOME_A_SELLER = "Become a Seller";
 export const CART = "Cart";
 export const DISCOUNT = "% off";
-export const DISCOUNT_TITLE = "Discount";
+export const DISCOUNT_PERCENTAGE = "Discount Percentage";
 
 export const AVAILABLE_STOCK = "✔️ InStock (only ${stocks} Available)";
 export const UNAVAILABLE = "❌ UnAvailable";

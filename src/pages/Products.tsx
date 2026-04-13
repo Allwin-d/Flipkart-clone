@@ -1,11 +1,15 @@
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
-import type { ApiResponseType, Product } from "../Types/ApiResponse";
+import type {
+  ApiResponseType,
+  Product,
+  UserComments,
+} from "../Types/ApiResponse";
 import { useQuery } from "@tanstack/react-query";
 import ProductTile from "../components/ProductTile";
 import { useMemo, useState } from "react";
 import {
-  DISCOUNT_TITLE,
+  DISCOUNT_PERCENTAGE,
   ERROR_MESSAGE,
   LOADING_MESSAGE,
   NO_FILTERED_PRODUCTS_MESSAGE,
@@ -18,8 +22,8 @@ const Products = () => {
   const [searchValue] = useSearchParams();
   const productValue = searchValue.get("search");
 
+  const COMMENTS_API = import.meta.env.VITE_COMMENTS_BASE_URL;
   const PRODUCT_API = import.meta.env.VITE_SEARCH_PRODUCT;
-
   const fetchProducts = async (): Promise<ApiResponseType | undefined> => {
     try {
       const res = await axios.get<ApiResponseType>(
@@ -31,10 +35,20 @@ const Products = () => {
     }
   };
 
+  const fetchCommentsRating = async (): Promise<UserComments | null> => {
+    const res = await axios.get(COMMENTS_API);
+    return res.data;
+  };
+
   const { data, isLoading, isError } = useQuery({
     queryKey: ["SearchProducts", productValue],
     queryFn: fetchProducts,
     enabled: !!productValue,
+  });
+
+  const { data: CommentsRating } = useQuery({
+    queryKey: ["CommentsRating"],
+    queryFn: fetchCommentsRating,
   });
 
   const handleRating = (num: number) => {
@@ -54,17 +68,28 @@ const Products = () => {
   };
 
   const ProductsData: Product[] = useMemo(() => {
-    if (ratingNumber) {
-      return data?.products.filter((item) => item.rating >= ratingNumber) ?? [];
-    } else if (discountNumber) {
-      return (
-        data?.products.filter(
-          (item) => item.discountPercentage >= discountNumber,
-        ) ?? []
+    if (!data?.products) return [];
+
+    let filteredProducts = data.products;
+
+    if (ratingNumber && CommentsRating) {
+      const productIdsWithRating = CommentsRating?.filter(
+        (comment) => comment.rating >= ratingNumber,
+      ).map((comment) => Number(comment.productId));
+
+      filteredProducts = filteredProducts.filter((product) =>
+        productIdsWithRating?.includes(product.id),
       );
     }
-    return data?.products ?? [];
-  }, [data, ratingNumber, discountNumber]);
+
+    if (discountNumber) {
+      filteredProducts = filteredProducts.filter(
+        (product) => product.discountPercentage >= discountNumber,
+      );
+    }
+
+    return filteredProducts;
+  }, [data, ratingNumber, discountNumber, CommentsRating]);
 
   if (isLoading) {
     return (
@@ -83,7 +108,7 @@ const Products = () => {
   }
 
   return (
-    <div className="w-full min-h-screen flex">
+    <div className="w-full h-full flex">
       {/* Left Side Section */}
 
       {/* This is for the Rating filter section */}
@@ -92,40 +117,40 @@ const Products = () => {
           {[1, 2, 3, 4, 5].map((num, index) => (
             <div
               key={index}
-              className="flex space-x-3 items-center justify-start"
+              className="flex space-x-3 items-center justify-start text-2xl font-semibold"
             >
               <input
                 type="checkbox"
                 value={num}
                 checked={ratingNumber === num}
                 onChange={() => handleRating(num)}
-                className="text-xl"
+                className="scale-150"
               />
               <div className="flex flex-row space-x-2">
-                <p className="text-xl">{`⭐`.repeat(num)}</p>
-                <p className="text-xl">{num} Above</p>
+                <p className="">{`⭐`.repeat(num)}</p>
+                <p className="">{num} Above</p>
               </div>
             </div>
           ))}
         </div>
 
         {/* This is for the Discount Filter Section */}
-        <div className="flex flex-col space-y-4 justify-center my-6">
-          <h1>{DISCOUNT_TITLE}</h1>
-          {[10, 20, 30].map((num, index) => (
+        <div className="flex flex-col space-y-4 justify-center mt-16">
+          <h1 className="font-bold text-2xl">{DISCOUNT_PERCENTAGE}</h1>
+          {[10, 15, 20].map((num, index) => (
             <div
               key={index}
-              className="flex space-x-3 items-center justify-start"
+              className="flex space-x-3 items-center justify-start text-2xl font-semibold"
             >
               <input
                 type="checkbox"
                 value={num}
                 checked={discountNumber === num}
                 onChange={() => handleDiscount(num)}
-                className="text-xl"
+                className="scale-150"
               />
               <div className="flex flex-row space-x-2">
-                <p className="text-xl ">% {num} Above </p>
+                <p className="">% {num} Above </p>
               </div>
             </div>
           ))}
@@ -151,7 +176,7 @@ const Products = () => {
           ) : (
             <div className="flex items-center justify-center w-full min-h-screen col-span-4">
               <p className="text-4xl text-red-600 font-bold text-center">
-                {ratingNumber
+                {ratingNumber || discountNumber
                   ? `${NO_FILTERED_PRODUCTS_MESSAGE}`
                   : `${NO_SEARCHED_PRODUCTS_MESSAGE}`}
               </p>

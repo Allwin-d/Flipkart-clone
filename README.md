@@ -153,6 +153,16 @@
   - `queryKey`
   - `enabled` flag (only runs when search value exists)
 
+  🔥 Filtering Enhancements (NEW)
+  Integrated rating-based filtering using comments from a separate API
+  Implemented client-side data mapping using productId (multi-API handling)
+  Added discount-based filtering (10%, 20%, 30% and above)
+  Combined multiple filters (rating + discount) efficiently
+  ⚡ Optimization:
+  Used useMemo for filtering logic
+  Prevented unnecessary computations and re-renders
+  Ensured type-safe data handling with TypeScript
+
 #### Features:
 
 - Handles loading and error states
