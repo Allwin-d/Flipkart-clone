@@ -44,3 +44,13 @@ export const DISCOUNT_PERCENTAGE = "Discount Percentage";
 
 export const AVAILABLE_STOCK = "✔️ InStock (only ${stocks} Available)";
 export const UNAVAILABLE = "❌ UnAvailable";
+export const PRICE_RANGE = "Price Range";
+
+export const PRICE_RANGE_VALUES = [
+  { min: 0, max: 100 },
+  { min: 500, max: 999 },
+  { min: 1000, max: 1999 },
+  { min: 2000, max: 4999 },
+  { min: 5000, max: 9999 },
+  { min: 10000, max: Infinity },
+];
