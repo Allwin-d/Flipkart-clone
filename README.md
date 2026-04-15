@@ -156,8 +156,11 @@
   🔥 Filtering Enhancements (NEW)
   Integrated rating-based filtering using comments from a separate API
   Implemented client-side data mapping using productId (multi-API handling)
+  Added Rating Based Filter like (1,2,3,4,5) based on the ratings of the added comments
   Added discount-based filtering (10%, 20%, 30% and above)
+  Added Price Based Filtering (0-499 , 500-999 , 1000-1999 , 2000 - 4999 , 5000-9999 , 10000 and above)
   Combined multiple filters (rating + discount) efficiently
+
   ⚡ Optimization:
   Used useMemo for filtering logic
   Prevented unnecessary computations and re-renders
