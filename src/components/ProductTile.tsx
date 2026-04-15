@@ -47,10 +47,10 @@ const ProductTile = ({
         <p className="line-through text-gray-500 font-medium">
           ₹{OriginalPrice(CurrencyConverter(price), discountPercentage)}
         </p>
-        <p className="text-green-600 font-medium text-xl">
-          {discountPercentage} {DISCOUNT}
-        </p>
       </div>
+      <p className="text-green-600 font-medium text-xl">
+        {discountPercentage} {DISCOUNT}
+      </p>
     </div>
   );
 };

@@ -43,7 +43,7 @@ const ProductDetails = () => {
   const { data, isError, isLoading } = useQuery({
     queryKey: ["SingleProduct", id],
     queryFn: fetchSingleProduct,
-    enabled: !!id,  //here it means that if the id is true , the api call will happen, otherwise it won't , -> it return boolean value 
+    enabled: !!id, //here it means that if the id is true , the api call will happen, otherwise it won't , -> it return boolean value
   });
 
   const SimilarProducts = context?.data?.products.filter(
@@ -142,7 +142,7 @@ const ProductDetails = () => {
       {/* This is for the Similar Products section */}
       <div className="flex flex-col m-8 w-full">
         <h1 className="text-2xl font-bold">{SIMILAR_PRODUCTS}</h1>
-        <div className="flex flex-row overflow-x-auto justify-around items-center scrollbar-hide">
+        <div className="flex flex-row overflow-x-auto justify-around items-center scrollbar-hide ">
           {SimilarProducts?.map((item, index) => (
             <ProductTile
               id={item.id}
@@ -160,7 +160,7 @@ const ProductDetails = () => {
       {/* This is for the Comment Section */}
       <Comments
         productId={id ? id : ""}
-        reviewsCount={setReviewsCount}  //here we are passing the setter function to the child component , and in the child component we update value and pass it to parent component 
+        reviewsCount={setReviewsCount} //here we are passing the setter function to the child component , and in the child component we update value and pass it to parent component
         averageRating={setAverageRating} //same as previous line
       />
     </div>
