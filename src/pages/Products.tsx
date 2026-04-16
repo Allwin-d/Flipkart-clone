@@ -9,25 +9,30 @@ import { useQuery } from "@tanstack/react-query";
 import ProductTile from "../components/ProductTile";
 import { useMemo, useState } from "react";
 import {
-  DISCOUNT_PERCENTAGE,
+  CATEGORY,
+  CUSTOMER_RATING,
+  DISCOUNT,
   ERROR_MESSAGE,
   LOADING_MESSAGE,
   NO_FILTERED_PRODUCTS_MESSAGE,
   NO_SEARCHED_PRODUCTS_MESSAGE,
   PRICE_RANGE,
-  PRICE_RANGE_VALUES,
 } from "../Constants/Constants";
+import { PRICE_RANGE_VALUES } from "../components/ConstantsArrays";
 import { CurrencyConverter } from "../utils/utilityFunctions";
 
 const Products = () => {
   const [ratingNumber, setRatingNumber] = useState<null | number>(null);
   const [discountNumber, setDiscountNumber] = useState<null | number>(null);
   const [priceNumber, setPriceNumber] = useState<null | number>(null);
+  const [categroyfilter, setCategoryFilter] = useState<null | number>(null);
+
   const [searchValue] = useSearchParams();
   const productValue = searchValue.get("search");
 
   const COMMENTS_API = import.meta.env.VITE_COMMENTS_BASE_URL;
   const PRODUCT_API = import.meta.env.VITE_SEARCH_PRODUCT;
+
   const fetchProducts = async (): Promise<ApiResponseType | undefined> => {
     try {
       const res = await axios.get<ApiResponseType>(
@@ -55,29 +60,15 @@ const Products = () => {
     queryFn: fetchCommentsRating,
   });
 
-  const handleRating = (num: number) => {
-    if (ratingNumber === num) {
-      setRatingNumber(null);
-    } else {
-      setRatingNumber(num);
-    }
-  };
+  const categoryCountMap = useMemo(() => {
+    const map: Record<string, number> = {};
 
-  const handleDiscount = (num: number) => {
-    if (discountNumber === num) {
-      setDiscountNumber(null);
-    } else {
-      setDiscountNumber(num);
+    for (const val of data?.products ?? []) {
+      map[val.category] = (map[val.category] || 0) + 1;
     }
-  };
 
-  const handlePriceRange = (index: number) => {
-    if (priceNumber === index) {
-      setPriceNumber(null);
-    } else {
-      setPriceNumber(index);
-    }
-  };
+    return Object.entries(map);
+  }, [data]);
 
   const ProductsData: Product[] = useMemo(() => {
     if (!data?.products) return [];
@@ -118,8 +109,58 @@ const Products = () => {
       }
     }
 
+    if (categroyfilter !== null) {
+      const selectedCategory = categoryCountMap[categroyfilter]?.[0];
+
+      filteredProducts = filteredProducts.filter(
+        (item) => item.category === selectedCategory,
+      );
+    }
+
+    console.log("category filter : ", categroyfilter);
+
     return filteredProducts;
-  }, [data, ratingNumber, discountNumber, CommentsRating, priceNumber]);
+  }, [
+    data,
+    ratingNumber,
+    discountNumber,
+    CommentsRating,
+    priceNumber,
+    categroyfilter,
+    categoryCountMap,
+  ]);
+
+  const handleRating = (num: number) => {
+    if (ratingNumber === num) {
+      setRatingNumber(null);
+    } else {
+      setRatingNumber(num);
+    }
+  };
+
+  const handleDiscount = (num: number) => {
+    if (discountNumber === num) {
+      setDiscountNumber(null);
+    } else {
+      setDiscountNumber(num);
+    }
+  };
+
+  const handlePriceRange = (index: number) => {
+    if (priceNumber === index) {
+      setPriceNumber(null);
+    } else {
+      setPriceNumber(index);
+    }
+  };
+
+  const handleCategory = (item: number) => {
+    if (categroyfilter === item) {
+      setCategoryFilter(null);
+    } else {
+      setCategoryFilter(item);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -140,14 +181,18 @@ const Products = () => {
   return (
     <div className="w-full h-full flex">
       {/* Left Side Section */}
-
-      <div className="w-1/4 bg-gray-200 h-screen p-4 fixed  overflow-x-hidden">
-        {/* This is for the Rating filter section */}
+      <div className="w-1/4 bg-gray-100 h-screen p-4 fixed overflow-x-hidden">
+        {/* Rating */}
         <div className="flex flex-col space-y-4 justify-center">
+          <h1 className="font-bold text-2xl tracking-wider ">
+            {CUSTOMER_RATING}
+          </h1>
+          <hr className="border-gray-500 w-3/4" />
+
           {[1, 2, 3, 4, 5].map((num, index) => (
             <div
               key={index}
-              className="flex space-x-3 items-center justify-start text-2xl font-semibold"
+              className="flex space-x-3 items-center text-xl font-semibold"
             >
               <input
                 type="checkbox"
@@ -156,21 +201,23 @@ const Products = () => {
                 onChange={() => handleRating(num)}
                 className="scale-150"
               />
-              <div className="flex flex-row space-x-2">
-                <p className="">{`⭐`.repeat(num)}</p>
-                <p className="">{num} Above</p>
+              <div className="flex space-x-2">
+                <p className="text-gray-700">{"⭐".repeat(num)}</p>
+                <p className="text-gray-700">{num} Above</p>
               </div>
             </div>
           ))}
         </div>
 
-        {/* This is for the Discount Filter Section */}
-        <div className="flex flex-col space-y-4 justify-center mt-16">
-          <h1 className="font-bold text-2xl">{DISCOUNT_PERCENTAGE}</h1>
+        {/* Discount */}
+        <div className="flex flex-col space-y-4 mt-8">
+          <h1 className="font-bold text-2xl tracking-wider">{DISCOUNT}</h1>
+          <hr className="border-gray-500 w-3/4" />
+
           {[10, 15, 20].map((num, index) => (
             <div
               key={index}
-              className="flex space-x-3 items-center justify-start text-2xl font-semibold"
+              className="flex space-x-3 items-center text-xl font-semibold"
             >
               <input
                 type="checkbox"
@@ -179,20 +226,20 @@ const Products = () => {
                 onChange={() => handleDiscount(num)}
                 className="scale-150"
               />
-              <div className="flex flex-row space-x-2">
-                <p className="">% {num} Above </p>
-              </div>
+              <p className="text-gray-700">% {num} Above</p>
             </div>
           ))}
         </div>
 
-        {/* This is for the Price range Filter Section */}
-        <div className="flex flex-col spacey-y-4 justify-center mt-16">
-          <h1 className="font-bold text-2xl">{PRICE_RANGE}</h1>
+        {/* Price */}
+        <div className="flex flex-col space-y-4 mt-8">
+          <h1 className="font-bold text-2xl tracking-wider">{PRICE_RANGE}</h1>
+          <hr className="border-gray-500 w-3/4" />
+
           {PRICE_RANGE_VALUES.map((num, index) => (
             <div
               key={index}
-              className="flex space-x-3 items-center justify-start text-2xl font-semibold"
+              className="flex space-x-3 items-center text-xl font-semibold"
             >
               <input
                 type="checkbox"
@@ -201,15 +248,45 @@ const Products = () => {
                 onChange={() => handlePriceRange(index)}
                 className="scale-150"
               />
-              <span className="m-2">
-                {num.min === 10000 ? `${num.min}` : `${num.min} - ${num.max}`}
+              <span className="text-gray-700">
+                {num.max === Infinity
+                  ? `₹ ${num.min}`
+                  : `₹ ${num.min} - ₹ ${num.max}`}
               </span>
+            </div>
+          ))}
+        </div>
+
+        {/* Category */}
+        <div className="flex flex-col space-y-4 mt-8">
+          <h1 className="font-bold text-2xl tracking-wider">
+            {CATEGORY.toUpperCase()}
+          </h1>
+          <hr className="border-gray-500" />
+
+          {categoryCountMap.map((item, index) => (
+            <div
+              key={index}
+              className="flex space-x-3 items-center text-xl font-semibold"
+            >
+              <input
+                type="checkbox"
+                value={index}
+                checked={categroyfilter === index}
+                onChange={() => handleCategory(index)}
+                className="scale-150"
+              />
+              <div className="flex space-x-4">
+                <span>{item[0]}</span>
+                <span>:</span>
+                <span>{item[1]}</span>
+              </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Right Side Section */}
+      {/* Right Side */}
       <div className="w-3/4 min-h-screen ml-[25%]">
         <div className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 m-4">
           {ProductsData.length ? (
@@ -228,7 +305,7 @@ const Products = () => {
           ) : (
             <div className="flex items-center justify-center w-full min-h-screen col-span-4">
               <p className="text-4xl text-red-600 font-bold text-center">
-                {ratingNumber || discountNumber || priceNumber
+                {ratingNumber || discountNumber || priceNumber || categroyfilter
                   ? `${NO_FILTERED_PRODUCTS_MESSAGE}`
                   : `${NO_SEARCHED_PRODUCTS_MESSAGE}`}
               </p>

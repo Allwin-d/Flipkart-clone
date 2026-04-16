@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { CurrencyConverter } from "../utils/utilityFunctions";
 import { OriginalPrice } from "../utils/utilityFunctions";
-import { DISCOUNT } from "../Constants/Constants";
+import { DISCOUNT_PERCENTAGE } from "../Constants/Constants";
 
 type productTileProps = {
   id: number;
@@ -49,7 +49,7 @@ const ProductTile = ({
         </p>
       </div>
       <p className="text-green-600 font-medium text-xl">
-        {discountPercentage} {DISCOUNT}
+        {discountPercentage} {DISCOUNT_PERCENTAGE}
       </p>
     </div>
   );

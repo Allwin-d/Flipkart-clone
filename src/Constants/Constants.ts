@@ -39,18 +39,10 @@ export const MY_ACCOUNT = "My Account";
 export const MORE = "More";
 export const BECOME_A_SELLER = "Become a Seller";
 export const CART = "Cart";
-export const DISCOUNT = "% off";
-export const DISCOUNT_PERCENTAGE = "Discount Percentage";
+export const DISCOUNT_PERCENTAGE = "% off";
+export const DISCOUNT = "DISCOUNT";
 
 export const AVAILABLE_STOCK = "✔️ InStock (only ${stocks} Available)";
 export const UNAVAILABLE = "❌ UnAvailable";
-export const PRICE_RANGE = "Price Range";
-
-export const PRICE_RANGE_VALUES = [
-  { min: 0, max: 100 },
-  { min: 500, max: 999 },
-  { min: 1000, max: 1999 },
-  { min: 2000, max: 4999 },
-  { min: 5000, max: 9999 },
-  { min: 10000, max: Infinity },
-];
+export const PRICE_RANGE = "PRICE RANGE";
+export const CUSTOMER_RATING = "CUSTOMER RATING";
