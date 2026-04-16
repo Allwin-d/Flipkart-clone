@@ -8,6 +8,7 @@ import {
   STOCK,
   WARRANTY_INFORMATION,
 } from "../Constants/Constants";
+import { Capitalize } from "../utils/utilityFunctions";
 
 type AdditionalInformationProps = {
   Category: string;
@@ -31,9 +32,10 @@ const AdditionalInformation = ({
   return (
     <div className="flex flex-col space-y-4">
       <h1 className="text-3xl text-black font-bold">{SPECIFICATION}</h1>
+      <hr className="w-1/4"></hr>
       <div className="flex flex-row space-x-4 text-2xl ">
         <p className="text-gray-400 font-bold">{CATEGORY}</p>
-        <p className="font-medium">{Category}</p>
+        <p className="font-medium">{Capitalize(Category)}</p>
       </div>
       <div className="flex flex-row space-x-4 text-2xl">
         <p className="text-gray-400 font-bold">{SKU}</p>

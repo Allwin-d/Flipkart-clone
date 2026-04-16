@@ -8,3 +8,7 @@ export const OriginalPrice = (
 ): number => {
   return Math.floor(orgPrice * (discountPercentage / 100) + orgPrice);
 };
+
+export const Capitalize = (value: string) => {
+  return `${value.charAt(0).toUpperCase() + value.slice(1)}`;
+};

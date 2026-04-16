@@ -19,7 +19,7 @@ import {
   PRICE_RANGE,
 } from "../Constants/Constants";
 import { PRICE_RANGE_VALUES } from "../components/ConstantsArrays";
-import { CurrencyConverter } from "../utils/utilityFunctions";
+import { Capitalize, CurrencyConverter } from "../utils/utilityFunctions";
 
 const Products = () => {
   const [ratingNumber, setRatingNumber] = useState<null | number>(null);
@@ -181,7 +181,7 @@ const Products = () => {
   return (
     <div className="w-full h-full flex">
       {/* Left Side Section */}
-      <div className="w-1/4 bg-gray-100 h-screen p-4 fixed overflow-x-hidden">
+      <div className="w-1/4 bg-gray-100 h-[calc(100vh-64px)] p-12 fixed top-16 left-0 overflow-y-auto pb-16 scrollbar-hide">
         {/* Rating */}
         <div className="flex flex-col space-y-4 justify-center">
           <h1 className="font-bold text-2xl tracking-wider ">
@@ -202,8 +202,8 @@ const Products = () => {
                 className="scale-150"
               />
               <div className="flex space-x-2">
-                <p className="text-gray-700">{"⭐".repeat(num)}</p>
-                <p className="text-gray-700">{num} Above</p>
+                <p className="text-gray-600">{"⭐".repeat(num)}</p>
+                <p className="text-gray-600">{num} Above</p>
               </div>
             </div>
           ))}
@@ -226,7 +226,7 @@ const Products = () => {
                 onChange={() => handleDiscount(num)}
                 className="scale-150"
               />
-              <p className="text-gray-700">% {num} Above</p>
+              <p className="text-gray-600">% {num} Above</p>
             </div>
           ))}
         </div>
@@ -248,7 +248,7 @@ const Products = () => {
                 onChange={() => handlePriceRange(index)}
                 className="scale-150"
               />
-              <span className="text-gray-700">
+              <span className="text-gray-600">
                 {num.max === Infinity
                   ? `₹ ${num.min}`
                   : `₹ ${num.min} - ₹ ${num.max}`}
@@ -276,10 +276,10 @@ const Products = () => {
                 onChange={() => handleCategory(index)}
                 className="scale-150"
               />
-              <div className="flex space-x-4">
-                <span>{item[0]}</span>
+              <div className="flex space-x-4 text-gray-600">
+                <span>{Capitalize(item[0])}</span>
                 <span>:</span>
-                <span>{item[1]}</span>
+                <span>{`(${item[1]})`}</span>
               </div>
             </div>
           ))}
@@ -287,7 +287,7 @@ const Products = () => {
       </div>
 
       {/* Right Side */}
-      <div className="w-3/4 min-h-screen ml-[25%]">
+      <div className="w-3/4 min-h-screen ml-[25%] pt-4">
         <div className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 m-4">
           {ProductsData.length ? (
             ProductsData.map((item, key) => (

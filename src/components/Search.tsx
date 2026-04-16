@@ -15,11 +15,11 @@ const Search = () => {
     if (!trimmed) return;
     if (
       location.pathname.startsWith("/productDetails") &&
-      trimmed.length >= 3
+      trimmed.length >= 1
     ) {
       navigate(`/products?search=${trimmed}`);
       setValue("");
-    } else if (trimmed.length >= 3) {
+    } else if (trimmed.length >= 1) {
       navigate(`/products?search=${trimmed}`);
       setValue("");
     }
