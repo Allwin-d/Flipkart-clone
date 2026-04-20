@@ -21,6 +21,7 @@ export type Product = {
   meta: Meta;
   thumbnail: string;
   images: string[];
+  quantity?: number;
 };
 
 export type ApiResponseType = {

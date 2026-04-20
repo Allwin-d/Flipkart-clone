@@ -46,3 +46,4 @@ export const AVAILABLE_STOCK = "✔️ InStock (only ${stocks} Available)";
 export const UNAVAILABLE = "❌ UnAvailable";
 export const PRICE_RANGE = "PRICE RANGE";
 export const CUSTOMER_RATING = "CUSTOMER RATING";
+export const USD_TO_INR_RATE = 93;

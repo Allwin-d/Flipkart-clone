@@ -13,7 +13,7 @@ const Search = () => {
   const debouncedValue = useDebounce(value, 500);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    isUserTyping.current = true; 
+    isUserTyping.current = true;
     setValue(e.target.value);
   };
 
@@ -22,9 +22,13 @@ const Search = () => {
 
     if (!trimmed) return;
     if (!isUserTyping.current) return;
+    
+    //here it will navigate to the products page only when the value length is > 3 
+    if (trimmed.length >= 3) {
+      navigate(`/products?search=${trimmed}`);
+    }
 
-    navigate(`/products?search=${trimmed}`);
-    isUserTyping.current = false; 
+    isUserTyping.current = false;
   }, [debouncedValue, navigate]);
 
   useEffect(() => {

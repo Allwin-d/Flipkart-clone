@@ -2,7 +2,7 @@ import { Toaster } from "react-hot-toast";
 const Toast = () => {
   return (
     <Toaster
-      position="top-right"
+      position="top-center"
       toastOptions={{
         className: "bg-gray-900 text-white rounded-lg shadow-lg",
         success: {

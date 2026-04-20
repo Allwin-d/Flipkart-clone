@@ -1,5 +1,7 @@
+import { USD_TO_INR_RATE } from "../Constants/Constants";
+
 export const CurrencyConverter = (price: number): number => {
-  return Math.floor(price * 83);
+  return Math.floor(price * USD_TO_INR_RATE);
 };
 
 export const OriginalPrice = (
@@ -10,5 +12,5 @@ export const OriginalPrice = (
 };
 
 export const Capitalize = (value: string) => {
-  return `${value.charAt(0).toUpperCase() + value.slice(1)}`;
+  return `${value.trim().charAt(0).toUpperCase() + value.slice(1)}`;
 };
