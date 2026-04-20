@@ -45,7 +45,10 @@ const Navbar = () => {
           <CiCircleMore className="text-white text-4xl" />
         </div>
 
-        <div className="flex items-center justify-center gap-2 cursor-pointer">
+        <div
+          className="flex items-center justify-center gap-2 cursor-pointer"
+          onClick={() => navigate("/cart")}
+        >
           <p className="text-white text-xl font-medium">{CART}</p>
           <IoCartOutline className="text-white text-4xl" />
         </div>

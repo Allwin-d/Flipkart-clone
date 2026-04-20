@@ -46,10 +46,11 @@ const ProductDetails = () => {
     enabled: !!id, //here it means that if the id is true , the api call will happen, otherwise it won't , -> it return boolean value
   });
 
-  const SimilarProducts = context?.data?.products.filter(
-    (item) => item.category === data?.category && item.id !== data.id,
+  const SimilarProducts = context?.data?.products?.filter(
+    (item) => item.category === data?.category && item.id !== data?.id,
   );
-  console.log("Similar Products :", SimilarProducts);
+
+  console.log("Similar Products : ", SimilarProducts);
 
   if (isLoading) {
     return (
@@ -100,7 +101,7 @@ const ProductDetails = () => {
                 src={data?.images?.[activeImg]}
                 className="w-[700px] h-[700px] bg-gray-100"
               />
-              <BuyAndCart />
+              {data && <BuyAndCart prod={data} />}
             </div>
           </div>
 
@@ -139,7 +140,7 @@ const ProductDetails = () => {
         </div>
       </div>
 
-      {/* This is for the Similar Products section */}
+      {/*Similar Products section*/}
       <div className="flex flex-col m-8 w-full">
         <h1 className="text-2xl font-bold">{SIMILAR_PRODUCTS}</h1>
         <div className="flex flex-row overflow-x-auto justify-around items-center scrollbar-hide ">
@@ -157,7 +158,7 @@ const ProductDetails = () => {
         </div>
       </div>
 
-      {/* This is for the Comment Section */}
+      {/* Comment Section */}
       <Comments
         productId={id ? id : ""}
         reviewsCount={setReviewsCount} //here we are passing the setter function to the child component , and in the child component we update value and pass it to parent component
