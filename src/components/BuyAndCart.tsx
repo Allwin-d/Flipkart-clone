@@ -1,11 +1,11 @@
 import { useDispatch } from "react-redux";
 import { ADD_TO_CART, BUY_NOW } from "../Constants/Constants";
-import type { Product } from "../Types/ApiResponse";
+import type { CartItem } from "../Types/ApiResponse";
 import { addToCart } from "../Slices/CartSlice";
 import type { AppDispatch } from "../Store/store";
 
 type prodProps = {
-  prod: Product;
+  prod: CartItem;
 };
 
 const BuyAndCart = ({ prod }: prodProps) => {
