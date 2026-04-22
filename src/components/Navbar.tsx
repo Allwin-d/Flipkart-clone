@@ -11,10 +11,16 @@ import {
   MORE,
   MY_ACCOUNT,
 } from "../Constants/Constants";
-// import { IoIosSearch } from "react-icons/io";
+import { useSelector } from "react-redux";
+import type { RootState } from "../Store/store";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const cartData = useSelector((state: RootState) => state.cart);
+
+  const cartLength = cartData.reduce((acc, curr) => {
+    return acc + curr.quantity;
+  }, 0);
 
   return (
     <div className="w-full h-24 bg-blue-600 sticky top-0 z-50 flex flex-row">
@@ -51,6 +57,11 @@ const Navbar = () => {
         >
           <p className="text-white text-xl font-medium">{CART}</p>
           <IoCartOutline className="text-white text-4xl" />
+          <p
+            className={`${cartLength >= 1 ? `bg-red-500 text-white rounded-full font-bold px-4 py-2 border-white border-2 transition duration-150 hover scale-110` : ``}`}
+          >
+            {cartLength >= 1 ? cartLength : ""}
+          </p>
         </div>
       </div>
     </div>

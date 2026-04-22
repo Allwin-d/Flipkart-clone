@@ -105,7 +105,6 @@ const Home = () => {
       in the Categroy section we send data as a prop 
       */}
       <Categories category={categories} />
-      <Categories category={categories} />
       <HeroBanner />
       <ProductCategory data={BeautyProducts ?? []} title={"Beauty Products"} />
       <ProductCategory data={Laptop ?? []} title="Laptops" />

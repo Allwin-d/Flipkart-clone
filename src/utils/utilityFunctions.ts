@@ -14,3 +14,7 @@ export const OriginalPrice = (
 export const Capitalize = (value: string) => {
   return `${value.trim().charAt(0).toUpperCase() + value.slice(1)}`;
 };
+
+export const UpperCase = (value: string) => {
+  return value.trim().toUpperCase();
+};
