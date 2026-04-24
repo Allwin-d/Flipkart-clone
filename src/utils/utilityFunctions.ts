@@ -1,14 +1,16 @@
 import { USD_TO_INR_RATE } from "../Constants/Constants";
 
+// Convert ONLY for UI
 export const CurrencyConverter = (price: number): number => {
   return Math.floor(price * USD_TO_INR_RATE);
 };
 
-export const OriginalPrice = (
-  orgPrice: number,
+// Correct way to get original price from discounted price
+export const getOriginalPrice = (
+  price: number,
   discountPercentage: number,
 ): number => {
-  return Math.floor(orgPrice * (discountPercentage / 100) + orgPrice);
+  return Math.floor(price / (1 - discountPercentage / 100));
 };
 
 export const Capitalize = (value: string) => {

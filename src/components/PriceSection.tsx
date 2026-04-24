@@ -1,6 +1,6 @@
 import { DISCOUNT_PERCENTAGE } from "../Constants/Constants";
 import { CurrencyConverter } from "../utils/utilityFunctions";
-import { OriginalPrice } from "../utils/utilityFunctions";
+import { getOriginalPrice } from "../utils/utilityFunctions";
 
 type PriceSectionProps = {
   FixedPrice?: number;
@@ -18,7 +18,7 @@ const PriceSection = ({
       </p>
       <p className="text-gray-500 text-2xl line-through">
         ₹
-        {OriginalPrice(
+        {getOriginalPrice(
           CurrencyConverter(FixedPrice ? FixedPrice : 0),
           discountPercentage ? discountPercentage : 0,
         )}

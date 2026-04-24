@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { CurrencyConverter } from "../utils/utilityFunctions";
-import { OriginalPrice } from "../utils/utilityFunctions";
+import { getOriginalPrice } from "../utils/utilityFunctions";
 import { DISCOUNT_PERCENTAGE } from "../Constants/Constants";
 
 type productTileProps = {
@@ -45,7 +45,7 @@ const ProductTile = ({
       <div className="flex flex-row space-x-4" key={index}>
         <p className="text-xl font-bold ">₹{CurrencyConverter(price)}</p>
         <p className="line-through text-gray-500 font-medium">
-          ₹{OriginalPrice(CurrencyConverter(price), discountPercentage)}
+          ₹{getOriginalPrice(CurrencyConverter(price), discountPercentage)}
         </p>
       </div>
       <p className="text-green-600 font-medium text-xl">

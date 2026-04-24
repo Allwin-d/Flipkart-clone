@@ -40,10 +40,14 @@ export const MORE = "More";
 export const BECOME_A_SELLER = "Become a Seller";
 export const CART = "Cart";
 export const DISCOUNT_PERCENTAGE = "% off";
-export const DISCOUNT = "DISCOUNT";
+export const DISCOUNT = "Discount";
 
 export const AVAILABLE_STOCK = "✔️ InStock (only ${stocks} Available)";
 export const UNAVAILABLE = "❌ UnAvailable";
 export const PRICE_RANGE = "PRICE RANGE";
 export const CUSTOMER_RATING = "CUSTOMER RATING";
 export const USD_TO_INR_RATE = 93;
+export const DELIVERY_CHARGES = "Delivery Charges";
+export const FREE = "Free";
+export const REMOVE = "Remove";
+export const PLACE_ORDER = "Place Order";
