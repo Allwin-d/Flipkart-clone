@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useLocation, useParams, useSearchParams } from "react-router-dom";
-import type { Product } from "../Types/ApiResponse";
+import type { CartItem } from "../Types/ApiResponse";
 import { useContext, useState } from "react";
 import BuyAndCart from "../components/BuyAndCart";
 import RatingAndStock from "../components/Ratings";
@@ -35,8 +35,8 @@ const ProductDetails = () => {
   console.log("Product ID:", id);
 
   const SingleProductApi = import.meta.env.VITE_SINGLE_PRODUCT_API;
-  const fetchSingleProduct = async (): Promise<Product> => {
-    const res = await axios.get<Product>(`${SingleProductApi}${id}`);
+  const fetchSingleProduct = async (): Promise<CartItem> => {
+    const res = await axios.get<CartItem>(`${SingleProductApi}${id}`);
     return res.data;
   };
 

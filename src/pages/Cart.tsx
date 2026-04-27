@@ -1,15 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../Store/store";
+import { clearAll } from "../Slices/CartSlice";
 import {
-  clearAll,
-  removeFromCart,
-  decreaseQuantity,
-  addToCart,
-} from "../Slices/CartSlice";
-import RatingAndStock from "../components/Ratings";
-import PriceSection from "../components/PriceSection";
-import {
-  Capitalize,
   CurrencyConverter,
   getOriginalPrice,
   UpperCase,
@@ -21,8 +13,13 @@ import {
   DISCOUNT,
   FREE,
   PLACE_ORDER,
-  REMOVE,
 } from "../Constants/Constants";
+import CartTile from "../components/CartTile";
+import {
+  addToCart,
+  removeFromCart,
+  decreaseQuantity,
+} from "../Slices/CartSlice";
 
 const Cart = () => {
   const cartData = useSelector((state: RootState) => state.cart);
@@ -77,52 +74,21 @@ const Cart = () => {
           {/* ITEMS */}
           <div className="flex flex-col space-y-5 mt-5">
             {cartData.map((item) => (
-              <div key={item.id} className="flex items-center justify-around">
-                <img
-                  src={item.images[0]}
-                  alt={item.title}
-                  className="w-[200px] h-[200px] object-contain"
-                />
-
-                <div className="flex flex-col space-y-4">
-                  <p>{item.category.toUpperCase()}</p>
-                  <p>{Capitalize(item.title)}</p>
-
-                  <RatingAndStock
-                    rating={item.rating}
-                    NoOfRatings={item.rating}
-                    stocks={item.stock}
-                  />
-
-                  <PriceSection
-                    FixedPrice={item.price}
-                    discountPercentage={item.discountPercentage}
-                  />
-
-                  <div className="flex flex-row justify-center items-center space-x-10 text-xl">
-                    <button
-                      className="bg-gray-300 px-4"
-                      onClick={() => handleDecrease(item)}
-                    >
-                      -
-                    </button>
-                    <p className="font-bold">{item.quantity}</p>
-                    <button
-                      className="bg-gray-300 px-4"
-                      onClick={() => handleIncrease(item)}
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-
-                <button
-                  className="bg-red-600 text-white rounded-lg p-2 hover:transition duration-150 hover:scale-110 "
-                  onClick={() => handleRemove(item)}
-                >
-                  {REMOVE.toUpperCase()}
-                </button>
-              </div>
+              <CartTile
+                id={item.id}
+                images={item.images[0]}
+                title={item.title}
+                category={item.category}
+                rating={item.rating}
+                stock={item.stock}
+                price={item.price}
+                discountPercentage={item.discountPercentage}
+                quantity={item.quantity}
+                item={item}
+                onRemove={handleRemove}
+                onIncrease={handleIncrease}
+                onDecrease={handleDecrease}
+              />
             ))}
           </div>
         </div>

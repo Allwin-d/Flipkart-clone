@@ -1,6 +1,5 @@
 import { DISCOUNT_PERCENTAGE } from "../Constants/Constants";
-import { CurrencyConverter } from "../utils/utilityFunctions";
-import { getOriginalPrice } from "../utils/utilityFunctions";
+import { CurrencyConverter, getOriginalPrice } from "../utils/utilityFunctions";
 
 type PriceSectionProps = {
   FixedPrice?: number;
