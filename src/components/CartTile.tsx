@@ -3,6 +3,7 @@ import RatingAndStock from "./Ratings";
 import PriceSection from "./PriceSection";
 import { REMOVE } from "../Constants/Constants";
 import { Capitalize } from "../utils/utilityFunctions";
+import { useNavigate } from "react-router-dom";
 
 type cartTileProps = {
   id: number;
@@ -34,12 +35,15 @@ const CartTile = ({
   onIncrease,
   onDecrease,
 }: cartTileProps) => {
+  const navigate = useNavigate();
+
   return (
-    <div key={id} className="flex items-center justify-around">
+    <div key={id} className="flex items-center justify-around border-b pb-5 ">
       <img
         src={images}
         alt={title}
-        className="w-[200px] h-[200px] object-contain"
+        className="w-[200px] h-[200px] object-contain cursor-pointer"
+        onClick={() => navigate(`/productDetails/${id}`)}
       />
 
       <div className="flex flex-col space-y-4">
@@ -56,11 +60,17 @@ const CartTile = ({
         />
 
         <div className="flex flex-row justify-center items-center space-x-10 text-xl">
-          <button className="bg-gray-300 px-4" onClick={() => onDecrease(item)}>
+          <button
+            className="rounded-full bg-gray-300 px-4 py-2 font-bold"
+            onClick={() => onDecrease(item)}
+          >
             -
           </button>
           <p className="font-bold">{item.quantity}</p>
-          <button className="bg-gray-300 px-4" onClick={() => onIncrease(item)}>
+          <button
+            className="rounded-full bg-gray-300 px-4 py-2 font-bold"
+            onClick={() => onIncrease(item)}
+          >
             +
           </button>
         </div>

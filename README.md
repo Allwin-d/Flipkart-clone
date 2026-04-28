@@ -116,7 +116,7 @@
 - Implemented query invalidation using `invalidateQueries` after mutations
 - Ensures real-time UI updates and server state consistency
 
-## 1️⃣2️⃣ Search & Filtering System (NEW 🔥)
+## 1️⃣2️⃣ Search & Filtering System
 
 - Implemented debounced search using `useDebounce`
 - Synced search input with URL using query parameters
@@ -132,8 +132,6 @@
   - Price filters
   - Sorting
   - Pagination
-
----
 
 ---
 
@@ -153,8 +151,8 @@
   - `queryKey`
   - `enabled` flag (only runs when search value exists)
 
-  🔥 Filtering Enhancements (NEW)
-  Integrated rating-based filtering like (1,2,3,4,5)  using comments from a separate API
+  🔥 Filtering Enhancements
+  Integrated rating-based filtering like (1,2,3,4,5) using comments from a separate API
   Implemented client-side data mapping using productId (multi-API handling)
   Added discount-based filtering (10%, 20%, 30% and above)
   Added Price Based Filtering (0-499 , 500-999 , 1000-1999 , 2000 - 4999 , 5000-9999 , 10000 and above)
@@ -209,12 +207,81 @@
 
 ---
 
+## 1️⃣4️⃣ Cart Page 🛒
+
+### 📦 Cart Page (`Cart.tsx`)
+
+- Displays all items currently added to the cart using **Redux state** via `useSelector`
+- Dispatches cart actions using `useDispatch`
+
+#### Computed Values (Derived State):
+
+- **Total Item Count** → Sum of all `item.quantity` values across cart items
+- **Total Discounted Price** → Sum of `item.price * item.quantity`
+- **Total Original Price** → Calculated using `getOriginalPrice(price, discountPercentage)` for each item
+- **Total Discount** → `totalOriginalPrice - totalPrice`
+
+#### Cart Actions:
+
+- **Increase Quantity** → Dispatches `addToCart(item)`
+- **Decrease Quantity** → Dispatches `decreaseQuantity(item)`
+- **Remove Item** → Dispatches `removeFromCart(item)` + shows toast notification via `react-hot-toast`
+- **Clear All** → Dispatches `clearAll()` to wipe the entire cart
+
+#### Layout (Two-Panel):
+
+- **Left Panel (3/4 width)** → Lists all cart items using the `CartTile` component
+- **Right Panel (1/4 width)** → Shows price breakdown summary (only visible when cart is non-empty):
+  - Price for all items at original price
+  - Discount amount (in green)
+  - Delivery charges (shown as FREE)
+  - Total payable amount
+  - Savings summary banner
+  - "Place Order" button
+
+#### Empty State:
+
+- When the cart is empty, displays a full-height message prompting the user to add items
+
+---
+
+### 🧩 CartTile Component (`CartTile.tsx`)
+
+- Reusable component to render an individual cart item
+- Accepts props: `id`, `images`, `title`, `category`, `rating`, `stock`, `price`, `discountPercentage`, `quantity`, `item`, `onRemove`, `onIncrease`, `onDecrease`
+
+#### Displays:
+
+- **Product image** → Clickable, navigates to `/productDetails/:id` using `useNavigate`
+- **Category** → Shown in uppercase
+- **Title** → Formatted using `Capitalize` utility
+- **Rating & Stock** → Rendered via reusable `RatingAndStock` component
+- **Price Section** → Rendered via reusable `PriceSection` component with discount info
+
+#### Quantity Controls:
+
+- **"−" button** → Calls `onDecrease(item)` (dispatches `decreaseQuantity`)
+- **Quantity display** → Shows `item.quantity`
+- **"+" button** → Calls `onIncrease(item)` (dispatches `addToCart`)
+
+#### Remove:
+
+- **"REMOVE" button** → Calls `onRemove(item)`, which dispatches `removeFromCart` and shows a toast error notification
+
+#### TypeScript:
+
+- Strongly typed via `cartTileProps` type definition
+- Uses `CartItem` type from `ApiResponse.ts` for the `item` prop
+
+---
+
 ## 🧠 Key Concepts Used
 
 - React Hooks (`useState`, `useEffect`)
 - Custom Hooks (`useDebounce`)
 - React Router Hooks (`useNavigate`, `useParams`, `useLocation`, `useSearchParams`)
 - React Query (Server State Management)
+- Redux Toolkit (Client State Management — Cart)
 - Lifting State Up
 - Controlled Components (Forms)
 - Conditional Rendering
@@ -227,6 +294,7 @@ This project demonstrates a scalable and production-ready React architecture usi
 - Clean component structure
 - Efficient data fetching with React Query
 - URL-based state management (search & filters)
+- Redux-based cart management with full CRUD operations
 - Proper state management techniques
-- Real-world features like comments, ratings, and filtering
+- Real-world features like comments, ratings, filtering, and a cart system
 - Optimized performance with debouncing and query control

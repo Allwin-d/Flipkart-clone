@@ -51,3 +51,5 @@ export const DELIVERY_CHARGES = "Delivery Charges";
 export const FREE = "Free";
 export const REMOVE = "Remove";
 export const PLACE_ORDER = "Place Order";
+export const PRODUCT_ADDED = "Product added to cart";
+export const PRODUCT_REMOVED = "Product removed from cart";
