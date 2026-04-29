@@ -283,15 +283,19 @@
 - Accepts fully custom styling via `className` prop (Tailwind-friendly)
 - Renders any content inside via `children` (`React.ReactNode`)
 - Optional `onClick` handler — safe to omit when no action is needed
+- Supports native `type` attribute for form usage (`submit`, `reset`, `button`)
+- Supports a `disable` boolean prop to render the button in a disabled state
 
 ### Props:
 
-| Prop        | Type              | Required | Description                        |
-| ----------- | ----------------- | -------- | ---------------------------------- |
-| `className` | `string`          | ✅ Yes   | Tailwind or custom CSS classes     |
-| `onClick`   | `() => void`      | ❌ No    | Click handler function             |
-| `children`  | `React.ReactNode` | ✅ Yes   | Content rendered inside the button |
-
+| Prop        | Type                                  | Required | Description                          |
+|-------------|---------------------------------------|----------|--------------------------------------|
+| `className` | `string`                              | ✅ Yes   | Tailwind or custom CSS classes       |
+| `onClick`   | `() => void`                          | ❌ No    | Click handler function               |
+| `children`  | `React.ReactNode`                     | ✅ Yes   | Content rendered inside the button  |
+| `type`      | `"submit" \| "reset" \| "button"`    | ❌ No    | Native HTML button type attribute    |
+| `disable`   | `boolean`                             | ❌ No    | Disables the button when `true`      |
+```
 ```
 
 ## 🧠 Key Concepts Used

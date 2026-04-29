@@ -2,11 +2,24 @@ type ButtonProps = {
   className: string;
   onClick?: () => void;
   children: React.ReactNode;
+  type?: "submit" | "reset" | "button";
+  disable?: boolean;
 };
 
-const Button = ({ className, onClick, children }: ButtonProps) => {
+const Button = ({
+  type,
+  className,
+  onClick,
+  children,
+  disable,
+}: ButtonProps) => {
   return (
-    <button className={className} onClick={onClick}>
+    <button
+      className={className}
+      onClick={onClick}
+      type={type}
+      disabled={disable}
+    >
       {children}
     </button>
   );
