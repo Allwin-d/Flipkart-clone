@@ -20,6 +20,7 @@ import {
 } from "../Constants/Constants";
 import { PRICE_RANGE_VALUES } from "../components/ConstantsArrays";
 import { Capitalize, CurrencyConverter } from "../utils/utilityFunctions";
+import Input from "../components/Input";
 
 const Products = () => {
   const [ratingNumber, setRatingNumber] = useState<null | number>(null);
@@ -194,7 +195,7 @@ const Products = () => {
               key={index}
               className="flex space-x-3 items-center text-xl font-semibold"
             >
-              <input
+              <Input
                 type="checkbox"
                 value={num}
                 checked={ratingNumber === num}
@@ -219,7 +220,7 @@ const Products = () => {
               key={index}
               className="flex space-x-3 items-center text-xl font-semibold"
             >
-              <input
+              <Input
                 type="checkbox"
                 value={num}
                 checked={discountNumber === num}
@@ -241,7 +242,7 @@ const Products = () => {
               key={index}
               className="flex space-x-3 items-center text-xl font-semibold"
             >
-              <input
+              <Input
                 type="checkbox"
                 value={index}
                 checked={priceNumber === index}
@@ -269,7 +270,7 @@ const Products = () => {
               key={index}
               className="flex space-x-3 items-center text-xl font-semibold"
             >
-              <input
+              <Input
                 type="checkbox"
                 value={index}
                 checked={categroyfilter === index}

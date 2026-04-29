@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import type { UserComment, UserComments } from "../Types/ApiResponse";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import Input from "./Input";
 import axios from "axios";
 import {
   COMMENT_FAILED,
@@ -142,7 +143,7 @@ const Comments = ({
         <h1 className="text-xl text-gray-700 font-medium">{WRITE_COMMENT}</h1>
         <div className="flex flex-row w-3/4 justify-between">
           <div>
-            <input
+            <Input
               type="text"
               placeholder=" Your Name "
               onChange={(e) =>
@@ -150,11 +151,11 @@ const Comments = ({
               }
               value={comment.UserName}
               className="p-2 border-2 border-gray-300 focus:ring-2 ring-blue-500 focus:outline-none rounded-md px-12 font-medium"
-            ></input>
+            />
           </div>
           <div>
             {" "}
-            <input
+            <Input
               type="email"
               placeholder="Email (optional) "
               onChange={(e) =>
@@ -162,7 +163,7 @@ const Comments = ({
               }
               value={comment.Email}
               className="p-2 border-2 border-gray-300 focus:ring-2 ring-blue-500 focus:outline-none rounded-md px-12 font-medium"
-            ></input>
+            />
           </div>
           <div className="flex items-center space-x-4">
             <h1 className="font-medium text-gray-400">{RATING}</h1>

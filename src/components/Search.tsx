@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { IoIosSearch } from "react-icons/io";
 import { useDebounce } from "../Hooks/useDebounce";
 import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
+import Input from "./Input";
 
 const Search = () => {
   const [searchParams] = useSearchParams();
@@ -22,8 +23,8 @@ const Search = () => {
 
     if (!trimmed) return;
     if (!isUserTyping.current) return;
-    
-    //here it will navigate to the products page only when the value length is > 3 
+
+    //here it will navigate to the products page only when the value length is > 3
     if (trimmed.length >= 3) {
       navigate(`/products?search=${trimmed}`);
     }
@@ -40,7 +41,7 @@ const Search = () => {
   return (
     <div className="w-3/4 p-4 relative">
       <IoIosSearch className="absolute left-7 top-1/2 -translate-y-1/2 text-gray-500" />
-      <input
+      <Input
         type="text"
         placeholder="Search Products..."
         className="w-full p-4 pl-12 mt-1 border rounded focus:outline-none"

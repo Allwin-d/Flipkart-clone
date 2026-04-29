@@ -275,8 +275,6 @@
 
 ---
 
-# 📘 Project Overview
-
 ## 🔘 Button Component (`Button.tsx`)
 
 - A minimal, reusable button component built with TypeScript
@@ -295,7 +293,88 @@
 | `children`  | `React.ReactNode`                     | ✅ Yes   | Content rendered inside the button  |
 | `type`      | `"submit" \| "reset" \| "button"`    | ❌ No    | Native HTML button type attribute    |
 | `disable`   | `boolean`                             | ❌ No    | Disables the button when `true`      |
+
+### Usage Example:
+
+```tsx
+<Button
+  className="bg-orange-600 text-white py-2 px-4 rounded-lg"
+  onClick={() => console.log("clicked")}
+  type="button"
+>
+  Place Order
+</Button>
+
+{/* Disabled state */}
+<Button
+  className="bg-gray-400 text-white py-2 px-4 rounded-lg"
+  disable={true}
+  type="submit"
+>
+  Submit
+</Button>
 ```
+
+---
+
+## 📝 Input Component (`Input.tsx`)
+
+- A reusable, controlled input component built with TypeScript
+- Supports multiple input types: `text`, `radio`, `checkbox`, and `email`
+- Fully controlled via `value` and `onChange` props
+- Accepts fully custom styling via `className` prop (Tailwind-friendly)
+- Handles edge cases with `value ?? ""` to prevent uncontrolled input warnings
+- Supports `checked` prop for `radio` and `checkbox` types
+
+### Props:
+
+| Prop          | Type                                              | Required | Description                                      |
+|---------------|---------------------------------------------------|----------|--------------------------------------------------|
+| `type`        | `"text" \| "radio" \| "checkbox" \| "email"`     | ✅ Yes   | HTML input type                                  |
+| `onChange`    | `(e: React.ChangeEvent<HTMLInputElement>) => void`| ✅ Yes   | Change handler for controlled input              |
+| `value`       | `string \| number`                                | ✅ Yes   | Controlled value of the input                   |
+| `className`   | `string`                                          | ✅ Yes   | Tailwind or custom CSS classes                   |
+| `placeholder` | `string`                                          | ❌ No    | Placeholder text (relevant for text/email types) |
+| `checked`     | `boolean`                                         | ❌ No    | Checked state (relevant for radio/checkbox types)|
+
+### Usage Example:
+
+```tsx
+{/* Text input */}
+<Input
+  type="text"
+  placeholder="Enter your name"
+  value={name}
+  onChange={(e) => setName(e.target.value)}
+  className="border rounded-lg px-4 py-2"
+/>
+
+{/* Email input */}
+<Input
+  type="email"
+  placeholder="Enter your email"
+  value={email}
+  onChange={(e) => setEmail(e.target.value)}
+  className="border rounded-lg px-4 py-2"
+/>
+
+{/* Checkbox */}
+<Input
+  type="checkbox"
+  value=""
+  checked={isChecked}
+  onChange={(e) => setIsChecked(e.target.checked)}
+  className="w-4 h-4"
+/>
+
+{/* Radio */}
+<Input
+  type="radio"
+  value="option1"
+  checked={selected === "option1"}
+  onChange={(e) => setSelected(e.target.value)}
+  className="w-4 h-4"
+/>
 ```
 
 ## 🧠 Key Concepts Used

@@ -77,7 +77,7 @@ const useAuth = () => {
 // 3. Regular Function Expression
 const hasChangesInStepper = (
   venueData: VenueChecklistState,
-  stepperName: string
+  stepperName: string,
 ): boolean => {
   // ...
 };
@@ -98,7 +98,7 @@ const hasChangesInStepper = (
 const basicFields = [venueName, contactName, phoneNumber, email];
 const hasBasicContent = basicFields.some(
   (field) =>
-    field !== null && field !== undefined && String(field).trim() !== ""
+    field !== null && field !== undefined && String(field).trim() !== "",
 );
 
 // .some() - Returns true if ANY element passes the test
@@ -141,7 +141,7 @@ const VenueData = {
   contactName : ,
   phoneNumber : ,
   email : ,
-  questions : 
+  questions :
 }
 
 const { venueName, contactName, phoneNumber, email, questions } = venueData;
@@ -190,9 +190,9 @@ const status = isActive ? "active" : "inactive";
 // Logical AND (short-circuit)
 {isLoading && <Loader />}
 
-// Nullish coalescing (??) it is used to handle the null & undefined  
+// Nullish coalescing (??) it is used to handle the null & undefined
 const name = userName ?? "Guest";
-//if the userName in here is null or undefined then the value Guest is gets executed ,if not the left side is gets executed 
+//if the userName in here is null or undefined then the value Guest is gets executed ,if not the left side is gets executed
 
 // Optional chaining (?.)
 const email = user?.profile?.email;
@@ -217,7 +217,8 @@ export type OptionType = {
 };
 
 // Function with type annotations
-function useDebounce<T>(value: T, delay = 500): T { //generic type allows any type to be received , like we can pass the string , numbers , boolean etc...
+function useDebounce<T>(value: T, delay = 500): T {
+  //generic type allows any type to be received , like we can pass the string , numbers , boolean etc...
   // T is a generic type parameter
   return debouncedValue;
 }
@@ -249,8 +250,7 @@ export interface VendorVenueChecklistPayload {
   questions: VendorVenueChecklistQuestion[];
 }
 
-
-//interface can be extended 
+//interface can be extended
 interface Person {
   name: string;
 }
@@ -259,20 +259,19 @@ interface Employee extends Person {
   empId: number;
 }
 
-//interface can be merged 
+//interface can be merged
 interface personal {
-  name:string
+  name: string;
 }
-interface personal{
-  age:number
+interface personal {
+  age: number;
 }
 
-const user:personal = {
-   name:"Allwin",
-   age:24
-} //here both the defined personal are being merged under one object name , which consist of two properties of personal (interface);
+const user: personal = {
+  name: "Allwin",
+  age: 24,
+}; //here both the defined personal are being merged under one object name , which consist of two properties of personal (interface);
 ```
-
 
 **Type Aliases (more flexible):**
 
@@ -283,7 +282,7 @@ export type OptionType = {
   label: string;
 };
 
-//type can be intersected 
+//type can be intersected
 type Person = {
   name: string;
 };
@@ -291,26 +290,24 @@ type Person = {
 type Employee = {
   empId: number;
 };
-type Staff = Person & Employee; 
+type Staff = Person & Employee;
 
 // Union types
-type Status = "pending" | "active" | "inactive"; //this is used when we know , what are the values will comes up 
+type Status = "pending" | "active" | "inactive"; //this is used when we know , what are the values will comes up
 let userStatus: Status;
 
-userStatus = "pending";   // ✅ valid
-userStatus = "active";    // ✅ valid
-userStatus = "inactive";  // ✅ valid
-userStatus = "deleted";   // ❌ error
-
+userStatus = "pending"; // ✅ valid
+userStatus = "active"; // ✅ valid
+userStatus = "inactive"; // ✅ valid
+userStatus = "deleted"; // ❌ error
 
 //type with the primitives
 type Id = number | string;
 let userId: Id;
 
-userId = 10;      // ✅
-userId = "A123";  // ✅
-userId = true;    // ❌ //we can't use boolean because that type is not defined 
-
+userId = 10; // ✅
+userId = "A123"; // ✅
+userId = true; // ❌ //we can't use boolean because that type is not defined
 
 // Function types
 type Handler = (value: number) => void;
@@ -333,9 +330,9 @@ function useDebounce<T>(value: T, delay = 500): T {
   return debouncedValue;
 }
 
-//using arrow function 
+//using arrow function
 const useDebounce = <T>(value:T):T => {
-           
+
 }
 
 // Usage
@@ -385,11 +382,10 @@ const rootElement = document.getElementById("root") as HTMLElement;
 // Alternative syntax
 const element = <HTMLElement>document.getElementById("root");
 
-//basic example 
+//basic example
 let value: any = "Allwin";
 let name = value as string;
 console.log(name.toUpperCase()); // works
-
 ```
 
 ### 7. Type Guards
@@ -433,8 +429,6 @@ function handleResponse(res: ApiResponse) {
     console.log(res.message);
   }
 }
-
-
 ```
 
 ---
@@ -550,14 +544,14 @@ const Counter = () => {
 
 export default Counter;
 
-//state wit string input field 
+//state wit string input field
 const NameInput = () => {
   const [name, setName] = useState("");
 
   return (
     <div>
-      <input 
-        type="text" 
+      <input
+        type="text"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
@@ -566,7 +560,7 @@ const NameInput = () => {
   );
 };
 
-//state with boolean 
+//state with boolean
 const Toggle = () => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -583,7 +577,6 @@ const Toggle = () => {
 
 
 ```
-
 
 ### 4. useEffect Hook
 
@@ -691,8 +684,8 @@ const Counter = () => {
 
 ```typescript
 // From your components
-{isLoading && <Loader />} //and operator 
-{error ? <Error /> : <Content />} //ternary operator 
+{isLoading && <Loader />} //and operator
+{error ? <Error /> : <Content />} //ternary operator
 {items.length > 0 && items.map(item => <Item key={item.id} />)}
 ```
 
@@ -748,8 +741,8 @@ import { useDispatch, useSelector } from "react-redux";
 const Component = () => {
   const dispatch = useDispatch();
   const activeClient = useSelector(
-    (state: RootState) => state.client.activeClient //this is referring 
-    //from store.ts -> 
+    (state: RootState) => state.client.activeClient, //this is referring
+    //from store.ts ->
     // reducer :{
     // client : clientReducer
     // } ;
@@ -804,7 +797,7 @@ export const useViewVenueCheckList = (
   });
 };
 
-//using useQuery : 
+//using useQuery :
 import { useQuery } from "@tanstack/react-query";
 
 type User = {
@@ -893,7 +886,7 @@ const UsersCRUD = () => {
   const { data: users, isLoading } = useQuery({
     queryKey: ["users"],
     queryFn: fetchUsers,
-  }); //this is for the (get) , make an http request 
+  }); //this is for the (get) , make an http request
 
   // Add User
   const addMutation = useMutation({
@@ -1025,7 +1018,7 @@ export const fetcher = <T>(
   options?: {
     method: METHODS;
     body?: Record<string, unknown>;
-  }
+  },
 ): Promise<T> => {
   // Returns a Promise that resolves to type T
   return fetch(url, config).then(handleError).then(toJSON);
@@ -1180,23 +1173,20 @@ interface ApiResponse<T> {
 // Usage
 type UserResponse = ApiResponse<User>;
 
-//Basic Genereic Usage : 
+//Basic Genereic Usage :
 function identity<T>(value: T): T {
   return value;
 }
-const num = identity<number>(10);       // T = number
-const str = identity<string>("Hello");  // T = string
+const num = identity<number>(10); // T = number
+const str = identity<string>("Hello"); // T = string
 
-//Generic with Array : 
+//Generic with Array :
 function getFirstElement<T>(arr: T[]): T {
   return arr[0];
 }
 
 const firstNum = getFirstElement<number>([1, 2, 3]);
 const firstName = getFirstElement<string>(["Allwin", "John", "Sam"]);
-
-
-
 ```
 
 ### 3. Utility Types
@@ -1234,7 +1224,7 @@ type UserWithoutEmail = Omit<User, "email">;
 const user: UserWithoutEmail = {
   id: 1,
   name: "Allwin",
-  //email is omitted 
+  //email is omitted
 };
 
 // ReturnType - get return type of function
@@ -1247,7 +1237,6 @@ function getUser() {
 }
 
 type GetUserReturn = ReturnType<typeof getUser>;
-
 ```
 
 ---
@@ -1345,8 +1334,6 @@ let currentStatus: Status = Status.Pending;
 if (currentStatus === Status.Approved) {
   console.log("Approved!");
 }
-
-
 ```
 
 ---
