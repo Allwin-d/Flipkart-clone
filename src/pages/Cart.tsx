@@ -9,8 +9,10 @@ import {
 import type { CartItem } from "../Types/ApiResponse";
 import {
   CART,
+  CLEAR_ALL,
   DELIVERY_CHARGES,
   DISCOUNT,
+  EMPTY_CART,
   FREE,
   PLACE_ORDER,
   PRODUCT_REMOVED,
@@ -22,6 +24,7 @@ import {
   decreaseQuantity,
 } from "../Slices/CartSlice";
 import toast from "react-hot-toast";
+import Button from "../components/Button";
 
 const Cart = () => {
   const cartData = useSelector((state: RootState) => state.cart);
@@ -72,13 +75,11 @@ const Cart = () => {
                 {cartLength} items in your Cart
               </p>
             </div>
-
-            <button
+            <Button
               className="bg-red-600 text-white px-4 py-2 rounded-lg hover:transition duration-150 hover:scale-110 hover:bg-red-900"
               onClick={() => dispatch(clearAll())}
-            >
-              Clear All
-            </button>
+              children={CLEAR_ALL}
+            />
           </div>
 
           {/* ITEMS */}
@@ -103,7 +104,7 @@ const Cart = () => {
               ))
             ) : (
               <div className="flex items-center justify-center text-5xl font-bold text-red-600 min-h-screen">
-                <h1>Please Add Some Items to Cart</h1>
+                <h1>{EMPTY_CART}</h1>
               </div>
             )}
             {}
@@ -148,9 +149,10 @@ const Cart = () => {
                 You will Save ₹ {CurrencyConverter(totalDiscount)} on this order
               </p>
             </div>
-            <button className="bg-orange-600 text-white py-2 px-4 rounded-lg hover:transition duration-150 hover:scale-105">
-              {PLACE_ORDER.toUpperCase()}
-            </button>
+            <Button
+              className="bg-orange-600 text-white py-2 px-4 rounded-lg hover:transition duration-150 hover:scale-105"
+              children={PLACE_ORDER.toUpperCase()}
+            />
           </div>
         </div>
       ) : (

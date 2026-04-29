@@ -53,3 +53,5 @@ export const REMOVE = "Remove";
 export const PLACE_ORDER = "Place Order";
 export const PRODUCT_ADDED = "Product added to cart";
 export const PRODUCT_REMOVED = "Product removed from cart";
+export const EMPTY_CART = "Please Add Some Items to Cart";
+export const CLEAR_ALL = "Clear All";

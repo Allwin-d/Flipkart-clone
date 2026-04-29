@@ -1,9 +1,14 @@
-const Button =()=>{
-    return (
-        <div>
+type ButtonProps = {
+  className: string;
+  onClick?: () => void;
+  children: React.ReactNode;
+};
 
-        </div>
-    )
-}
-
+const Button = ({ className, onClick, children }: ButtonProps) => {
+  return (
+    <button className={className} onClick={onClick}>
+      {children}
+    </button>
+  );
+};
 export default Button;

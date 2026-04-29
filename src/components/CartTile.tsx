@@ -4,6 +4,7 @@ import PriceSection from "./PriceSection";
 import { REMOVE } from "../Constants/Constants";
 import { Capitalize } from "../utils/utilityFunctions";
 import { useNavigate } from "react-router-dom";
+import Button from "./Button";
 
 type cartTileProps = {
   id: number;
@@ -60,28 +61,25 @@ const CartTile = ({
         />
 
         <div className="flex flex-row justify-center items-center space-x-10 text-xl">
-          <button
+          <Button
             className="rounded-full bg-gray-300 px-4 py-2 font-bold"
             onClick={() => onDecrease(item)}
-          >
-            -
-          </button>
+            children="-"
+          />
+
           <p className="font-bold">{item.quantity}</p>
-          <button
-            className="rounded-full bg-gray-300 px-4 py-2 font-bold"
+          <Button
+            className={`rounded-full bg-gray-300 px-4 py-2 font-bold`}
             onClick={() => onIncrease(item)}
-          >
-            +
-          </button>
+            children="+"
+          />
         </div>
       </div>
-
-      <button
-        className="bg-red-600 text-white rounded-lg p-2 hover:transition duration-150 hover:scale-110 "
+      <Button
+        className="bg-red-600 text-white rounded-lg p-2 hover:transition duration-150 hover:scale-110"
         onClick={() => onRemove(item)}
-      >
-        {REMOVE.toUpperCase()}
-      </button>
+        children={REMOVE.toUpperCase()}
+      />
     </div>
   );
 };

@@ -14,6 +14,7 @@ import {
   WRITE_COMMENT,
 } from "../Constants/Constants";
 import toast from "react-hot-toast";
+import Button from "./Button";
 
 type CommentsProps = {
   productId: string;
@@ -185,12 +186,11 @@ const Comments = ({
           value={comment.body}
         ></textarea>
         <div className="flex justify-end">
-          <button
+          <Button
             className="bg-red-600 text-white rounded-lg px-4 py-1"
             onClick={() => handlePost()}
-          >
-            {POST_COMMENT}
-          </button>
+            children={POST_COMMENT}
+          />
         </div>
 
         {/* This is for the User Comments section */}

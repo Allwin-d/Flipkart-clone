@@ -275,6 +275,25 @@
 
 ---
 
+# 📘 Project Overview
+
+## 🔘 Button Component (`Button.tsx`)
+
+- A minimal, reusable button component built with TypeScript
+- Accepts fully custom styling via `className` prop (Tailwind-friendly)
+- Renders any content inside via `children` (`React.ReactNode`)
+- Optional `onClick` handler — safe to omit when no action is needed
+
+### Props:
+
+| Prop        | Type              | Required | Description                        |
+| ----------- | ----------------- | -------- | ---------------------------------- |
+| `className` | `string`          | ✅ Yes   | Tailwind or custom CSS classes     |
+| `onClick`   | `() => void`      | ❌ No    | Click handler function             |
+| `children`  | `React.ReactNode` | ✅ Yes   | Content rendered inside the button |
+
+```
+
 ## 🧠 Key Concepts Used
 
 - React Hooks (`useState`, `useEffect`)
@@ -286,6 +305,7 @@
 - Controlled Components (Forms)
 - Conditional Rendering
 - TypeScript for type safety
+- Reusable Button Component
 
 ## 🚀 Summary
 
