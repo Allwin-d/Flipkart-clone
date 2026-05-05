@@ -1,9 +1,5 @@
-const Checkout =()=>{
-    return (
-        <div>
-
-        </div>
-    )
-}
+const Checkout = () => {
+  return <div></div>;
+};
 
 export default Checkout;

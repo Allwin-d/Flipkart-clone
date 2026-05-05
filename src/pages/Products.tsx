@@ -14,7 +14,7 @@ import {
   NO_SEARCHED_PRODUCTS_MESSAGE,
   PRICE_RANGE,
 } from "../Constants/ConstantVariables/constantsVariables";
-import { PRICE_RANGE_VALUES } from "../Constants/ConstantArrays/ConstantsArrays";
+import { PRICE_RANGE_VALUES } from "../Constants/ConstantArrays/constantsArrays";
 import { Capitalize, CurrencyConverter } from "../utils/utilityFunctions";
 import Input from "../components/Input/Input";
 import { fetchComment } from "../api/comment";

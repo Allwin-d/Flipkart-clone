@@ -1,8 +1,5 @@
-const Dialog =()=>{
-    return (
-        <div>
-        </div>
-    )
-}
+const Dialog = () => {
+  return <div></div>;
+};
 
 export default Dialog;
