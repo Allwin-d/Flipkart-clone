@@ -1,4 +1,4 @@
-import FlipkartLogo from "../images/original-logo.png";
+import FlipkartLogo from "../../images/original-logo.png";
 import Search from "../Search/Search";
 import { RiAccountCircleLine } from "react-icons/ri";
 import { IoHomeOutline } from "react-icons/io5";
