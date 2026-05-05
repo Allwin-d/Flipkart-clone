@@ -1,11 +1,5 @@
-import { UNAVAILABLE } from "../Constants/Constants";
-
-type RatingsProps = {
-  rating?: number;
-  NoOfRatings?: number;
-  stocks?: number;
-};
-
+import { UNAVAILABLE } from "../../Constants/ConstantVariables/constantsVariables";
+import type { RatingsProps } from "./ratings.types";
 const RatingAndStock = ({ rating, NoOfRatings, stocks }: RatingsProps) => {
   return (
     <div className="flex flex-row space-x-6 items-center">

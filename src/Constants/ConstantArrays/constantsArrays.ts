@@ -49,7 +49,8 @@ export const banners = [
     title: "Big Billion Days Sale",
     subtitle: "Massive deals on Electronics & more",
     cta: "SHOP NOW",
-    image: "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=1200&q=80",
+    image:
+      "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=1200&q=80",
   },
   {
     id: 2,
@@ -57,7 +58,8 @@ export const banners = [
     title: "Styles That Turn Heads",
     subtitle: "Trendy fashion up to 70% off",
     cta: "EXPLORE",
-    image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200&q=80",
+    image:
+      "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200&q=80",
   },
   {
     id: 3,
@@ -65,7 +67,8 @@ export const banners = [
     title: "Power Up Your Setup",
     subtitle: "Laptops, monitors & accessories",
     cta: "BUY NOW",
-    image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=1200&q=80",
+    image:
+      "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=1200&q=80",
   },
   {
     id: 4,
@@ -73,7 +76,8 @@ export const banners = [
     title: "Transform Your Home",
     subtitle: "Furniture & decor at best prices",
     cta: "DISCOVER",
-    image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200&q=80",
+    image:
+      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200&q=80",
   },
   {
     id: 5,
@@ -81,7 +85,8 @@ export const banners = [
     title: "Beauty & Skincare",
     subtitle: "Top brands, unbeatable prices",
     cta: "GRAB DEAL",
-    image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=1200&q=80",
+    image:
+      "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=1200&q=80",
   },
 ];
 
@@ -93,4 +98,3 @@ export const PRICE_RANGE_VALUES = [
   { min: 5000, max: 9999 },
   { min: 10000, max: Infinity },
 ];
-

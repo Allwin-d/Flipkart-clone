@@ -1,10 +1,9 @@
-import { DISCOUNT_PERCENTAGE } from "../Constants/Constants";
-import { CurrencyConverter, getOriginalPrice } from "../utils/utilityFunctions";
-
-type PriceSectionProps = {
-  FixedPrice?: number;
-  discountPercentage?: number;
-};
+import { DISCOUNT_PERCENTAGE } from "../../Constants/ConstantVariables/constantsVariables";
+import {
+  CurrencyConverter,
+  getOriginalPrice,
+} from "../../utils/utilityFunctions";
+import type { PriceSectionProps } from "./priceSection.types";
 
 const PriceSection = ({
   FixedPrice,

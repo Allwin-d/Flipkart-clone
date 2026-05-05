@@ -1,15 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import type { ApiResponseType } from "../Types/ApiResponse";
-import Categories from "../components/Categories";
+import Categories from "../components/Categories/Categories";
 import type { Category } from "../Types/ApiResponse";
-import HeroBanner from "../components/HeroBanner";
-import ProductCategory from "../components/ProductCategory";
-import { ERROR_MESSAGE, LOADING_MESSAGE } from "../Constants/Constants";
+import HeroBanner from "../components/HeroBanner/HeroBanner";
+import ProductCategory from "../components/ProductCategory/ProductCategory";
+import {
+  ERROR_MESSAGE,
+  LOADING_MESSAGE,
+} from "../Constants/ConstantVariables/constantsVariables";
 
 const Home = () => {
   const API_URL = import.meta.env.VITE_PRODUCTS_API;
-  console.log("Api url : ", API_URL);
 
   // This is the function which is gonna fetch All the products
   const fetchProducts = async () => {
@@ -17,7 +19,7 @@ const Home = () => {
       const response = await axios.get<ApiResponseType>(API_URL);
       return response.data;
     } catch (err) {
-      console.log("Failed to fetch Data : ", err);
+      console.error(err);
     }
   };
 
@@ -25,11 +27,6 @@ const Home = () => {
     queryKey: ["Products"],
     queryFn: fetchProducts,
   });
-
-  console.log("Products Data : ", data);
-  console.log("Loading State from the Home Page : ", isLoading);
-  console.log("Error state from the Home page : ", isError);
-
   // Getting the categories details
 
   const categories: Category[] = Object.values(
@@ -45,43 +42,29 @@ const Home = () => {
     }, {}), //initially the acc is just empty object ,
   );
 
-  console.log("Categories from the Home Page : ", categories);
-
   const BeautyProducts = data?.products.filter((item) => {
     return item.category === "beauty";
   });
-
-  console.log("Beauty: ", BeautyProducts);
 
   const Laptop = data?.products.filter((item) => {
     return item.category === "laptops";
   });
 
-  console.log("Laptops : ", Laptop);
-
   const mensShirts = data?.products.filter((item) => {
     return item.category === "mens-shirts";
   });
-
-  console.log("Mens-Shirts: ", mensShirts);
 
   const smartPhones = data?.products.filter((item) => {
     return item.category === "smartphones" && item.rating >= 4;
   });
 
-  console.log("Smart Phones :", smartPhones);
-
   const womensDresses = data?.products.filter((item) => {
     return item.category === "womens-dresses";
   });
 
-  console.log("Womens-Dresses : ", womensDresses);
-
   const groceries = data?.products.filter((item) => {
     return item.category === "groceries" && item.rating > 4;
   });
-
-  console.log("Groceries : ", groceries?.slice(0, 5));
 
   if (isLoading) {
     return (

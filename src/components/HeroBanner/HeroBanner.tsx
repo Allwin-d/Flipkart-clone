@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { banners } from "./ConstantsArrays";
+import { banners } from "../../Constants/ConstantArrays/ConstantsArrays";
 
 const HeroBanner = () => {
   const [activeImg, setActiveImg] = useState(0);

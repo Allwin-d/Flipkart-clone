@@ -1,4 +1,4 @@
-import { USD_TO_INR_RATE } from "../Constants/Constants";
+import { USD_TO_INR_RATE } from "../Constants/ConstantVariables/constantsVariables";
 
 // Convert ONLY for UI
 export const CurrencyConverter = (price: number): number => {

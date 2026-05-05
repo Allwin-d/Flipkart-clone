@@ -1,14 +1,14 @@
 import { useDispatch } from "react-redux";
-import { ADD_TO_CART, BUY_NOW, PRODUCT_ADDED } from "../Constants/Constants";
-import type { CartItem } from "../Types/ApiResponse";
-import { addToCart } from "../Slices/CartSlice";
-import type { AppDispatch } from "../Store/store";
+import {
+  ADD_TO_CART,
+  BUY_NOW,
+  PRODUCT_ADDED,
+} from "../../Constants/ConstantVariables/constantsVariables";
+import type { prodProps } from "./buyAndCart.types";
+import { addToCart } from "../../Slices/CartSlice";
+import type { AppDispatch } from "../../Store/store";
 import toast from "react-hot-toast";
-import Button from "./Button";
-
-type prodProps = {
-  prod: CartItem;
-};
+import Button from "../Button/Button";
 
 const BuyAndCart = ({ prod }: prodProps) => {
   const dispatch = useDispatch<AppDispatch>();

@@ -3,19 +3,19 @@ import axios from "axios";
 import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import type { CartItem } from "../Types/ApiResponse";
 import { useContext, useState } from "react";
-import BuyAndCart from "../components/BuyAndCart";
-import RatingAndStock from "../components/Ratings";
-import PriceSection from "../components/PriceSection";
-import AdditionalInformation from "../components/AdditionalInformation";
-import Comments from "../components/Comments";
+import BuyAndCart from "../components/BuyAndCart/BuyAndCart";
+import RatingAndStock from "../components/Ratings/Ratings";
+import PriceSection from "../components/PriceSection/PriceSection";
+import AdditionalInformation from "../components/AdditionalInformation/AdditionalInformation";
+import Comments from "../components/Comments/Comments";
 import { Context } from "../Context/ContextProvider";
-import ProductTile from "../components/ProductTile";
+import ProductTile from "../components/ProductTile/ProductTile";
 import {
   ERROR_MESSAGE,
   LOADING_MESSAGE,
   NOIMAGE,
   SIMILAR_PRODUCTS,
-} from "../Constants/Constants";
+} from "../Constants/ConstantVariables/constantsVariables";
 
 const ProductDetails = () => {
   const [activeImg, setActiveImg] = useState(0);
@@ -24,15 +24,16 @@ const ProductDetails = () => {
 
   const [searchParams] = useSearchParams();
   console.log("useSearchParams:", searchParams.get("category"));
+  // URL la irukkura query params-a handle pannum like /products?category=chicken&page=2 , we can get the CATEGORY AND PAGE by using get method it provides
 
   const context = useContext(Context);
-  console.log("Context Data : ", context);
 
   const location = useLocation();
   console.log("useLocation:", location);
+  //ippa user enga irukkaan (URL details) nu therinjikkanum na useLocation use pannuvom it
+  //`pathname` current route (`/home`), `search` query params (`?id=10`), `hash` `#section` part.
 
   const { id } = useParams();
-  console.log("Product ID:", id);
 
   const SingleProductApi = import.meta.env.VITE_SINGLE_PRODUCT_API;
   const fetchSingleProduct = async (): Promise<CartItem> => {
@@ -49,8 +50,6 @@ const ProductDetails = () => {
   const SimilarProducts = context?.data?.products?.filter(
     (item) => item.category === data?.category && item.id !== data?.id,
   );
-
-  console.log("Similar Products : ", SimilarProducts);
 
   if (isLoading) {
     return (
@@ -160,7 +159,7 @@ const ProductDetails = () => {
 
       {/* Comment Section */}
       <Comments
-        productId={id ? id : ""}
+        productId={id ?? ""}
         reviewsCount={setReviewsCount} //here we are passing the setter function to the child component , and in the child component we update value and pass it to parent component
         averageRating={setAverageRating} //same as previous line
       />

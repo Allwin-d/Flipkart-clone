@@ -1,27 +1,10 @@
-import type { CartItem } from "../Types/ApiResponse";
-import RatingAndStock from "./Ratings";
-import PriceSection from "./PriceSection";
-import { REMOVE } from "../Constants/Constants";
-import { Capitalize } from "../utils/utilityFunctions";
+import RatingAndStock from "../Ratings/Ratings";
+import PriceSection from "../PriceSection/PriceSection";
+import { REMOVE } from "../../Constants/ConstantVariables/constantsVariables";
+import { Capitalize } from "../../utils/utilityFunctions";
 import { useNavigate } from "react-router-dom";
-import Button from "./Button";
-
-type cartTileProps = {
-  id: number;
-  images: string;
-  title: string;
-  category: string;
-  rating: number;
-  avgRating: number;
-  stock: number;
-  price: number;
-  discountPercentage: number;
-  quantity: number;
-  item: CartItem;
-  onRemove: (item: CartItem) => void;
-  onIncrease: (item: CartItem) => void;
-  onDecrease: (item: CartItem) => void;
-};
+import Button from "../Button/Button";
+import type { cartTileProps } from "./cartTile.types";
 
 const CartTile = ({
   id,

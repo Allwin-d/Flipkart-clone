@@ -4,12 +4,12 @@ import Products from "./pages/Products";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import About from "./pages/About";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ProductDetails from "./pages/ProductDetails";
 import ContextProvider from "./Context/ContextProvider";
-import Toast from "./components/Toast";
+import Toast from "./components/Toast/Toast";
 import { Provider } from "react-redux";
 import { store } from "./Store/store";
 

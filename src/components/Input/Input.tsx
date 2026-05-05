@@ -1,11 +1,4 @@
-type InputProps = {
-  type: "text" | "radio" | "checkbox" | "email";
-  placeholder?: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  value: string | number;
-  className: string;
-  checked?: boolean;
-};
+import type { InputProps } from "./input.types";
 
 const Input = ({
   type,

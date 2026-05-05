@@ -16,15 +16,15 @@ import {
   FREE,
   PLACE_ORDER,
   PRODUCT_REMOVED,
-} from "../Constants/Constants";
-import CartTile from "../components/CartTile";
+} from "../Constants/ConstantVariables/constantsVariables";
+import CartTile from "../components/CartTile/CartTile";
 import {
   addToCart,
   removeFromCart,
   decreaseQuantity,
 } from "../Slices/CartSlice";
 import toast from "react-hot-toast";
-import Button from "../components/Button";
+import Button from "../components/Button/Button";
 import { useQuery } from "@tanstack/react-query";
 import { fetchComment } from "../api/comment";
 
@@ -68,8 +68,6 @@ const Cart = () => {
     queryKey: ["Comments"],
     queryFn: fetchComment,
   });
-
-  console.log("Whole Comment data : ", data);
 
   const getCommentRating = (id: number) => {
     const filteredComm = data?.filter(

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import type { Category } from "../Types/ApiResponse";
+import type { Category } from "../../Types/ApiResponse";
 
 const Categories = ({ category }: { category: Category[] }) => {
   const scrollRef = useRef<HTMLDivElement | null>(null);

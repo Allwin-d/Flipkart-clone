@@ -1,5 +1,5 @@
 import FlipkartLogo from "../images/original-logo.png";
-import Search from "./Search";
+import Search from "../Search/Search";
 import { RiAccountCircleLine } from "react-icons/ri";
 import { IoHomeOutline } from "react-icons/io5";
 import { IoCartOutline } from "react-icons/io5";
@@ -10,9 +10,9 @@ import {
   CART,
   MORE,
   MY_ACCOUNT,
-} from "../Constants/Constants";
+} from "../../Constants/ConstantVariables/constantsVariables";
 import { useSelector } from "react-redux";
-import type { RootState } from "../Store/store";
+import type { RootState } from "../../Store/store";
 
 const Navbar = () => {
   const navigate = useNavigate();

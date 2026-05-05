@@ -1,18 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { CurrencyConverter } from "../utils/utilityFunctions";
-import { getOriginalPrice } from "../utils/utilityFunctions";
-import { DISCOUNT_PERCENTAGE } from "../Constants/Constants";
-
-type productTileProps = {
-  id: number;
-  index: number;
-  images: string;
-  title: string;
-  brand: string;
-  price: number;
-  discountPercentage: number;
-};
-
+import { CurrencyConverter } from "../../utils/utilityFunctions";
+import { getOriginalPrice } from "../../utils/utilityFunctions";
+import { DISCOUNT_PERCENTAGE } from "../../Constants/ConstantVariables/constantsVariables";
+import type { productTileProps } from "./productTile.types";
 const ProductTile = ({
   id,
   index,
@@ -25,7 +15,6 @@ const ProductTile = ({
   const navigate = useNavigate();
 
   const handleNavigate = (id: number) => {
-    console.log("You have clicked this Id : ", id);
     navigate(`/productDetails/${id}`);
   };
 

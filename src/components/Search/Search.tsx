@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef } from "react";
 import { IoIosSearch } from "react-icons/io";
-import { useDebounce } from "../Hooks/useDebounce";
+import { useDebounce } from "../../Hooks/useDebounce";
 import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
-import Input from "./Input";
+import Input from "../Input/Input";
 
 const Search = () => {
   const [searchParams] = useSearchParams();

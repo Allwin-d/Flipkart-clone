@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import type { UserComment } from "../Types/ApiResponse";
+import type { UserComment } from "../../Types/ApiResponse";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import Input from "./Input";
+import Input from "../Input/Input";
 import axios from "axios";
 import {
   COMMENT_FAILED,
@@ -13,16 +13,11 @@ import {
   POST_COMMENT,
   RATING,
   WRITE_COMMENT,
-} from "../Constants/Constants";
+} from "../../Constants/ConstantVariables/constantsVariables";
 import toast from "react-hot-toast";
-import Button from "./Button";
-import { fetchComment } from "../api/comment";
-
-type CommentsProps = {
-  productId: string;
-  reviewsCount: (count: number) => void;
-  averageRating: (count: number) => void;
-};
+import Button from "../Button/Button";
+import { fetchComment } from "../../api/comment";
+import type { CommentsProps } from "./comments.types";
 
 const Comments = ({
   productId,
@@ -36,18 +31,12 @@ const Comments = ({
     body: "",
   });
 
-  const SINGLE_PRODUCT_COMMENT_API = import.meta.env
-    .VITE_SINGLE_PROUDCT_COMMENTS;
-  console.log("Single Product Comment Api : ", SINGLE_PRODUCT_COMMENT_API);
-
-  console.log("Comment details : ", comment);
-
   const CommentsApi = import.meta.env.VITE_COMMENTS_BASE_URL;
   const queryClient = useQueryClient();
 
   const { data, isError, isLoading } = useQuery({
     queryKey: ["Comments"],
-    queryFn: fetchComment,
+    queryFn: fetchComment, //this function is defined under api / comment.ts
   });
 
   const addComment = async (newComment: UserComment): Promise<UserComment> => {
@@ -83,7 +72,6 @@ const Comments = ({
   const FilteredComments = data?.filter(
     (item) => String(item.productId) === productId,
   );
-  console.log("Comments for this Product : ", FilteredComments);
 
   const TotalRating = FilteredComments?.reduce((acc, val) => {
     return acc + val.rating;

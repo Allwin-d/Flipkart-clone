@@ -1,4 +1,4 @@
-import { footerSections } from "./ConstantsArrays";
+import { footerSections } from "../../Constants/ConstantArrays/ConstantsArrays";
 
 const Footer = () => {
   return (

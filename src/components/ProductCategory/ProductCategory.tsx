@@ -1,20 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import type { Product } from "../Types/ApiResponse";
-
-type ProductType = {
-  data: Product[];
-  title: string;
-};
+import type { ProductType } from "./productCategory.types";
 
 const ProductCategory = ({ data, title }: ProductType) => {
   const navigate = useNavigate();
 
   const handleClick = (itemId: number) => {
-    console.log("You have clicked this Id : ", itemId);
     navigate(`productDetails/${itemId}`);
   };
 
-  console.log("Data : ", data);
   return (
     <div className="m-6">
       <div className="flex flex-col space-y-4">

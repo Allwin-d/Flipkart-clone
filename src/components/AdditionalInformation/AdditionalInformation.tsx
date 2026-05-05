@@ -7,18 +7,9 @@ import {
   SPECIFICATION,
   STOCK,
   WARRANTY_INFORMATION,
-} from "../Constants/Constants";
-import { Capitalize } from "../utils/utilityFunctions";
-
-type AdditionalInformationProps = {
-  Category: string;
-  Sku: string;
-  Stock: number;
-  MinimumOrderQuantity: number;
-  WarrantyInformation: string;
-  ShippingInformation: string;
-  ReturnPolicy: string;
-};
+} from "../../Constants/ConstantVariables/constantsVariables";
+import type { AdditionalInformationProps } from "./additionalInformation.types";
+import { Capitalize } from "../../utils/utilityFunctions";
 
 const AdditionalInformation = ({
   Category,

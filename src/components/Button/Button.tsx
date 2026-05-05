@@ -1,10 +1,4 @@
-type ButtonProps = {
-  className: string;
-  onClick?: () => void;
-  children: React.ReactNode;
-  type?: "submit" | "reset" | "button";
-  disable?: boolean;
-};
+import type { ButtonProps } from "./button.types";
 
 const Button = ({
   type,

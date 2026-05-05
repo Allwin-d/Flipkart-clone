@@ -2,7 +2,7 @@ import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import type { ApiResponseType, Product } from "../Types/ApiResponse";
 import { useQuery } from "@tanstack/react-query";
-import ProductTile from "../components/ProductTile";
+import ProductTile from "../components/ProductTile/ProductTile";
 import { useMemo, useState } from "react";
 import {
   CATEGORY,
@@ -13,10 +13,10 @@ import {
   NO_FILTERED_PRODUCTS_MESSAGE,
   NO_SEARCHED_PRODUCTS_MESSAGE,
   PRICE_RANGE,
-} from "../Constants/Constants";
-import { PRICE_RANGE_VALUES } from "../components/ConstantsArrays";
+} from "../Constants/ConstantVariables/constantsVariables";
+import { PRICE_RANGE_VALUES } from "../Constants/ConstantArrays/ConstantsArrays";
 import { Capitalize, CurrencyConverter } from "../utils/utilityFunctions";
-import Input from "../components/Input";
+import Input from "../components/Input/Input";
 import { fetchComment } from "../api/comment";
 
 const Products = () => {
@@ -108,8 +108,6 @@ const Products = () => {
         (item) => item.category === selectedCategory,
       );
     }
-
-    console.log("category filter : ", categroyfilter);
 
     return filteredProducts;
   }, [
