@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useLocation, useParams, useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+// import { useLocation, useSearchParams } from "react-router-dom";
 import type { CartItem } from "../Types/ApiResponse";
 import { useContext, useState } from "react";
 import BuyAndCart from "../components/BuyAndCart/BuyAndCart";
@@ -22,14 +23,14 @@ const ProductDetails = () => {
   const [reviewsCount, setReviewsCount] = useState(0);
   const [averageRating, setAverageRating] = useState(0);
 
-  const [searchParams] = useSearchParams();
-  console.log("useSearchParams:", searchParams.get("category"));
+  // const [searchParams] = useSearchParams();
+  // console.log("useSearchParams:", searchParams.get("category"));
   // URL la irukkura query params-a handle pannum like /products?category=chicken&page=2 , we can get the CATEGORY AND PAGE by using get method it provides
 
   const context = useContext(Context);
 
-  const location = useLocation();
-  console.log("useLocation:", location);
+  // const location = useLocation();
+  // console.log("useLocation:", location);
   //ippa user enga irukkaan (URL details) nu therinjikkanum na useLocation use pannuvom it
   //`pathname` current route (`/home`), `search` query params (`?id=10`), `hash` `#section` part.
 
