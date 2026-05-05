@@ -68,7 +68,7 @@ export type UserComment = {
   rating: number;
   date?: string;
   productId?: number;
-  id?: string;
+  id?: string | number;
   helpful?: number;
 };
 

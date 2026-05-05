@@ -25,6 +25,8 @@ import {
 } from "../Slices/CartSlice";
 import toast from "react-hot-toast";
 import Button from "../components/Button";
+import { useQuery } from "@tanstack/react-query";
+import { fetchComment } from "../api/comment";
 
 const Cart = () => {
   const cartData = useSelector((state: RootState) => state.cart);
@@ -62,6 +64,33 @@ const Cart = () => {
     dispatch(addToCart(item));
   };
 
+  const { data } = useQuery({
+    queryKey: ["Comments"],
+    queryFn: fetchComment,
+  });
+
+  console.log("Whole Comment data : ", data);
+
+  const getCommentRating = (id: number) => {
+    const filteredComm = data?.filter(
+      (item) => Number(item.productId) === Number(id),
+    );
+    return filteredComm?.length;
+  };
+
+  const getAverageRating = (id: number) => {
+    const filter = data?.filter(
+      (item) => Number(item.productId) === Number(id),
+    );
+    if (!filter || filter?.length === 0) return 0;
+    else {
+      const TotalRatings = filter.reduce((acc, curr) => {
+        return acc + Number(curr.rating);
+      }, 0);
+      return TotalRatings / filter.length;
+    }
+  };
+
   return (
     <div className="min-h-screen w-full flex">
       {/* LEFT SECTION */}
@@ -91,7 +120,8 @@ const Cart = () => {
                   images={item.images[0]}
                   title={item.title}
                   category={item.category}
-                  rating={item.rating}
+                  rating={getCommentRating(item.id) ?? 0}
+                  avgRating={getAverageRating(item.id) ?? 0}
                   stock={item.stock}
                   price={item.price}
                   discountPercentage={item.discountPercentage}

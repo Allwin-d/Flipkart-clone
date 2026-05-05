@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { UserComment, UserComments } from "../Types/ApiResponse";
+import type { UserComment } from "../Types/ApiResponse";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Input from "./Input";
 import axios from "axios";
@@ -16,6 +16,7 @@ import {
 } from "../Constants/Constants";
 import toast from "react-hot-toast";
 import Button from "./Button";
+import { fetchComment } from "../api/comment";
 
 type CommentsProps = {
   productId: string;
@@ -44,15 +45,9 @@ const Comments = ({
   const CommentsApi = import.meta.env.VITE_COMMENTS_BASE_URL;
   const queryClient = useQueryClient();
 
-  const fetchComments = async (): Promise<UserComments> => {
-    const res = await axios.get(CommentsApi);
-    console.log("All Comments from All the Product : ", res.data);
-    return res.data;
-  };
-
   const { data, isError, isLoading } = useQuery({
     queryKey: ["Comments"],
-    queryFn: fetchComments,
+    queryFn: fetchComment,
   });
 
   const addComment = async (newComment: UserComment): Promise<UserComment> => {

@@ -13,7 +13,9 @@ const RatingAndStock = ({ rating, NoOfRatings, stocks }: RatingsProps) => {
         ⭐ {rating}
       </p>
       <p className="text-gray-400 cursor-pointer font-bold">
-        {NoOfRatings} Ratings
+        {(NoOfRatings ?? 0) <= 1
+          ? `${NoOfRatings} Rating`
+          : `${NoOfRatings} Ratings`}
       </p>
       <p
         className={

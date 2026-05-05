@@ -1,10 +1,6 @@
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
-import type {
-  ApiResponseType,
-  Product,
-  UserComments,
-} from "../Types/ApiResponse";
+import type { ApiResponseType, Product } from "../Types/ApiResponse";
 import { useQuery } from "@tanstack/react-query";
 import ProductTile from "../components/ProductTile";
 import { useMemo, useState } from "react";
@@ -21,6 +17,7 @@ import {
 import { PRICE_RANGE_VALUES } from "../components/ConstantsArrays";
 import { Capitalize, CurrencyConverter } from "../utils/utilityFunctions";
 import Input from "../components/Input";
+import { fetchComment } from "../api/comment";
 
 const Products = () => {
   const [ratingNumber, setRatingNumber] = useState<null | number>(null);
@@ -31,7 +28,6 @@ const Products = () => {
   const [searchValue] = useSearchParams();
   const productValue = searchValue.get("search");
 
-  const COMMENTS_API = import.meta.env.VITE_COMMENTS_BASE_URL;
   const PRODUCT_API = import.meta.env.VITE_SEARCH_PRODUCT;
 
   const fetchProducts = async (): Promise<ApiResponseType | undefined> => {
@@ -45,11 +41,6 @@ const Products = () => {
     }
   };
 
-  const fetchCommentsRating = async (): Promise<UserComments | null> => {
-    const res = await axios.get(COMMENTS_API);
-    return res.data;
-  };
-
   const { data, isLoading, isError } = useQuery({
     queryKey: ["SearchProducts", productValue],
     queryFn: fetchProducts,
@@ -58,7 +49,7 @@ const Products = () => {
 
   const { data: CommentsRating } = useQuery({
     queryKey: ["CommentsRating"],
-    queryFn: fetchCommentsRating,
+    queryFn: fetchComment,
   });
 
   const categoryCountMap = useMemo(() => {

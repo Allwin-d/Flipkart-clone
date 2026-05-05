@@ -12,6 +12,7 @@ type cartTileProps = {
   title: string;
   category: string;
   rating: number;
+  avgRating: number;
   stock: number;
   price: number;
   discountPercentage: number;
@@ -28,6 +29,7 @@ const CartTile = ({
   title,
   category,
   rating,
+  avgRating,
   stock,
   price,
   discountPercentage,
@@ -53,7 +55,11 @@ const CartTile = ({
         </p>
         <p className="font-medium text-gray-700">{Capitalize(title)}</p>
 
-        <RatingAndStock rating={rating} NoOfRatings={rating} stocks={stock} />
+        <RatingAndStock
+          rating={avgRating}
+          NoOfRatings={rating}
+          stocks={stock}
+        />
 
         <PriceSection
           FixedPrice={price}
