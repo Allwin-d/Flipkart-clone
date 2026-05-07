@@ -38,7 +38,7 @@ const CartTile = ({
       <img
         src={images}
         alt={title}
-        className="w-[200px] h-[200px] object-contain cursor-pointer"
+        className="w-[200px] h-[200px] object-contain cursor-pointer transition duration-200 hover:scale-125"
         onClick={() => navigate(`/productDetails/${id}`)}
       />
 
