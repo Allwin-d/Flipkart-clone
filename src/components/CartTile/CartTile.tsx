@@ -61,14 +61,14 @@ const CartTile = ({
 
         <div className="flex flex-row justify-center items-center space-x-10 text-xl">
           <Button
-            className="rounded-full bg-gray-300 px-4 py-2 font-bold"
+            className="rounded-md bg-gray-200 px-2 py-1 font-bold"
             onClick={() => onDecrease(item)}
             children="-"
           />
-
+          
           <p className="font-bold">{item.quantity}</p>
           <Button
-            className={`rounded-full bg-gray-300 px-4 py-2 font-bold`}
+            className={`rounded-md bg-gray-200 px-2 py-1 font-bold`}
             onClick={() => onIncrease(item)}
             children="+"
           />

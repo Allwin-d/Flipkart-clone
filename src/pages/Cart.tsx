@@ -98,7 +98,9 @@ const Cart = () => {
             <div className="flex flex-col space-y-4">
               <h1 className="text-4xl font-bold">My {CART}</h1>
               <p className="font-medium text-gray-600 text-2xl">
-                {cartLength} items in your Cart
+                {cartLength <= 1
+                  ? `${cartLength} item in your Cart`
+                  : `${cartLength} items in your Cart`}
               </p>
             </div>
             <Button
