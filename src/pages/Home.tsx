@@ -42,13 +42,6 @@ const Home = () => {
     }, {}), //initially the acc is just empty object ,
   );
 
-  //out of stock product
-
-  const outofstock = data?.products.find(
-    (item) => item.availabilityStatus === "Out of Stock",
-  );
-  console.log("Out of stock product : ", outofstock);
-
   const BeautyProducts = data?.products.filter((item) => {
     return item.category === "beauty";
   });
