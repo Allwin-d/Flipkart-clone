@@ -14,7 +14,7 @@ export type Product = {
   dimensions: Dimensions;
   warrantyInformation: string;
   shippingInformation: string;
-  availabilityStatus: string;
+  availabilityStatus: "In Stock" | "Out of Stock" | "Low Stock";
   reviews: Review[];
   returnPolicy: string;
   minimumOrderQuantity: number;

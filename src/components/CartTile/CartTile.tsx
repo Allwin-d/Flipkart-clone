@@ -1,7 +1,14 @@
 import RatingAndStock from "../Ratings/Ratings";
 import PriceSection from "../PriceSection/PriceSection";
-import { REMOVE } from "../../Constants/ConstantVariables/constantsVariables";
-import { Capitalize } from "../../utils/utilityFunctions";
+import {
+  REMOVE,
+  SAVE,
+} from "../../Constants/ConstantVariables/constantsVariables";
+import {
+  Capitalize,
+  CurrencyConverter,
+  getOriginalPrice,
+} from "../../utils/utilityFunctions";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 import type { cartTileProps } from "./cartTile.types";
@@ -22,6 +29,9 @@ const CartTile = ({
   onDecrease,
 }: cartTileProps) => {
   const navigate = useNavigate();
+
+  const originalPrice = getOriginalPrice(price, discountPercentage);
+  const savedAmount = (originalPrice - price) * item.quantity;
 
   return (
     <div key={id} className="flex items-center justify-around border-b pb-5 ">
@@ -64,11 +74,20 @@ const CartTile = ({
           />
         </div>
       </div>
-      <Button
-        className="bg-red-600 text-white rounded-lg p-2 hover:transition duration-150 hover:scale-110"
-        onClick={() => onRemove(item)}
-        children={REMOVE.toUpperCase()}
-      />
+      <div className="flex flex-col space-y-4 w-50">
+        <h1 className="font-medium text-xl text-gray-500">Item Total</h1>
+        <p className="font-bold text-2xl ">
+          ₹{item.quantity * CurrencyConverter(price)}
+        </p>
+        <p className="font-bold text-green-700">
+          {Capitalize(SAVE)} ₹{CurrencyConverter(savedAmount)}
+        </p>
+        <Button
+          className="bg-red-600 text-white rounded-lg py-2 px-4 hover:transition duration-150 hover:scale-110"
+          onClick={() => onRemove(item)}
+          children={REMOVE.toUpperCase()}
+        />
+      </div>
     </div>
   );
 };

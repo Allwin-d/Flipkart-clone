@@ -101,7 +101,9 @@ const ProductDetails = () => {
                 src={data?.images?.[activeImg]}
                 className="w-[700px] h-[700px] bg-gray-100"
               />
-              {data && <BuyAndCart prod={data} />}
+              {data && (
+                <BuyAndCart prod={data} available={data.availabilityStatus} />
+              )}
             </div>
           </div>
 
@@ -146,6 +148,7 @@ const ProductDetails = () => {
         <div className="flex flex-row overflow-x-auto justify-around items-center scrollbar-hide ">
           {SimilarProducts?.map((item, index) => (
             <ProductTile
+              key={item.id}
               id={item.id}
               index={index}
               images={item.images[0]}

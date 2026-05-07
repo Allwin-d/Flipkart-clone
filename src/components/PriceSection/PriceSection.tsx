@@ -22,7 +22,7 @@ const PriceSection = ({
         )}
       </p>
       <p className="text-green-700 text-xl">
-        {discountPercentage} {DISCOUNT_PERCENTAGE}
+        {Math.floor(discountPercentage ?? 0)} {DISCOUNT_PERCENTAGE}
       </p>
     </div>
   );

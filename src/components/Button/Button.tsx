@@ -5,14 +5,14 @@ const Button = ({
   className,
   onClick,
   children,
-  disable,
+  disabled,
 }: ButtonProps) => {
   return (
     <button
       className={className}
       onClick={onClick}
       type={type}
-      disabled={disable}
+      disabled={disabled}
     >
       {children}
     </button>

@@ -3,5 +3,5 @@ export type ButtonProps = {
   onClick?: () => void;
   children: React.ReactNode;
   type?: "submit" | "reset" | "button";
-  disable?: boolean;
+  disabled?: boolean;
 };

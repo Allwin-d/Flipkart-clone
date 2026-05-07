@@ -38,18 +38,17 @@ const Cart = () => {
   }, 0);
 
   // Total Discounted Price
-  const totalPrice = cartData.reduce((acc, item) => {
+  const totalDiscountedPriceUSD = cartData.reduce((acc, item) => {
     return acc + item.price * item.quantity;
   }, 0);
 
-  // Total Original Price
-  const totalOriginalPrice = cartData.reduce((acc, item) => {
-    const original = getOriginalPrice(item.price, item.discountPercentage);
-    return acc + original * item.quantity;
+  const totalOriginalPriceUSD = cartData.reduce((acc, item) => {
+    const originalPrice = getOriginalPrice(item.price, item.discountPercentage);
+
+    return acc + originalPrice * item.quantity;
   }, 0);
 
-  // Total Discount
-  const totalDiscount = totalOriginalPrice - totalPrice;
+  const totalDiscountUSD = totalOriginalPriceUSD - totalDiscountedPriceUSD;
 
   const handleRemove = (item: CartItem) => {
     dispatch(removeFromCart(item));
@@ -151,14 +150,14 @@ const Cart = () => {
             <div className="flex justify-between">
               <p>Price ({cartLength} items)</p>
               <p className="font-bold">
-                ₹ {CurrencyConverter(totalOriginalPrice)}
+                ₹ {CurrencyConverter(totalOriginalPriceUSD)}
               </p>
             </div>
 
             <div className="flex justify-between text-green-600 border-t pt-2">
               <p className="text-green-700">{DISCOUNT}</p>
               <p className="font-bold">
-                - ₹ {CurrencyConverter(totalDiscount)}
+                - ₹ {CurrencyConverter(totalDiscountUSD)}
               </p>
             </div>
 
@@ -169,12 +168,13 @@ const Cart = () => {
 
             <div className="flex justify-between font-bold border-t pt-2">
               <p>Total Amount</p>
-              <p>₹ {CurrencyConverter(totalPrice)}</p>
+              <p>₹ {CurrencyConverter(totalDiscountedPriceUSD)}</p>
             </div>
 
             <div className="cursor-pointer">
               <p className="font-bold text-2xl bg-green-200 text-green-600 py-2 px-4 rounded-lg ">
-                You will Save ₹ {CurrencyConverter(totalDiscount)} on this order
+                You will Save ₹ {CurrencyConverter(totalDiscountUSD)} on this
+                order
               </p>
             </div>
             <Button
