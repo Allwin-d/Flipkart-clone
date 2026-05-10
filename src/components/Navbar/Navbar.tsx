@@ -11,16 +11,11 @@ import {
   MORE,
   MY_ACCOUNT,
 } from "../../Constants/ConstantVariables/constantsVariables";
-import { useSelector } from "react-redux";
-import type { RootState } from "../../Store/store";
+import useCartCount from "../../Hooks/useCartCount";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const cartData = useSelector((state: RootState) => state.cart);
-
-  const cartLength = cartData.reduce((acc, curr) => {
-    return acc + curr.quantity;
-  }, 0);
+  const cartLength = useCartCount();
 
   return (
     <div className="w-full h-24 bg-blue-600 sticky top-0 z-50 flex flex-row">

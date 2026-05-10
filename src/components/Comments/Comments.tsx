@@ -157,8 +157,10 @@ const Comments = ({
                 setComment({ ...comment, rating: Number(e.target.value) })
               }
             >
-              {[1, 2, 3, 4, 5].map((val) => (
-                <option value={val}>{val}</option>
+              {[1, 2, 3, 4, 5].map((val, id) => (
+                <option key={id} value={val}>
+                  {val}
+                </option>
               ))}
             </select>
           </div>
@@ -180,8 +182,8 @@ const Comments = ({
         {/* This is for the User Comments section */}
         {FilteredComments?.length ? (
           <div className="flex flex-col space-y-14">
-            {FilteredComments.map((item) => (
-              <div key={item.id} className="flex flex-col space-y-2">
+            {FilteredComments.map((item, key) => (
+              <div key={key} className="flex flex-col space-y-2">
                 <div className="flex items-center w-1/2 justify-start space-x-8">
                   <p className="rounded-full bg-gray-400 text-white px-4 py-2 ">
                     {item.UserName.split(" ").map((item) =>
