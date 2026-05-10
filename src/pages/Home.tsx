@@ -13,7 +13,7 @@ import {
 const Home = () => {
   const API_URL = import.meta.env.VITE_PRODUCTS_API;
 
-  // This is the function which is gonna fetch All the products
+  //This is the function which is gonna fetch All the products
   const fetchProducts = async () => {
     try {
       const response = await axios.get<ApiResponseType>(API_URL);
@@ -27,8 +27,9 @@ const Home = () => {
     queryKey: ["Products"],
     queryFn: fetchProducts,
   });
-  // Getting the categories details
 
+
+  // Getting the categories details
   const categories: Category[] = Object.values(
     //the Object.Values is convert the object into an array
     (data?.products ?? []).reduce<Record<string, Category>>((acc, product) => {
@@ -84,8 +85,8 @@ const Home = () => {
 
   return (
     <div className="min-h-screen mx-12">
-      {/* This is for the Categories Section  
-      in the Categroy section we send data as a prop 
+      {/* This is for the Categories Section
+      in the Categroy section we send data as a prop
       */}
       <Categories category={categories} />
       <HeroBanner />
