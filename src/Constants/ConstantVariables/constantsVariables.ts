@@ -41,6 +41,7 @@ export const BECOME_A_SELLER = "Become a Seller";
 export const CART = "Cart";
 export const DISCOUNT_PERCENTAGE = "% off";
 export const DISCOUNT = "Discount";
+export const LOCAL_STORAGE_KEY = "localStorageProducts";
 
 export const AVAILABLE_STOCK = "✔️ InStock (only ${stocks} Available)";
 export const UNAVAILABLE = "❌ UnAvailable";

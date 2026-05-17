@@ -1,4 +1,7 @@
-import { USD_TO_INR_RATE } from "../Constants/ConstantVariables/constantsVariables";
+import {
+  LOCAL_STORAGE_KEY,
+  USD_TO_INR_RATE,
+} from "../Constants/ConstantVariables/constantsVariables";
 import type { useLocalStoragetypes } from "./utilityFunction.types";
 
 // Convert ONLY for UI
@@ -22,16 +25,14 @@ export const UpperCase = (value: string) => {
   return value.trim().toUpperCase();
 };
 
-//Related to LocalStorage 
-const key = "localStorageProducts";
-
+//Related to LocalStorage
 const handleLocalStorage = ({ value, method }: useLocalStoragetypes) => {
   if (method === "GET") {
-    return localStorage.getItem(key);
+    return localStorage.getItem(LOCAL_STORAGE_KEY);
   } else if (method === "SET") {
-    return localStorage.setItem("localStorageProducts", JSON.stringify(value));
+    return localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(value));
   } else {
-    return localStorage.removeItem("localStorageProducts");
+    return localStorage.removeItem(LOCAL_STORAGE_KEY);
   }
 };
 
