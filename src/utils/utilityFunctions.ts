@@ -1,4 +1,5 @@
 import { USD_TO_INR_RATE } from "../Constants/ConstantVariables/constantsVariables";
+import type { useLocalStoragetypes } from "./utilityFunction.types";
 
 // Convert ONLY for UI
 export const CurrencyConverter = (price: number): number => {
@@ -20,3 +21,18 @@ export const Capitalize = (value: string) => {
 export const UpperCase = (value: string) => {
   return value.trim().toUpperCase();
 };
+
+//Related to LocalStorage 
+const key = "localStorageProducts";
+
+const handleLocalStorage = ({ value, method }: useLocalStoragetypes) => {
+  if (method === "GET") {
+    return localStorage.getItem(key);
+  } else if (method === "SET") {
+    return localStorage.setItem("localStorageProducts", JSON.stringify(value));
+  } else {
+    return localStorage.removeItem("localStorageProducts");
+  }
+};
+
+export default handleLocalStorage;

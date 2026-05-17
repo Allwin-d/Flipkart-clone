@@ -1,40 +1,68 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { CartItem } from "../Types/ApiResponse";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import handleLocalStorage from "../utils/utilityFunctions";
 
-const initialState: CartItem[] = [];
+const getLocalStorageProducts = (): CartItem[] => {
+  const data = localStorage.getItem("localStorageProducts");
+  return data ? JSON.parse(data) : [];
+};
 
+const initialState: CartItem[] = getLocalStorageProducts();
 const cartSlice = createSlice({
   name: "cartSlice",
   initialState: initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<CartItem>) => {
       const prod = state.find((item) => item.id === action.payload.id);
+
       if (prod) {
         prod.quantity += 1;
       } else {
         state.push({
-          ...action.payload, //here im just spreading out the other fields which is in the ACTION PAYLOAD
-          quantity: action.payload.quantity ?? 1, //this is a null coalescing operator , if the left hand side is null or undefined it goes up with the right hand side value
+          ...action.payload,
+          quantity: action.payload.quantity ?? 1,
         });
       }
+
+      //handleLocalStorage is a utility function
+      handleLocalStorage({
+        value: state,
+        method: "SET",
+      });
     },
+
     decreaseQuantity: (state, action: PayloadAction<CartItem>) => {
       const exist = state.find((item) => item.id === action.payload.id);
+
       if (!exist) return;
-      if (exist) {
-        if (exist.quantity > 1) {
-          exist.quantity -= 1;
-        } else {
-          return state.filter((item) => item.id !== action.payload.id);
-        }
+
+      let updatedCart = state;
+
+      if (exist.quantity > 1) {
+        exist.quantity -= 1;
+      } else {
+        updatedCart = state.filter((item) => item.id !== action.payload.id);
       }
+      handleLocalStorage({
+        value: updatedCart,
+        method: "SET",
+      });
+      return updatedCart;
     },
 
     removeFromCart: (state, action: PayloadAction<CartItem>) => {
-      return state.filter((item) => item.id !== action.payload.id);
+      const updatedCart = state.filter((item) => item.id !== action.payload.id);
+      handleLocalStorage({
+        value: updatedCart,
+        method: "SET",
+      });
+      return updatedCart;
     },
     clearAll: () => {
+      handleLocalStorage({
+        method: "REMOVE",
+      });
       return [];
     },
   },
