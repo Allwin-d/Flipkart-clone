@@ -27,11 +27,17 @@ import toast from "react-hot-toast";
 import Button from "../components/Button/Button";
 import { useQuery } from "@tanstack/react-query";
 import { fetchComment } from "../api/comment";
+import { useState } from "react";
+import OrderSuccessModal from "../components/OrderSuccessModal/OrderSuccessModal";
 
 const Cart = () => {
   const cartData = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
+  const [isOrderPlaced, setIsOrderPlaced] = useState(false);
 
+  const handlePlaceOrder = () => {
+    setIsOrderPlaced(true);
+  };
   // Total Items Count (with quantity)
   const cartLength = cartData.reduce((acc, item) => {
     return acc + item.quantity;
@@ -182,12 +188,17 @@ const Cart = () => {
             <Button
               className="bg-orange-600 text-white py-2 px-4 rounded-lg hover:transition duration-150 hover:scale-105"
               children={PLACE_ORDER.toUpperCase()}
+              onClick={handlePlaceOrder}
             />
           </div>
         </div>
       ) : (
         <div></div>
       )}
+      <OrderSuccessModal
+        isOpen={isOrderPlaced}
+        onClose={() => setIsOrderPlaced(false)}
+      />
     </div>
   );
 };
