@@ -119,8 +119,9 @@ const Cart = () => {
           {/* ITEMS */}
           <div className="flex flex-col space-y-5 mt-5">
             {cartData.length >= 1 ? (
-              cartData.map((item) => (
+              cartData.map((item,key) => (
                 <CartTile
+                  key={key}
                   id={item.id}
                   images={item.images[0]}
                   title={item.title}

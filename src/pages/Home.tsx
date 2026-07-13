@@ -28,7 +28,6 @@ const Home = () => {
     queryFn: fetchProducts,
   });
 
-
   // Getting the categories details
   const categories: Category[] = Object.values(
     //the Object.Values is convert the object into an array
