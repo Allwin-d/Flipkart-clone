@@ -9,7 +9,7 @@ export const CurrencyConverter = (price: number): number => {
   return Math.floor(price * USD_TO_INR_RATE);
 };
 
-// Correct way to get original price from discounted price
+// Cget original price from discounted price
 export const getOriginalPrice = (
   price: number,
   discountPercentage: number,
