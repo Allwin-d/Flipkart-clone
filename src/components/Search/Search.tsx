@@ -39,12 +39,12 @@ const Search = () => {
   }, [searchParams, location.pathname]);
 
   return (
-    <div className="w-3/4 p-4 relative">
-      <IoIosSearch className="absolute left-7 top-1/2 -translate-y-1/2 text-gray-500" />
+    <div className="relative w-full md:w-3/4 md:p-4">
+      <IoIosSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 md:left-7" />
       <Input
         type="text"
         placeholder="Search Products..."
-        className="w-full p-4 pl-12 mt-1 border rounded focus:outline-none"
+        className="mt-1 w-full rounded border p-2 pl-9 text-sm focus:outline-none sm:p-3 sm:pl-10 md:p-4 md:pl-12 md:text-base"
         value={value}
         onChange={handleChange}
       />

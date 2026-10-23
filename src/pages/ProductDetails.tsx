@@ -69,26 +69,27 @@ const ProductDetails = () => {
   }
 
   return (
-    <div className="flex flex-col min-h-screen my-4 w-full px-6">
-      <div className="my-4 flex w-full px-6">
+    <div className="my-4 flex min-h-screen w-full flex-col px-3 sm:px-6">
+    <div className="my-4 flex w-full">
         {/* 🔹 Main Flex Container */}
-        <div className="flex justify-start items-start w-full">
+      <div className="flex w-full flex-col items-start gap-8 lg:flex-row">
           {/* 🔹 Left Section (Thumbnails + Image) */}
-          <div className="flex flex-row gap-6">
+        <div className="flex w-full flex-col-reverse gap-3 sm:flex-row sm:gap-4 lg:w-1/2">
             {/* Thumbnails */}
-            <div className="flex flex-col">
+          <div className="flex max-w-full flex-row gap-2 overflow-x-auto sm:max-h-[min(70vw,700px)] sm:flex-col sm:overflow-y-auto sm:overflow-x-hidden">
               {data?.images?.length ? (
                 data.images.map((item, index) => (
                   <img
                     key={index}
                     src={item}
-                    onClick={() => setActiveImg(index)}
-                    className={
-                      activeImg === index
-                        ? "w-[200px] h-[200px] cursor-pointer border-4 border-blue-500 rounded-lg bg-gray-100"
-                        : "w-[200px] h-[200px] cursor-pointer border-2"
-                    }
-                  />
+                  alt={`${data.title} image ${index + 1}`}
+                  onClick={() => setActiveImg(index)}
+                  className={
+                    activeImg === index
+                      ? "h-16 w-16 shrink-0 cursor-pointer rounded-lg border-4 border-blue-500 bg-gray-100 object-contain sm:h-20 sm:w-20 lg:h-24 lg:w-24"
+                      : "h-16 w-16 shrink-0 cursor-pointer border-2 object-contain sm:h-20 sm:w-20 lg:h-24 lg:w-24"
+                  }
+                />
                 ))
               ) : (
                 <p>{NOIMAGE}</p>
@@ -96,10 +97,11 @@ const ProductDetails = () => {
             </div>
 
             {/* Main Image + Buttons */}
-            <div className="flex flex-col">
+            <div className="flex min-w-0 flex-1 flex-col">
               <img
                 src={data?.images?.[activeImg]}
-                className="w-[700px] h-[700px] bg-gray-100"
+                alt={data?.title}
+                className="h-[min(100vw,480px)] w-full rounded-lg bg-gray-100 object-contain sm:h-[min(70vw,600px)] lg:h-[min(50vw,700px)]"
               />
               {data && (
                 <BuyAndCart prod={data} available={data.availabilityStatus} />
@@ -108,14 +110,14 @@ const ProductDetails = () => {
           </div>
 
           {/* 🔹 Right Section (Product Details) */}
-          <div className="flex flex-col space-y-8 ml-20">
+          <div className="flex w-full min-w-0 flex-col space-y-5 sm:space-y-7 lg:w-1/2 lg:space-y-8 lg:pl-8">
             <p className="font-bold text-gray-500 text-xl">
               {data?.category?.toUpperCase()}
             </p>
             <p className="text-blue-600 font-bold text-2xl">
               {data?.brand?.toUpperCase()}
             </p>
-            <p className="text-black font-bold text-xl w-3/4 leading-8">
+            <p className="w-full text-base font-bold leading-7 text-black sm:text-xl sm:leading-8">
               {data?.description}
             </p>
             <RatingAndStock
@@ -143,9 +145,9 @@ const ProductDetails = () => {
       </div>
 
       {/*Similar Products section*/}
-      <div className="flex flex-col m-8 w-full">
-        <h1 className="text-2xl font-bold">{SIMILAR_PRODUCTS}</h1>
-        <div className="flex flex-row overflow-x-auto justify-around items-center scrollbar-hide ">
+      <div className="my-8 w-full">
+        <h1 className="text-xl font-bold sm:text-2xl">{SIMILAR_PRODUCTS}</h1>
+        <div className="flex items-center overflow-x-auto scrollbar-hide">
           {SimilarProducts?.map((item, index) => (
             <ProductTile
               key={item.id}

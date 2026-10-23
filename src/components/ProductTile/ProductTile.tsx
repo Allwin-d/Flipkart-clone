@@ -21,23 +21,23 @@ const ProductTile = ({
   return (
     <div
       key={index}
-      className="flex flex-col items-center justify-center space-y-2 m-8 hover:shadow-lg transition duration-150 hover:cursor-pointer p-2 hover:scale-105"
+      className="m-1 flex min-w-0 flex-col items-center justify-start space-y-2 rounded-lg p-2 text-center transition duration-150 hover:cursor-pointer hover:shadow-lg sm:m-2 sm:p-3 lg:m-4"
       onClick={() => handleNavigate(id)}
     >
       <img
         src={images}
         alt={title}
-        className="w-60 h-60 bg-gray-100 rounded-lg"
+        className="h-32 w-full rounded-lg bg-gray-100 object-contain sm:h-44 lg:h-56"
       />
-      <h1 className="font-bold text-xl text-gray-500">{brand}</h1>
-      <p className="font-medium text-gray-700">{title}</p>
-      <div className="flex flex-row space-x-4" key={index}>
-        <p className="text-xl font-bold ">₹{CurrencyConverter(price)}</p>
-        <p className="line-through text-gray-500 font-medium">
+      <h1 className="text-sm font-bold text-gray-500 sm:text-base">{brand}</h1>
+      <p className="line-clamp-2 text-sm font-medium text-gray-700 sm:text-base">{title}</p>
+      <div className="flex flex-wrap justify-center gap-x-2" key={index}>
+        <p className="text-base font-bold sm:text-xl">₹{CurrencyConverter(price)}</p>
+        <p className="text-sm font-medium text-gray-500 line-through sm:text-base">
           ₹{getOriginalPrice(CurrencyConverter(price), discountPercentage)}
         </p>
       </div>
-      <p className="text-green-600 font-medium text-xl">
+      <p className="text-base font-medium text-green-600 sm:text-lg">
         {discountPercentage} {DISCOUNT_PERCENTAGE}
       </p>
     </div>

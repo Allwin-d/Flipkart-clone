@@ -95,22 +95,22 @@ const Cart = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex">
+    <div className="flex min-h-screen w-full flex-col lg:flex-row">
       {/* LEFT SECTION */}
-      <div className="w-3/4 p-10">
+      <div className="w-full p-4 sm:p-8 lg:w-3/4 lg:p-10">
         <div className="flex flex-col">
           {/* HEADER */}
-          <div className="flex justify-between items-center">
+          <div className="flex items-center justify-between gap-3">
             <div className="flex flex-col space-y-4">
-              <h1 className="text-4xl font-bold">My {CART}</h1>
-              <p className="font-medium text-gray-600 text-2xl">
+              <h1 className="text-3xl font-bold sm:text-4xl">My {CART}</h1>
+              <p className="text-lg font-medium text-gray-600 sm:text-2xl">
                 {cartLength <= 1
                   ? `${cartLength} item in your Cart`
                   : `${cartLength} items in your Cart`}
               </p>
             </div>
             <Button
-              className="bg-red-600 text-white px-4 py-2 rounded-lg hover:transition duration-150 hover:scale-110 hover:bg-red-900"
+              className="shrink-0 rounded-lg bg-red-600 px-3 py-2 text-sm text-white transition duration-150 hover:scale-105 hover:bg-red-900 sm:px-4 sm:text-base"
               onClick={() => dispatch(clearAll())}
               children={CLEAR_ALL}
             />
@@ -119,9 +119,9 @@ const Cart = () => {
           {/* ITEMS */}
           <div className="flex flex-col space-y-5 mt-5">
             {cartData.length >= 1 ? (
-              cartData.map((item,key) => (
+              cartData.map((item) => (
                 <CartTile
-                  key={key}
+                  key={item.id}
                   id={item.id}
                   images={item.images[0]}
                   title={item.title}
@@ -139,7 +139,7 @@ const Cart = () => {
                 />
               ))
             ) : (
-              <div className="flex items-center justify-center text-5xl font-bold text-red-600 min-h-screen">
+              <div className="flex min-h-[50vh] items-center justify-center text-center text-3xl font-bold text-red-600 sm:text-5xl">
                 <h1>{EMPTY_CART}</h1>
               </div>
             )}
@@ -150,8 +150,8 @@ const Cart = () => {
 
       {/* RIGHT SECTION */}
       {cartData.length > 0 ? (
-        <div className="w-1/4 p-5 flex justify-center">
-          <div className="flex flex-col space-y-8 text-3xl ">
+        <div className="w-full p-4 sm:p-8 lg:w-1/4 lg:p-5">
+          <div className="flex flex-col space-y-5 rounded-lg border p-4 text-lg sm:space-y-8 sm:p-6 sm:text-2xl lg:text-xl xl:text-2xl">
             <h1 className="font-bold text-gray-500">
               {UpperCase("Price Details")}
             </h1>
@@ -181,7 +181,7 @@ const Cart = () => {
             </div>
 
             <div className="cursor-pointer">
-              <p className="font-bold text-2xl bg-green-200 text-green-600 py-2 px-4 rounded-lg ">
+              <p className="rounded-lg bg-green-200 px-4 py-2 text-base font-bold text-green-600 sm:text-xl">
                 You will Save ₹ {CurrencyConverter(totalDiscountUSD)} on this
                 order
               </p>

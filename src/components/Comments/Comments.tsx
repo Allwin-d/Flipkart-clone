@@ -94,7 +94,7 @@ const Comments = ({
 
   if (isLoading) {
     return (
-      <div className="flex w-2/4 items-center justify-center m-8  space-y-4">
+      <div className="m-4 flex w-full items-center justify-center space-y-4 sm:m-8 sm:w-3/4">
         <p className="text-xl font-bold ">{LOADING_COMMENTS}</p>
       </div>
     );
@@ -102,7 +102,7 @@ const Comments = ({
 
   if (isError) {
     return (
-      <div className="flex items-center justify-center w-2/4 m-8  space-y-4">
+      <div className="m-4 flex w-full items-center justify-center space-y-4 sm:m-8 sm:w-3/4">
         <p className="text-xl font-bold text-red-600">
           {FAILED_LOADING_COMMENTS}
         </p>
@@ -111,9 +111,9 @@ const Comments = ({
   }
 
   return (
-    <div className="flex flex-col w-3/4 m-8  space-y-4">
-      <div className="flex flex-row justify-between p-4">
-        <p className="text-2xl font-bold">{COMMENTS_REVIEWS}</p>
+    <div className="my-8 flex w-full flex-col space-y-4 sm:w-3/4">
+      <div className="flex flex-row justify-between gap-3 p-2 sm:p-4">
+        <p className="text-xl font-bold sm:text-2xl">{COMMENTS_REVIEWS}</p>
         <p className="bg-gray-200 text-gray-600 font-medium rounded-lg px-2 py-1">
           {(FilteredComments?.length ?? 0) <= 1
             ? `${FilteredComments?.length} Comment`
@@ -123,8 +123,8 @@ const Comments = ({
       <hr></hr>
 
       <div className="flex flex-col space-y-10 ">
-        <h1 className="text-xl text-gray-700 font-medium">{WRITE_COMMENT}</h1>
-        <div className="flex flex-row w-3/4 justify-between">
+        <h1 className="text-lg font-medium text-gray-700 sm:text-xl">{WRITE_COMMENT}</h1>
+        <div className="grid w-full grid-cols-1 gap-3 sm:grid-cols-2 lg:w-3/4 lg:grid-cols-3 lg:gap-4">
           <div>
             <Input
               type="text"
@@ -133,7 +133,7 @@ const Comments = ({
                 setComment({ ...comment, UserName: e.target.value })
               }
               value={comment.UserName}
-              className="p-2 border-2 border-gray-300 focus:ring-2 ring-blue-500 focus:outline-none rounded-md px-12 font-medium"
+              className="w-full rounded-md border-2 border-gray-300 p-2 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 sm:px-4"
             />
           </div>
           <div>
@@ -145,7 +145,7 @@ const Comments = ({
                 setComment({ ...comment, Email: e.target.value })
               }
               value={comment.Email}
-              className="p-2 border-2 border-gray-300 focus:ring-2 ring-blue-500 focus:outline-none rounded-md px-12 font-medium"
+              className="w-full rounded-md border-2 border-gray-300 p-2 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 sm:px-4"
             />
           </div>
           <div className="flex items-center space-x-4">
@@ -166,7 +166,7 @@ const Comments = ({
           </div>
         </div>
         <textarea
-          className="w-full h-24 p-3 border-gray-300 border-2 focus:ring-2 focus:ring-blue-500 focus:outline-none rounded-md resize-none"
+          className="h-24 w-full resize-none rounded-md border-2 border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Share your Experience with this Product..."
           onChange={(e) => setComment({ ...comment, body: e.target.value })}
           value={comment.body}
@@ -184,14 +184,14 @@ const Comments = ({
           <div className="flex flex-col space-y-14">
             {FilteredComments.map((item, key) => (
               <div key={key} className="flex flex-col space-y-2">
-                <div className="flex items-center w-1/2 justify-start space-x-8">
+                <div className="flex w-full items-center justify-start gap-3 sm:w-1/2 sm:gap-8">
                   <p className="rounded-full bg-gray-400 text-white px-4 py-2 ">
                     {item.UserName.split(" ").map((item) =>
                       item[0]?.toUpperCase(),
                     )}
                   </p>
-                  <p className="font-bold text-xl">{item.UserName}</p>
-                  <p className="font-medium text-gray-500">
+                  <p className="break-all font-bold sm:text-xl">{item.UserName}</p>
+                  <p className="break-all text-sm font-medium text-gray-500">
                     {item.Email.length > 0 ? `(${item.Email})` : ""}
                   </p>
                 </div>

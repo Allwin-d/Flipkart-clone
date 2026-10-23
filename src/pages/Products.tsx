@@ -20,6 +20,7 @@ import Input from "../components/Input/Input";
 import { fetchComment } from "../api/comment";
 
 const Products = () => {
+  const [showFilters, setShowFilters] = useState(false);
   const [ratingNumber, setRatingNumber] = useState<null | number>(null);
   const [discountNumber, setDiscountNumber] = useState<null | number>(null);
   const [priceNumber, setPriceNumber] = useState<null | number>(null);
@@ -169,12 +170,21 @@ const Products = () => {
   }
 
   return (
-    <div className="w-full h-full flex">
+    <div className="flex h-full w-full flex-col lg:flex-row">
       {/* Left Side Section */}
-      <div className="w-1/4 bg-gray-100 h-[calc(100vh-64px)] p-12 fixed top-16 left-0 overflow-y-auto pb-16 scrollbar-hide">
+      <aside className="w-full bg-gray-100 p-4 sm:p-6 lg:sticky lg:top-24 lg:h-[calc(100vh-6rem)] lg:w-1/4 lg:shrink-0 lg:overflow-y-auto lg:p-8 lg:pb-16 scrollbar-hide">
+        <button
+          type="button"
+          className="mb-4 w-full rounded-lg bg-blue-600 px-4 py-3 text-left font-semibold text-white lg:hidden"
+          aria-expanded={showFilters}
+          onClick={() => setShowFilters((visible) => !visible)}
+        >
+          {showFilters ? "Hide filters" : "Show filters"}
+        </button>
+        <div className={`${showFilters ? "block" : "hidden"} space-y-8 lg:block`}>
         {/* Rating */}
-        <div className="flex flex-col space-y-4 justify-center">
-          <h1 className="font-bold text-2xl tracking-wider ">
+        <div className="flex flex-col justify-center space-y-4">
+          <h1 className="text-xl font-bold tracking-wider sm:text-2xl">
             {CUSTOMER_RATING}
           </h1>
           <hr className="border-gray-500 w-3/4" />
@@ -182,7 +192,7 @@ const Products = () => {
           {[1, 2, 3, 4, 5].map((num, index) => (
             <div
               key={index}
-              className="flex space-x-3 items-center text-xl font-semibold"
+              className="flex items-center space-x-3 text-base font-semibold sm:text-xl"
             >
               <Input
                 type="checkbox"
@@ -201,13 +211,13 @@ const Products = () => {
 
         {/* Discount */}
         <div className="flex flex-col space-y-4 mt-8">
-          <h1 className="font-bold text-2xl tracking-wider">{DISCOUNT}</h1>
+          <h1 className="text-xl font-bold tracking-wider sm:text-2xl">{DISCOUNT}</h1>
           <hr className="border-gray-500 w-3/4" />
 
           {[10, 15, 20].map((num, index) => (
             <div
               key={index}
-              className="flex space-x-3 items-center text-xl font-semibold"
+              className="flex items-center space-x-3 text-base font-semibold sm:text-xl"
             >
               <Input
                 type="checkbox"
@@ -223,13 +233,13 @@ const Products = () => {
 
         {/* Price */}
         <div className="flex flex-col space-y-4 mt-8">
-          <h1 className="font-bold text-2xl tracking-wider">{PRICE_RANGE}</h1>
+          <h1 className="text-xl font-bold tracking-wider sm:text-2xl">{PRICE_RANGE}</h1>
           <hr className="border-gray-500 w-3/4" />
 
           {PRICE_RANGE_VALUES.map((num, index) => (
             <div
               key={index}
-              className="flex space-x-3 items-center text-xl font-semibold"
+              className="flex items-center space-x-3 text-base font-semibold sm:text-xl"
             >
               <Input
                 type="checkbox"
@@ -257,7 +267,7 @@ const Products = () => {
           {categoryCountMap.map((item, index) => (
             <div
               key={index}
-              className="flex space-x-3 items-center text-xl font-semibold"
+              className="flex items-center space-x-3 text-base font-semibold sm:text-xl"
             >
               <Input
                 type="checkbox"
@@ -275,14 +285,15 @@ const Products = () => {
           ))}
         </div>
       </div>
+      </aside>
 
       {/* Right Side */}
-      <div className="w-3/4 min-h-screen ml-[25%] pt-4">
-        <div className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 m-4">
+      <div className="min-h-screen w-full min-w-0 pt-2 lg:w-3/4 lg:pt-4">
+        <div className="m-2 grid grid-cols-2 sm:m-4 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
           {ProductsData.length ? (
             ProductsData.map((item, key) => (
               <ProductTile
-                key={key}
+                key={item.id}
                 index={key}
                 images={item.images[0]}
                 title={item.title}

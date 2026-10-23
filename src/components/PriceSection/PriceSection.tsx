@@ -10,18 +10,18 @@ const PriceSection = ({
   discountPercentage,
 }: PriceSectionProps) => {
   return (
-    <div className="flex flex-row space-x-6 items-center">
-      <p className="text-black text-3xl ">
+    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 sm:gap-x-6">
+      <p className="text-2xl text-black sm:text-3xl">
         ₹ {CurrencyConverter(FixedPrice ? FixedPrice : 0)}
       </p>
-      <p className="text-gray-500 text-2xl line-through">
+      <p className="text-lg text-gray-500 line-through sm:text-2xl">
         ₹
         {getOriginalPrice(
           CurrencyConverter(FixedPrice ? FixedPrice : 0),
           discountPercentage ? discountPercentage : 0,
         )}
       </p>
-      <p className="text-green-700 text-xl">
+      <p className="text-base text-green-700 sm:text-xl">
         {Math.floor(discountPercentage ?? 0)} {DISCOUNT_PERCENTAGE}
       </p>
     </div>

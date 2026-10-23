@@ -34,19 +34,19 @@ const CartTile = ({
   const savedAmount = (originalPrice - price) * item.quantity;
 
   return (
-    <div key={id} className="flex items-center justify-around border-b pb-5 ">
+    <div key={id} className="grid grid-cols-[88px_minmax(0,1fr)] items-start gap-3 border-b pb-5 sm:grid-cols-[140px_minmax(0,1fr)_auto] sm:items-center sm:gap-5 lg:grid-cols-[200px_minmax(0,1fr)_auto]">
       <img
         src={images}
         alt={title}
-        className="w-[200px] h-[200px] object-contain cursor-pointer transition duration-200 hover:scale-125"
+        className="h-24 w-full cursor-pointer object-contain transition duration-200 hover:scale-105 sm:h-36 lg:h-48"
         onClick={() => navigate(`/productDetails/${id}`)}
       />
 
-      <div className="flex flex-col space-y-4">
-        <p className="font-bold text-xl text-gray-500">
+      <div className="flex min-w-0 flex-col space-y-2 sm:space-y-4">
+        <p className="text-sm font-bold text-gray-500 sm:text-xl">
           {category.toUpperCase()}
         </p>
-        <p className="font-medium text-gray-700">{Capitalize(title)}</p>
+        <p className="font-medium text-gray-700 sm:text-lg">{Capitalize(title)}</p>
 
         <RatingAndStock
           rating={avgRating}
@@ -59,7 +59,7 @@ const CartTile = ({
           discountPercentage={discountPercentage}
         />
 
-        <div className="flex flex-row justify-center items-center space-x-10 text-xl">
+        <div className="flex flex-row items-center justify-start space-x-5 text-xl sm:justify-center sm:space-x-10">
           <Button
             className="rounded-md bg-gray-200 px-2 py-1 font-bold"
             onClick={() => onDecrease(item)}
@@ -74,16 +74,16 @@ const CartTile = ({
           />
         </div>
       </div>
-      <div className="flex flex-col space-y-4 w-50">
-        <h1 className="font-medium text-xl text-gray-500">Item Total</h1>
-        <p className="font-bold text-2xl ">
+      <div className="col-span-2 flex flex-row flex-wrap items-center justify-between gap-2 sm:col-span-1 sm:w-36 sm:flex-col sm:items-start sm:space-y-3 lg:w-44">
+        <h1 className="text-base font-medium text-gray-500 sm:text-xl">Item Total</h1>
+        <p className="text-xl font-bold sm:text-2xl">
           ₹{item.quantity * CurrencyConverter(price)}
         </p>
-        <p className="font-bold text-green-700">
+        <p className="text-sm font-bold text-green-700 sm:text-base">
           {Capitalize(SAVE)} ₹{CurrencyConverter(savedAmount)}
         </p>
         <Button
-          className="bg-red-600 text-white rounded-lg py-2 px-4 hover:transition duration-150 hover:scale-110"
+          className="rounded-lg bg-red-600 px-3 py-2 text-sm text-white transition duration-150 hover:scale-105 sm:px-4 sm:text-base"
           onClick={() => onRemove(item)}
           children={REMOVE.toUpperCase()}
         />

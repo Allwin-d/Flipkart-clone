@@ -13,17 +13,17 @@ const HeroBanner = () => {
   }, []); //here it runs , only when the component runs for the first time
 
   return (
-    <div className="relative h-[600px] w-3/3 mx-auto mt-4">
+    <div className="relative mx-auto mt-4 h-56 w-full sm:h-72 md:h-96 lg:h-[600px]">
       <img
         src={banners[activeImg].image}
         className="absolute w-full h-full object-cover transition-opacity duration-700 rounded-lg opacity-100"
       />
-      <div className="absolute inset-0 flex flex-col items-center justify-center space-y-12">
-        <p className=" text-8xl font-bold text-white">
+      <div className="absolute inset-0 flex flex-col items-center justify-center space-y-3 bg-black/20 px-4 text-center sm:space-y-5 md:space-y-8">
+        <p className="text-3xl font-bold text-white sm:text-5xl md:text-6xl lg:text-8xl">
           {banners[activeImg].title}
         </p>
-        <p className=" text-6xl text-white">{banners[activeImg].subtitle}</p>
-        <p className=" text-8xl text-white">{banners[activeImg].tag}</p>
+        <p className="text-lg text-white sm:text-2xl md:text-4xl lg:text-6xl">{banners[activeImg].subtitle}</p>
+        <p className="text-2xl text-white sm:text-4xl md:text-6xl lg:text-8xl">{banners[activeImg].tag}</p>
       </div>
     </div>
   );

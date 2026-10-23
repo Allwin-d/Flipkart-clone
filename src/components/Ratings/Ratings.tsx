@@ -2,21 +2,21 @@ import { UNAVAILABLE } from "../../Constants/ConstantVariables/constantsVariable
 import type { RatingsProps } from "./ratings.types";
 const RatingAndStock = ({ rating, NoOfRatings, stocks }: RatingsProps) => {
   return (
-    <div className="flex flex-row space-x-6 items-center">
-      <p className="text-white bg-green-700 px-4 py-2 rounded-lg font-bold cursor-pointer">
+    <div className="flex flex-wrap items-center gap-2 sm:gap-4">
+      <p className="cursor-pointer rounded-lg bg-green-700 px-3 py-2 font-bold text-white sm:px-4">
         ⭐ {rating}
       </p>
-      <p className="text-gray-400 cursor-pointer font-bold">
+      <p className="cursor-pointer text-sm font-bold text-gray-400 sm:text-base">
         {(NoOfRatings ?? 0) <= 1
           ? `${NoOfRatings} Rating`
           : `${NoOfRatings} Ratings`}
       </p>
       <p
-        className={
+        className={`text-sm sm:text-base ${
           stocks
-            ? "bg-green-300 text-green-900 px-2 py-2 rounded-lg font-medium cursor-pointer"
-            : "bg-red-300 text-red-800 px-2 py-2 rounded-lg font-medium cursor-pointer"
-        }
+            ? "cursor-pointer rounded-lg bg-green-300 px-2 py-2 font-medium text-green-900"
+            : "cursor-pointer rounded-lg bg-red-300 px-2 py-2 font-medium text-red-800"
+        }`}
       >
         {stocks ? `✔️ InStock ` : `${UNAVAILABLE}`}
       </p>

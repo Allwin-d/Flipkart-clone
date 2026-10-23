@@ -83,7 +83,7 @@ const Home = () => {
   }
 
   return (
-    <div className="min-h-screen mx-12">
+    <div className="mx-auto min-h-screen w-full max-w-screen-2xl px-3 sm:px-6 lg:px-10">
       {/* This is for the Categories Section
       in the Categroy section we send data as a prop
       */}
